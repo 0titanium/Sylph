@@ -15,6 +15,7 @@ Recruits project team members. Participate in the project.
 
 
 <br/>
+
 ***
 
 
@@ -29,10 +30,12 @@ Recruits project team members. Participate in the project.
 
 
 <br/>
+
 ***
 
 
 <br/>
+
 - frontend
 
     - NavBar
@@ -75,6 +78,7 @@ Recruits project team members. Participate in the project.
 
 
 <br/>
+
 - backend
 
 
@@ -115,6 +119,7 @@ Recruits project team members. Participate in the project.
 
 
 <br/>
+
 - database
 
 
@@ -134,6 +139,7 @@ Recruits project team members. Participate in the project.
 
 
 <br />
+
 ***
 
 2021-08-24
@@ -144,4 +150,5 @@ Recruits project team members. Participate in the project.
 
 
 <br/>
+
 ***
