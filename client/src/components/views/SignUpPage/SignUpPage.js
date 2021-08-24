@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 // import { useDispatch } from "react-redux";
 // import { registerUser } from "../../../_actions/user_action";
-import { Input, Form } from "antd";
+import { Input } from "antd";
 import { Button } from "antd";
 
-function SignUpPage(props) {
+function SignUpPage() {
   //   const dispatch = useDispatch();
 
   const [Id, setId] = useState("");
@@ -50,11 +50,11 @@ function SignUpPage(props) {
       return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
     }
 
-    let body = {
-      id: Id,
-      nickname: Nickname,
-      password: Password,
-    };
+    // let body = {
+    //   id: Id,
+    //   nickname: Nickname,
+    //   password: Password,
+    // };
 
     // dispatch(registerUser(body)).then((response) => {
     //   if (response.payload.success) {
