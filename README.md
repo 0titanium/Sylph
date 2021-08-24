@@ -31,18 +31,18 @@ Recruits project team members. Participate in the project.
 
     - NavBar
         - not login
-            - logo ("<a href="/">Sylph</a>")
-            - dropdown ("<li><a href="/category/positions">postions</a></li>")
-                - dropdown ("<li><a href="/category/techs">techs</a></li>")
-            - searchBar ("<?></?>")
-            - sign in ("<a href="/signin"></a>")
-            - sign up ("<a href="/signup"></a>")
+            - logo ("a href="/" Sylph /a")
+            - dropdown ("li a href="/category/positions" postions /a /li")
+                - dropdown ("li a href="/category/techs" techs /a /li")
+            - searchBar ("? /?")
+            - sign in ("a href="/signin" /a")
+            - sign up ("a href="/signup" /a")
         - login
-            - logo ("<a href="/">Sylph</a>")
-            - dropdown ("<li><a href="/category/positions">postions</a></li>")
-                - dropdown ("<li><a href="/category/techs">techs</a></li>")
-            - searchBar ("<?></?>")
-            - dropdown ("<a href="/myPage">myPage</a>") && ("<a>logout</a>")
+            - logo ("a href="/" Sylph /a ")
+            - dropdown ("li a href="/category/positions" postions /a /li")
+                - dropdown ("li a href="/category/techs" techs /a /li")
+            - searchBar ("? /?")
+            - dropdown ("a href="/myPage" myPage /a") && ("a logout /a")
 
     - RegisterPage ("/register")
 
@@ -51,11 +51,11 @@ Recruits project team members. Participate in the project.
 
 
     - LandingPage ("/")
-        - project recruitment cards (<a href="/recruitment/posts/:postId">detail</a>)
+        - project recruitment cards ("a href="/recruitment/posts/:postId" detail /a")
 
 
     - PostDetailPage ("/recruitment/posts/:postId")
-        - ParticipateIn (<button onClick={participateInHandler}>participateIn</button>)
+        - ParticipateIn ("button onClick={participateInHandler} participateIn /button")
         - Comment
 
 
