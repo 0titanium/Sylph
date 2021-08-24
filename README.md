@@ -15,7 +15,7 @@ Recruits project team members. Participate in the project.
 ***
 
 
-- frontend: react
+- frontend: react, antd
 
 
 - backend: nodejs, express
@@ -35,8 +35,8 @@ Recruits project team members. Participate in the project.
             - dropdown (<li><a href="/category/positions">postions</a></li>)
                 - dropdown (<li><a href="/category/techs">techs</a></li>)
             - searchBar (<?></?>)
-            - sign in (<a href="/login"></a>)
-            - sign up (<a href="/register"></a>)
+            - sign in (<a href="/signin"></a>)
+            - sign up (<a href="/signup"></a>)
         - login
             - logo (<a href="/">Sylph</a>)
             - dropdown (<li><a href="/category/positions">postions</a></li>)
@@ -76,10 +76,10 @@ Recruits project team members. Participate in the project.
     - "/users"
 
 
-        - POST "/users/register" // register users
+        - POST "/users/signup" // register users
 
 
-        - POST "/users/login" // login users
+        - POST "/users/signin" // login users
 
 
         - GET "/users/userId" // display user's avatar, name
@@ -117,7 +117,7 @@ Recruits project team members. Participate in the project.
         - nickname
         - password
         - position
-        - skill set
+        - skills
         - career
         - github address
 
@@ -125,3 +125,19 @@ Recruits project team members. Participate in the project.
     - posts
         - title
         - content
+
+
+
+
+***
+
+2021-08-24
+
+
+
+
+간략한 화면설계. frontend, backend, db 설계.
+
+
+
+***
