@@ -3,6 +3,8 @@
 
 ***
 
+<br/>
+
 
 Sylph means Start your lovely projects here.
 
@@ -16,6 +18,7 @@ Recruits project team members. Participate in the project.
 ***
 
 
+<br/>
 - frontend: react, antd
 
 
@@ -25,9 +28,11 @@ Recruits project team members. Participate in the project.
 - database: mongodb atlas
 
 
+<br/>
 ***
 
 
+<br/>
 - frontend
 
     - NavBar
@@ -69,8 +74,7 @@ Recruits project team members. Participate in the project.
     - Footer
 
 
-
-
+<br/>
 - backend
 
 
@@ -110,6 +114,7 @@ Recruits project team members. Participate in the project.
         - DELETE "/posts/users/postId" // delete posts
 
 
+<br/>
 - database
 
 
@@ -134,10 +139,9 @@ Recruits project team members. Participate in the project.
 2021-08-24
 
 
-
-
+<br/>
 간략한 화면설계. frontend, backend, db 설계.
 
 
-
+<br/>
 ***
