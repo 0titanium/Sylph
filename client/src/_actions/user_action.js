@@ -5,9 +5,11 @@ export function signinUser(dataToSubmit) {
   const request = fetch(`${USER_SERVER}/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    mode: "cors",
+    credentials: "include",
     body: JSON.stringify({ dataToSubmit }),
   }).then((response) => response.json());
-
+  console.log(request);
   return {
     type: SIGNIN_USER,
     payload: request,
