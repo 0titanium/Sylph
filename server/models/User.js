@@ -11,19 +11,23 @@ const userSchema = mongoose.Schema({
   },
   nickname: {
     type: String,
-    trim: true,
     unique: 1,
   },
   password: {
     type: String,
     minlength: 6,
-    maxlength: 20,
   },
   position: {
     type: String,
   },
   skills: {
-    type: Array,
+    type: String,
+  },
+  careers: {
+    type: String,
+  },
+  githubaddress: {
+    type: String
   },
   image: String,
   token: {

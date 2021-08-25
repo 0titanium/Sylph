@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { loginUser } from "../../../_actions/user_action";
-// import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signinUser } from "../../../_actions/user_action";
+import { withRouter } from "react-router-dom";
 import { Input, Button } from "antd";
 
 function SignInPage(props) {
-  //   const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
@@ -21,18 +21,18 @@ function SignInPage(props) {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    let body = {
+    let data = {
       id: Id,
       password: Password,
     };
-
-    // dispatch(loginUser(body)).then((response) => {
-    //   if (response.payload.loginSuccess) {
-    //     props.history.push("/"); // withRouter 필요
-    //   } else {
-    //     alert("Error");
-    //   }
-    // });
+    
+    dispatch(signinUser(data)).then((response) => {
+      if (response.payload.signinSuccess) {
+        props.history.push("/"); // withRouter 필요
+      } else {
+        alert("로그인에 실패했습니다.");
+      }
+    });
   };
 
   return (
@@ -61,7 +61,7 @@ function SignInPage(props) {
         <br />
 
         <label style={{ marginBottom: "5px" }}>ID</label>
-        <Input type="email" value={Id} onChange={onIdHandler} />
+        <Input type="text" value={Id} onChange={onIdHandler} />
         <br />
 
         <label style={{ marginBottom: "5px" }}>Password</label>
@@ -85,4 +85,4 @@ function SignInPage(props) {
   );
 }
 
-export default SignInPage;
+export default withRouter(SignInPage);

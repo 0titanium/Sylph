@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { registerUser } from "../../../_actions/user_action";
-import { Input } from "antd";
-import { Button } from "antd";
+import { withRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../../../_actions/user_action";
+import { Input, Button } from "antd";
 
-function SignUpPage() {
-  //   const dispatch = useDispatch();
+function SignUpPage(props) {
+    const dispatch = useDispatch();
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
   const [Nickname, setNickname] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [Position, setPosition] = useState("");
-  const [Skills, setSkills] = useState([]);
+  const [Skills, setSkills] = useState("");
+  const [Careers, setCareers] = useState("");
   const [GitHubAddress, setGitHubAddress] = useState("");
 
   const onIdHandler = (event) => {
@@ -39,6 +40,10 @@ function SignUpPage() {
     setSkills(event.currentTarget.value);
   };
 
+  const onCareersHandler = (event) => {
+    setCareers(event.currentTarget.value);
+  };
+
   const onGitHubAddressHandler = (event) => {
     setGitHubAddress(event.currentTarget.value);
   };
@@ -47,22 +52,26 @@ function SignUpPage() {
     event.preventDefault();
 
     if (Password !== ConfirmPassword) {
-      return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
+      return alert("비밀번호가 다릅니다.");
     }
 
-    // let body = {
-    //   id: Id,
-    //   nickname: Nickname,
-    //   password: Password,
-    // };
+    let data = {
+      id: Id,
+      nickname: Nickname,
+      password: Password,
+      postion: Position,
+      skills: Skills,
+      careers: Careers,
+      githubaddress: GitHubAddress,
+    };
 
-    // dispatch(registerUser(body)).then((response) => {
-    //   if (response.payload.success) {
-    //     props.history.push("/login"); // withRouter 필요
-    //   } else {
-    //     alert("Failed to Sign Up");
-    //   }
-    // });
+    dispatch(signupUser(data)).then((response) => {
+      if (response.payload.success) {
+        props.history.push("/signin"); // withRouter 필요
+      } else {
+        alert("계정을 만드는데 실패했습니다.");
+      }
+    });
   };
 
   return (
@@ -72,7 +81,7 @@ function SignUpPage() {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "110vh",
+        height: "130vh",
       }}
     >
       <form
@@ -157,6 +166,18 @@ function SignUpPage() {
         <br />
 
         <label style={{ marginBottom: "5px" }}>
+          <p style={{ display: "inline" }}>*</p> Careers
+        </label>
+        <Input
+          type="text"
+          value={Careers}
+          onChange={onCareersHandler}
+          style={{ height: "2.5rem" }}
+          placeholder="ex) 1 year, ...etc"
+        />
+        <br />
+
+        <label style={{ marginBottom: "5px" }}>
           <p style={{ display: "inline" }}>*</p> GitHub Address
         </label>
         <Input
@@ -184,4 +205,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default withRouter(SignUpPage);

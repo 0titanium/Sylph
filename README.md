@@ -124,18 +124,46 @@ Recruits project team members. Participate in the project.
 
 
     - users
-        - id
-        - nickname
-        - password
-        - position
-        - skills
-        - career
-        - github address
+        - id (string)
+        - nickname (string)
+        - password (string)
+        - position (string)
+        - skills (Array?)
+        - career (string)
+        - github address (string)
 
 
     - posts
-        - title
-        - content
+        - writer (objectId)
+        - title (string)
+        - content (string)
+
+
+<br />
+
+
+***
+
+
+2021-08-25
+
+
+<br />
+
+- axios말고 fetch를 사용하려고한다. 이유는 axios는 프록시 설정을 해줘야하는데 fetch api는 없었던 것으로 기억해서. 설정을 다르게 해줘야 하긴 하지만. 보안상 어떤 문제가 있는지는 잘 모르겠다.
+
+
+- 안쓰던 것을 사용하려니 좀 헷갈린다. 현재 sign up을 하면 db에 저장은 되지만 redux쪽에서 뭔가 잘못된 것이 있는 것 같다.
+
+
+-> 해결. fetch 후 then 사용.
+
+
+- sign in 완료. sign in하면 navBar right menu 변경 작업 필요.
+
+
+-> 인줄 알았으나 sign in이 유지되지 않는 문제 발생. 토큰은 생기는 것을 보면 완전히 안되는 것은 아닌 모양이다.
+
 
 
 <br />

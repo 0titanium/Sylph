@@ -4,9 +4,21 @@ const port = 5000;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-// const userRouter = require("./routes/users");
+const userRouter = require("./routes/users");
 // const postRouter = require("./routes/posts");
 // const commentRouter = require("./routes/comments");
+
+// CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+
+  next();
+});
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +40,7 @@ mongoose
   .then(() => console.log("MongoDB atlas Connected"))
   .catch((err) => console.log(err));
 
-// app.use("/api/users", userRouter);
+app.use("/api/users", userRouter);
 // app.use("/api/comments", commentRouter);
 
 app.listen(port, () => {
