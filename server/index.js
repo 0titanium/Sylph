@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 const userRouter = require("./routes/users");
-// const recruitRouter = require("./routes/recruits");
+const recruitRouter = require("./routes/recruits");
 // const commentRouter = require("./routes/comments");
 
 // CORS
@@ -41,6 +41,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/users", userRouter);
+app.use("/api/recruits", recruitRouter);
 // app.use("/api/comments", commentRouter);
 
 app.listen(port, () => {

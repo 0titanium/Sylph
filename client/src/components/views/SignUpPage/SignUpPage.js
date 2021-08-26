@@ -14,7 +14,7 @@ function SignUpPage(props) {
   const [Position, setPosition] = useState("");
   const [Skills, setSkills] = useState("");
   const [Careers, setCareers] = useState("");
-  const [GitHubAddress, setGitHubAddress] = useState("");
+  const [GitHubAddress, setGitHubAddress] = useState("https://github.com/");
 
   const onIdHandler = (event) => {
     setId(event.currentTarget.value);

@@ -3,21 +3,29 @@ import { RECRUIT_SERVER } from "../../../Config";
 
 import { Input, Button } from "antd";
 
-function RecruitPage() {
+function RecruitPage(props) {
   const { TextArea } = Input;
 
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
   const [RecruitPositions, setRecruitPositions] = useState("");
+  const [MeetingLocation, setMeetingLocation] = useState("");
 
   const fetchRecruit = (submitRecruitDetail) => {
-    fetch(`${RECRUIT_SERVER}/signin`, {
+    fetch(`${RECRUIT_SERVER}/post`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
       credentials: "include",
-      body: JSON.stringify({submitRecruitDetail}),
-    }).then((response) => response.json());
+      body: JSON.stringify({ submitRecruitDetail }),
+    }).then((response) => response.json()).then((data) => {
+        if(data.success){
+            props.history.push("/");
+        }else{
+          alert("모집글 작성에 실패했습니다.");
+        }
+        
+      });
   };
 
   const onTitleHandler = (e) => {
@@ -32,21 +40,30 @@ function RecruitPage() {
     setRecruitPositions(e.currentTarget.value);
   };
 
+  const onMeetingLocationHandler = (e) => {
+    setMeetingLocation(e.currentTarget.value);
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
     let submitRecruitDetail = {
-        title: Title,
-        projectDetail: ProjectDetail,
-        recruitPositions: RecruitPositions,
-    }
+      title: Title,
+      projectDetail: ProjectDetail,
+      recruitPositions: RecruitPositions,
+      meetingLocation: MeetingLocation,
+    };
 
-    if(submitRecruitDetail.title === "" || submitRecruitDetail.projectDetail === "" || submitRecruitDetail.recruitPositions === "" ){
-        alert("입력하지 않은 내용이 있습니다.");
-    }else{
-        fetchRecruit(submitRecruitDetail);
+    if (
+      submitRecruitDetail.title === "" ||
+      submitRecruitDetail.projectDetail === "" ||
+      submitRecruitDetail.recruitPositions === "" ||
+      submitRecruitDetail.meetingLocation === ""
+    ) {
+      alert("입력하지 않은 내용이 있습니다.");
+    } else {
+      fetchRecruit(submitRecruitDetail);
     }
-  
   };
 
   return (
@@ -56,7 +73,7 @@ function RecruitPage() {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "80vh",
+        height: "90vh",
       }}
     >
       <form
@@ -84,11 +101,6 @@ function RecruitPage() {
         <br />
 
         <label style={{ marginBottom: "5px" }}>프로젝트 상세</label>
-        {/* <Input
-          type="text"
-          value={ProjectDetail}
-          onChange={onProjectDetailHandler}
-        /> */}
         <TextArea
           style={{ resize: "none" }}
           rows={4}
@@ -98,16 +110,20 @@ function RecruitPage() {
         <br />
 
         <label style={{ marginBottom: "5px" }}>모집 포지션</label>
-        {/* <Input
-          type="text"
-          value={RecruitPositions}
-          onChange={onRecruitPositionsHandler}
-        /> */}
         <TextArea
           style={{ resize: "none" }}
           rows={4}
           value={RecruitPositions}
           onChange={onRecruitPositionsHandler}
+        />
+        <br />
+
+        <label style={{ marginBottom: "5px" }}>모임 장소</label>
+        <Input
+          style={{ height: "2.5rem" }}
+          type="text"
+          value={MeetingLocation}
+          onChange={onMeetingLocationHandler}
         />
         <br />
 

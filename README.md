@@ -103,19 +103,19 @@ Recruits project team members. Participate in the project.
         - DELETE "/users/mypage/profile" // witdrwal users
 
 
-    - "/posts"
+    - "/recruits"
 
 
-        - GET "/posts/postId" // get latest posts or get a post
+        - GET "/recruits/post" // get latest posts or get a post
 
 
-        - POST "/posts/users/post" // users post recruitement post
+        - POST "/recruits/post" // users post recruitement post
 
 
-        - UPDATE "/posts/users/postId" // update posts
+        - UPDATE "/recruits/post" // update posts
 
 
-        - DELETE "/posts/users/postId" // delete posts
+        - DELETE "/recruits/post" // delete posts
 
 
 <br/>
