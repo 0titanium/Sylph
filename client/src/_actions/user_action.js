@@ -20,6 +20,8 @@ export function signupUser(dataToSubmit) {
   const request = fetch(`${USER_SERVER}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    mode: "cors",
+    credentials: "include",
     body: JSON.stringify({ dataToSubmit }),
   }).then((response) => response.json());
 
@@ -33,6 +35,8 @@ export function auth() {
   const request = fetch(`${USER_SERVER}/auth`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
+    mode: "cors",
+    credentials: "include",
   }).then((response) => response.json());
 
   return {
@@ -42,9 +46,11 @@ export function auth() {
 }
 
 export function signoutUser() {
-  const request = fetch(`${USER_SERVER}/signup`, {
+  const request = fetch(`${USER_SERVER}/signout`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    mode: "cors",
+    credentials: "include",
   }).then((response) => response.json());
 
   return {

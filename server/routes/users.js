@@ -60,7 +60,7 @@ router.post("/signin", (req, res) => {
           .cookie("x_auth", user.token)
           .cookie("user_id", user._id.toString())
           .status(200)
-          .json({ signinSuccess: true, userId: user._id });
+          .json({ signinSuccess: true, userId: user._id,  });
       });
     });
   });
@@ -87,6 +87,7 @@ router.get("/auth", auth, (req, res) => {
 
 // signout route
 router.post("/signout", auth, (req, res) => {
+  console.log(req.user)
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
     if (err) {
       return res.json({ signoutSuccess: false, err });
@@ -98,8 +99,8 @@ router.post("/signout", auth, (req, res) => {
 });
 
 // 유저 데이터 보내기
-router.post("/userInfo", (req, res) => {
-  let userId = mongoose.Types.ObjectId(req.body.userId);
+router.get("/userInfo", (req, res) => {
+  let userId = req.cookies.user_id;
   let userImage = "";
   let userNickname = "";
 

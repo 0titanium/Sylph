@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
-import { Input, Button } from "antd";
+import { Form, Input, Button } from "antd";
 
 function SignUpPage(props) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
@@ -81,7 +81,7 @@ function SignUpPage(props) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "130vh",
+        height: "135vh",
       }}
     >
       <form
@@ -98,6 +98,9 @@ function SignUpPage(props) {
           <h2>Sign Up</h2>
         </div>
         <br />
+
+        <p style={{ color: "red" }}>* 필수입력</p>
+        <p style={{ marginBottom: "2rem" }}>* 선택입력</p>
 
         <label style={{ marginBottom: "5px" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> ID

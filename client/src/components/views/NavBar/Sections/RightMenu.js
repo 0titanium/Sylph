@@ -13,38 +13,42 @@ function RightMenu(props) {
   const dispatch = useDispatch();
   const [UserNickame, setUserNickame] = useState("");
   const [UserImage, setUserImage] = useState("");
-  const userInfo = {
-    userId: userId,
-  };
 
-  const fetchUser = (userInfo) => {
-    // Axios.post(`${USER_SERVER}/userInfo`, userInfo).then((response) => {
-    //   if (response.data.success) {
-    //     console.log(response.data);
-    //     if (response.data.userName) {
-    //       setUserName(response.data.userName);
-    //     }
-    //     setUserImage(response.data.userImage);
-    //   } else {
-    //     alert("사용자 정보를 불러오는데 실패했습니다.");
-    //   }
-    // });
+  const fetchUser = () => {
+    const request = fetch(`${USER_SERVER}/userInfo`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if(data.success){
+          setUserImage(data.userImage);
+          setUserNickame(data.userNickname);
+        }else{
+          alert("유저 정보를 불러오는데 실패했습니다.");
+        }
+        
+      });
+
   };
 
   useEffect(() => {
     if (userId) {
-      fetchUser(userInfo);
+      fetchUser();
     }
-  }, [userInfo, userId]);
+  }, [userId]);
 
   const signoutHandler = () => {
     dispatch(signoutUser()).then((response) => {
+      console.log(response.payload.err);
       if (response.payload.signoutSuccess) {
         setUserImage("");
         setUserNickame("");
         props.history.push("/signin"); // withRouter 필요
       } else {
-        alert("Error");
+        alert("sign out에 실패했습니다.");
       }
     });
   };
@@ -76,7 +80,7 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="recruit">
-          <a href="/">Recruit</a>
+          <a href="/recruit/post">Recruit</a>
         </Menu.Item>
         {/* avatar + name - click - dropdown - mypage, logout */}
         <Dropdown overlay={menu} trigger={["click"]}>

@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 const userRouter = require("./routes/users");
-// const postRouter = require("./routes/posts");
+// const recruitRouter = require("./routes/recruits");
 // const commentRouter = require("./routes/comments");
 
 // CORS

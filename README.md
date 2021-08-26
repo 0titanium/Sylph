@@ -136,10 +136,30 @@ Recruits project team members. Participate in the project.
     - posts
         - writer (objectId)
         - title (string)
-        - content (string)
+        - project detail (string)
+        - meeting location (string)
+        - recruit positions (string)
 
 
 <br />
+
+
+<br />
+
+
+***
+
+
+2021-08-26
+
+
+- fetch에 mode, credential을 추가하니까 로그인 상태 유지 해결.
+
+
+- navBar right menu 작업.
+
+
+- RecruitPage 작업.
 
 
 ***
