@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { RECRUIT_SERVER } from "../../../Config";
+import { getCookie } from "../../../utils/getCookie";
 
 import { Input, Button } from "antd";
 
 function RecruitPage(props) {
+  const userId = getCookie("user_id", document.cookie);
+
   const { TextArea } = Input;
 
   const [Title, setTitle] = useState("");
@@ -48,6 +51,7 @@ function RecruitPage(props) {
     e.preventDefault();
 
     let submitRecruitDetail = {
+      writer: userId,
       title: Title,
       projectDetail: ProjectDetail,
       recruitPositions: RecruitPositions,

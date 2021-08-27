@@ -71,7 +71,7 @@ Recruits project team members. Participate in the project.
     - PostRecruitmentPage ("/recruitment/posts/postId")
 
 
-    - MyPage ("/users/)
+    - MyPage ("/users/profile")
 
 
     - Footer
@@ -95,6 +95,9 @@ Recruits project team members. Participate in the project.
 
 
         - POST "/users/logout" // logout users
+
+        
+        - GET "/users/mypage/profile/ // enter mypage, get user info
 
 
         - UPDATE "/users/mypage/profile" // udpate user's profile
