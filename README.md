@@ -60,6 +60,7 @@ Recruits project team members. Participate in the project.
 
 
     - LandingPage ("/")
+        - position || tech stack filter dropdown
         - project recruitment cards ("a href="/recruitment/posts/:postId" detail /a")
 
 
@@ -72,6 +73,11 @@ Recruits project team members. Participate in the project.
 
 
     - MyPage ("/users/profile")
+        - MyInfo
+            - UpdateInfoPage
+        - MyRecruit
+        - ApplyTo
+        - ApplyFor
 
 
     - Footer

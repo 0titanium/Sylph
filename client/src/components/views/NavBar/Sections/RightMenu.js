@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signoutUser } from "../../../../_actions/user_action";
-import { Menu, Dropdown, Avatar } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Menu, Dropdown, Avatar, Button } from "antd";
+import { DownOutlined, BellOutlined } from "@ant-design/icons";
 import { getCookie } from "../../../../utils/getCookie";
 import { USER_SERVER } from "../../../../Config";
 
@@ -15,7 +15,7 @@ function RightMenu(props) {
   const [UserImage, setUserImage] = useState("");
 
   const fetchUser = () => {
-    const request = fetch(`${USER_SERVER}/userInfo`, {
+    fetch(`${USER_SERVER}/userInfo`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -23,15 +23,13 @@ function RightMenu(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(data.success){
+        if (data.success) {
           setUserImage(data.userImage);
           setUserNickame(data.userNickname);
-        }else{
+        } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
-        
       });
-
   };
 
   useEffect(() => {
@@ -79,6 +77,11 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
+        <Menu.Item key="notice">
+          <Button>
+            <BellOutlined />
+          </Button>
+        </Menu.Item>
         <Menu.Item key="recruit">
           <a href="/recruit/post">Recruit</a>
         </Menu.Item>
