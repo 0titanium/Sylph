@@ -10,7 +10,7 @@ function MyPage() {
   const { TabPane } = Tabs;
 
   return (
-    <div style={{ width: "60%", margin: "3rem auto" }}>
+    <div style={{ width: "65%", height: "70vh", margin: "3rem auto" }}>
       <Tabs defaultActiveKey="1">
         <TabPane tab="My Info" key="1">
           <MyInfo />

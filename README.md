@@ -158,6 +158,28 @@ Recruits project team members. Participate in the project.
 
 ***
 
+2021-08-31
+
+
+- notice icon 삽입하면 li 렌더링 순서가 1 2 3에서 1 3 2로 바뀌는 문제발생.
+
+
+- my page/my info 작업
+
+
+<br />
+
+***
+
+
+2021-08-27
+
+
+- my page 작업
+
+
+***
+
 
 2021-08-26
 

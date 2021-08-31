@@ -77,17 +77,22 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="notice">
-          <Button>
-            <BellOutlined />
-          </Button>
-        </Menu.Item>
         <Menu.Item key="recruit">
           <a href="/recruit/post">Recruit</a>
         </Menu.Item>
+        <Menu.Item
+          key="notice"
+          style={{ marginTop: "5px", textDecoration: "none" }}
+        >
+          <BellOutlined style={{ fontSize: "1.5rem" }} />
+        </Menu.Item>
         {/* avatar + name - click - dropdown - mypage, logout */}
         <Dropdown overlay={menu} trigger={["click"]}>
-          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          <a
+            className="ant-dropdown-link"
+            onClick={(e) => e.preventDefault()}
+            style={{ float: "right" }}
+          >
             <Avatar src={UserImage} style={{ marginRight: "7px" }} />
             <p style={{ display: "inline" }}>{UserNickame}</p>
             <DownOutlined style={{ marginLeft: "5px" }} />
