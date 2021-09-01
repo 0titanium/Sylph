@@ -7,6 +7,7 @@ import SignInPage from "./components/views/SignInPage/SignInPage";
 import MyPage from "./components/views/MyPage/MyPage";
 import RecruitPage from "./components/views/RecruitPage/RecruitPage";
 import RecruitDetailPage from "./components/views/RecruitDetailPage/RecruitDetailPage";
+import UpdateRecruitPage from "./components/views/UpdateRecruitPage/UpdateRecruitPage";
 import Footer from "./components/views/Footer/Footer";
 import Auth from "./hoc/auth";
 
@@ -24,15 +25,16 @@ function App() {
             path="/recruit/post"
             component={Auth(RecruitPage, true)}
           />
-          <Route
-            exact
-            path="/mypage"
-            component={Auth(MyPage, true)}
-          />
+          <Route exact path="/mypage" component={Auth(MyPage, true)} />
           <Route
             exact
             path="/recruit/:recruitId"
             component={Auth(RecruitDetailPage, null)}
+          />
+          <Route
+            exact
+            path="/recruit/update/:recruitId"
+            component={Auth(UpdateRecruitPage, null)}
           />
         </Switch>
       </div>

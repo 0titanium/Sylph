@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Row, Col, Avatar, Card } from "antd";
+import { Typography, Row, Col, Card } from "antd";
 import { RECRUIT_SERVER } from "../../../Config";
 
 function LandingPage() {
   const { Title } = Typography;
-  const { Meta } = Card;
   const [Recruits, setRecruits] = useState([]);
 
   const fetchRecruits = () => {
-    fetch(`${RECRUIT_SERVER}/latestPosts`, {
+    fetch(`${RECRUIT_SERVER}/latestRecruits`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

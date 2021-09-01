@@ -158,6 +158,22 @@ Recruits project team members. Participate in the project.
 
 ***
 
+
+2021-09-01
+
+
+- update page 작업
+
+
+- method patch 중에 에러 발생. "Unexpected token < in JSON at position 0".
+
+
+-> mongoose findByIdAndUpdate()를 사용하니까 해결됨.
+
+
+***
+
+
 2021-08-31
 
 

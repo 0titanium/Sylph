@@ -24,8 +24,8 @@ function RightMenu(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setUserImage(data.userImage);
-          setUserNickame(data.userNickname);
+          setUserImage(data.user[0].image);
+          setUserNickame(data.user[0].nickname);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }

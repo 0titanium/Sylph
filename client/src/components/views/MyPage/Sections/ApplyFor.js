@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function ASSR() {
-    return (
-        <div>
-            Apply for me
-        </div>
-    )
+function ApplyFor() {
+  return <div>Apply for me</div>;
 }
 
-export default ASSR
+export default ApplyFor;

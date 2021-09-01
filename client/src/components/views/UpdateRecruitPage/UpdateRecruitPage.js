@@ -1,23 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../Config";
-import { getCookie } from "../../../utils/getCookie";
 
-import { Input, Button } from "antd";
+import { Button, Input } from "antd";
 
-function RecruitPage(props) {
-  const userId = getCookie("user_id", document.cookie);
-
+function UpdateRecruitPage(props) {
   const { TextArea } = Input;
 
+  const [RecruitId, setRecruitId] = useState("");
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
   const [RecruitPositions, setRecruitPositions] = useState("");
   const [RequiredExperience, setRequiredExperience] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
+  // fetch data before update
+  const fetchRecruitDetail = () => {
+    fetch(`${RECRUIT_SERVER}/recruitDetail`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setRecruitId(data.recruitDetail._id._id);
+          setTitle(data.recruitDetail.title);
+          setProjectDetail(data.recruitDetail.projectDetail);
+          setRecruitPositions(data.recruitDetail.recruitPositions);
+          setRequiredExperience(data.recruitDetail.requiredExperience);
+          setMeetingLocation(data.recruitDetail.meetingLocation);
+        } else {
+          alert("모집글을 불러오는데 실패했습니다.");
+        }
+      });
+  };
+
+  // update request
   const fetchRecruit = (submitRecruitDetail) => {
     fetch(`${RECRUIT_SERVER}/recruit`, {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
       credentials: "include",
@@ -31,6 +53,30 @@ function RecruitPage(props) {
           alert("모집글 작성에 실패했습니다.");
         }
       });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    let submitRecruitDetail = {
+      recruitId: RecruitId,
+      title: Title,
+      projectDetail: ProjectDetail,
+      recruitPositions: RecruitPositions,
+      requiredExperience: RequiredExperience,
+      meetingLocation: MeetingLocation,
+    };
+
+    if (
+      submitRecruitDetail.title === "" ||
+      submitRecruitDetail.projectDetail === "" ||
+      submitRecruitDetail.recruitPositions === "" ||
+      submitRecruitDetail.meetingLocation === ""
+    ) {
+      alert("입력하지 않은 내용이 있습니다.");
+    } else {
+      fetchRecruit(submitRecruitDetail);
+    }
   };
 
   const onTitleHandler = (e) => {
@@ -53,29 +99,9 @@ function RecruitPage(props) {
     setMeetingLocation(e.currentTarget.value);
   };
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-
-    let submitRecruitDetail = {
-      writer: userId,
-      title: Title,
-      projectDetail: ProjectDetail,
-      recruitPositions: RecruitPositions,
-      requiredExperience: RequiredExperience,
-      meetingLocation: MeetingLocation,
-    };
-
-    if (
-      submitRecruitDetail.title === "" ||
-      submitRecruitDetail.projectDetail === "" ||
-      submitRecruitDetail.recruitPositions === "" ||
-      submitRecruitDetail.meetingLocation === ""
-    ) {
-      alert("입력하지 않은 내용이 있습니다.");
-    } else {
-      fetchRecruit(submitRecruitDetail);
-    }
-  };
+  useEffect(() => {
+    fetchRecruitDetail();
+  }, []);
 
   return (
     <div
@@ -84,7 +110,7 @@ function RecruitPage(props) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "110vh",
+        height: "90vh",
       }}
     >
       <form
@@ -158,11 +184,11 @@ function RecruitPage(props) {
           }}
           htmlType="submit"
         >
-          Recruit
+          Edit Recruit
         </Button>
       </form>
     </div>
   );
 }
 
-export default RecruitPage;
+export default UpdateRecruitPage;

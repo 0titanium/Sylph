@@ -15,15 +15,18 @@ const recruitSchema = mongoose.Schema(
       type: String,
     },
     recruitPositions: {
-        type: String,
+      type: String,
+    },
+    requiredExperience: {
+      type: String,
     },
     meetingLocation: {
-        type: String,
+      type: String,
     },
     recruitCompleted: {
-        type: Boolean,
-        default: false,
-    }
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

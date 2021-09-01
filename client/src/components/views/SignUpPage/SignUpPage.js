@@ -59,7 +59,7 @@ function SignUpPage(props) {
       id: Id,
       nickname: Nickname,
       password: Password,
-      postion: Position,
+      position: Position,
       skills: Skills,
       careers: Careers,
       githubaddress: GitHubAddress,

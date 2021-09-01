@@ -1,30 +1,65 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { USER_SERVER } from "../../../../Config";
 import { Descriptions, Button } from "antd";
 
 function MyInfo() {
-  const fetchUserInfo = () => {};
+  const [UserImage, setUserImage] = useState("");
+  const [UserId, setUserId] = useState("");
+  const [UserNickame, setUserNickame] = useState("");
+  const [UserPosition, setUserPosition] = useState("");
+  const [UserSkills, setUserSkills] = useState("");
+  const [UserCareers, setUserCareers] = useState("");
+  const [UserGitHubAddress, setUserGitHubAddress] = useState("");
 
-  useEffect(() => {}, []);
+  const fetchUserInfo = () => {
+    fetch(`${USER_SERVER}/userInfo`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data.user);
+          setUserImage(data.userImage);
+          setUserId(data.user[0].id);
+          setUserNickame(data.user[0].nickname);
+          setUserPosition(data.user[0].position);
+          setUserSkills(data.user[0].skills);
+          setUserCareers(data.user[0].careers);
+          setUserGitHubAddress(data.user[0].githubaddress);
+        } else {
+          alert("유저 정보를 불러오는데 실패했습니다.");
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
   return (
     <div style={{ height: "100%" }}>
-    <Descriptions bordered title="User Info" size="default" layout="vertical" extra={<Button type="primary">Edit</Button>}>
-        <Descriptions.Item label="image">user image</Descriptions.Item>
-        <Descriptions.Item label="id">user id</Descriptions.Item>
-        <Descriptions.Item label="nickname">user nickname</Descriptions.Item>
-        <Descriptions.Item label="position">user position</Descriptions.Item>
-        <Descriptions.Item label="skills">user skills</Descriptions.Item>
-        <Descriptions.Item label="careers">user careers</Descriptions.Item>
-    </Descriptions> 
-      {/* <a href="/">update</a>
-
-      <div>
-        <div>user image, id</div>
-        <div>user nickname</div>
-        <div>user position</div>
-        <div>user skills</div>
-        <div>user careers</div>
-      </div> */}
+      <Descriptions
+        bordered
+        title="User Info"
+        size="default"
+        column={1}
+        extra={<Button type="primary">Edit</Button>}
+      >
+        <Descriptions.Item label="image" labelStyle={{ width: "100px" }}>
+          {UserImage}
+        </Descriptions.Item>
+        <Descriptions.Item label="id">{UserId}</Descriptions.Item>
+        <Descriptions.Item label="nickname">{UserNickame}</Descriptions.Item>
+        <Descriptions.Item label="position">{UserPosition}</Descriptions.Item>
+        <Descriptions.Item label="skills">{UserSkills}</Descriptions.Item>
+        <Descriptions.Item label="careers">{UserCareers}</Descriptions.Item>
+        <Descriptions.Item label="GitHub Address">
+          {UserGitHubAddress}
+        </Descriptions.Item>
+      </Descriptions>
     </div>
   );
 }

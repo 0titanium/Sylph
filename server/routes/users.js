@@ -101,7 +101,6 @@ router.post("/signout", auth, (req, res) => {
 router.get("/userInfo", (req, res) => {
   let userId = req.cookies.user_id;
   let userImage = "";
-  let userNickname = "";
 
   User.find({ _id: userId }).exec((err, user) => {
     if (err) {
@@ -117,7 +116,7 @@ router.get("/userInfo", (req, res) => {
     return res.status(200).json({
       success: true,
       userImage: userImage,
-      userNickname: userNickname,
+      user
     });
   });
 });

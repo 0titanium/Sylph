@@ -1,11 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
-function ASMR() {
-    return (
-        <div>
-            Apply to me
-        </div>
-    )
+function ApplyTo() {
+  return <div></div>;
 }
 
-export default ASMR
+export default ApplyTo;
