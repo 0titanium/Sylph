@@ -64,17 +64,20 @@ Recruits project team members. Participate in the project.
         - project recruitment cards ("a href="/recruitment/posts/:postId" detail /a")
 
 
-    - PostDetailPage ("/recruitment/posts/:postId")
-        - ParticipateIn ("button onClick={participateInHandler} participateIn /button")
+    - RecruitDetailPage ("/recruit/:recruitId")
+        - Apply ("button onClick={onApplyHandler} Apply /button")
         - Comment
 
 
-    - PostRecruitmentPage ("/recruitment/posts/postId")
+    - RecruitPage ("/recruit/post")
 
 
-    - MyPage ("/users/profile")
+    - UpdateRecruitPage ("/recruit/update/:recruitId")
+
+
+    - MyPage ("/mypage")
         - MyInfo
-            - UpdateInfoPage
+            - UpdateMyInfo("/mypage/update)
         - MyRecruit
         - ApplyTo
         - ApplyFor
@@ -137,7 +140,7 @@ Recruits project team members. Participate in the project.
         - nickname (string)
         - password (string)
         - position (string)
-        - skills (Array?)
+        - skills (string)
         - career (string)
         - github address (string)
 
@@ -148,6 +151,7 @@ Recruits project team members. Participate in the project.
         - project detail (string)
         - meeting location (string)
         - recruit positions (string)
+        - required experience (string)
 
 
 <br />
@@ -159,16 +163,42 @@ Recruits project team members. Participate in the project.
 ***
 
 
+2021-09-02
+
+
+- update user info 작업
+
+
+-> 과정은 잘되지만 db data는 바뀌지않는 문제 발생.
+
+
+-> 변수명을 잘못 쓴 것이 원인이었다.
+
+
+- 해야할 일
+
+
+-> 지원 기능, 지원 확인 기능, 지원 취소 기능, 지원 수락 기능, 지원 거절 기능, ...etc
+
+
+<br />
+
+***
+
+
 2021-09-01
 
 
-- update page 작업
+- update recruit page 작업
 
 
 - method patch 중에 에러 발생. "Unexpected token < in JSON at position 0".
 
 
 -> mongoose findByIdAndUpdate()를 사용하니까 해결됨.
+
+
+- roughly finish recruit basic CRUD
 
 
 ***

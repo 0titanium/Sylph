@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
 
@@ -53,13 +54,11 @@ router.post("/signin", (req, res) => {
 
         // 토큰을 저장 (쿠키, 세션, 로컬스토리지등 어디가 제일 안전한지는 논란)
         // 여기선 쿠키에 저장
-        console.log("로그인 성공");
-        console.log("-a- ", user.token, "-b-", user._id.toString())
         return res
           .cookie("x_auth", user.token)
           .cookie("user_id", user._id.toString())
           .status(200)
-          .json({ signinSuccess: true, userId: user._id,  });
+          .json({ signinSuccess: true, userId: user._id });
       });
     });
   });
@@ -86,7 +85,7 @@ router.get("/auth", auth, (req, res) => {
 
 // signout route
 router.post("/signout", auth, (req, res) => {
-  console.log(req.user)
+  console.log(req.user);
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
     if (err) {
       return res.json({ signoutSuccess: false, err });
@@ -116,8 +115,22 @@ router.get("/userInfo", (req, res) => {
     return res.status(200).json({
       success: true,
       userImage: userImage,
-      user
+      user,
     });
+  });
+});
+
+// update user info
+
+router.patch("/userInfo", (req, res) => {
+  let userObjId = mongoose.Types.ObjectId(req.body.data.objId);
+  console.log(req.body.data);
+  User.findByIdAndUpdate(userObjId, req.body.data, (err, recruit) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
+    console.log("update");
+    return res.status(200).json({ success: true });
   });
 });
 

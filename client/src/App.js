@@ -5,6 +5,7 @@ import LandingPage from "./components/views/LandingPage/LandingPage";
 import SignUpPage from "./components/views/SignUpPage/SignUpPage";
 import SignInPage from "./components/views/SignInPage/SignInPage";
 import MyPage from "./components/views/MyPage/MyPage";
+import UpdateMyInfo from "./components/views/UpdateMyInfo/UpdateMyInfo";
 import RecruitPage from "./components/views/RecruitPage/RecruitPage";
 import RecruitDetailPage from "./components/views/RecruitDetailPage/RecruitDetailPage";
 import UpdateRecruitPage from "./components/views/UpdateRecruitPage/UpdateRecruitPage";
@@ -26,6 +27,7 @@ function App() {
             component={Auth(RecruitPage, true)}
           />
           <Route exact path="/mypage" component={Auth(MyPage, true)} />
+          <Route exact path="/mypage/update" component={Auth(UpdateMyInfo, true)} />
           <Route
             exact
             path="/recruit/:recruitId"

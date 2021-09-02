@@ -1,85 +1,114 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signupUser } from "../../../_actions/user_action";
-import { Form, Input, Button } from "antd";
+import React, { useState, useEffect } from "react";
+import { USER_SERVER } from "../../../Config";
 
-function SignUpPage(props) {
-  const dispatch = useDispatch();
+import { Input, Button } from "antd";
 
-  const [Id, setId] = useState("");
-  const [Password, setPassword] = useState("");
-  const [Nickname, setNickname] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [Position, setPosition] = useState("");
-  const [Skills, setSkills] = useState("");
-  const [Careers, setCareers] = useState("");
-  const [GitHubAddress, setGitHubAddress] = useState("https://github.com/");
+function UpdateMyInfo(props) {
+  // const [Password, setPassword] = useState("");
+  // const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [UserObjId, setUserObjId] = useState("");
+  const [UserId, setUserId] = useState("");
+  const [UserNickame, setUserNickame] = useState("");
+  const [UserPosition, setUserPosition] = useState("");
+  const [UserSkills, setUserSkills] = useState("");
+  const [UserCareers, setUserCareers] = useState("");
+  const [UserGitHubAddress, setUserGitHubAddress] = useState("");
 
-  const onIdHandler = (event) => {
-    setId(event.currentTarget.value);
-  };
+  // const onPasswordHandler = (event) => {
+  //   setPassword(event.currentTarget.value);
+  // };
 
-  const onPasswordHandler = (event) => {
-    setPassword(event.currentTarget.value);
-  };
 
-  const onNicknameHandler = (event) => {
-    setNickname(event.currentTarget.value);
-  };
-
-  const onConfirmPasswordHandler = (event) => {
-    setConfirmPassword(event.currentTarget.value);
-  };
+  // const onConfirmPasswordHandler = (event) => {
+  //   setConfirmPassword(event.currentTarget.value);
+  // };
 
   const onPositionHandler = (event) => {
-    setPosition(event.currentTarget.value);
+    setUserPosition(event.currentTarget.value);
   };
 
   const onSkillsHandler = (event) => {
-    setSkills(event.currentTarget.value);
+    setUserSkills(event.currentTarget.value);
   };
 
   const onCareersHandler = (event) => {
-    setCareers(event.currentTarget.value);
+    setUserCareers(event.currentTarget.value);
   };
 
   const onGitHubAddressHandler = (event) => {
-    setGitHubAddress(event.currentTarget.value);
+    setUserGitHubAddress(event.currentTarget.value);
+  };
+
+  const fetchUserInfo = () => {
+    fetch(`${USER_SERVER}/userInfo`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data.user);
+          // setUserImage(data.userImage);
+          setUserObjId(data.user[0]._id);
+          setUserId(data.user[0].id);
+          setUserNickame(data.user[0].nickname);
+          setUserPosition(data.user[0].position);
+          setUserSkills(data.user[0].skills);
+          setUserCareers(data.user[0].careers);
+          setUserGitHubAddress(data.user[0].githubaddress);
+        } else {
+          alert("유저 정보를 불러오는데 실패했습니다.");
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
+  // update request
+  const UpdateUserInfo = (data) => {
+    fetch(`${USER_SERVER}/userInfo`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ data }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          props.history.push("/mypage");
+        } else {
+          alert("정보 수정에 실패했습니다.");
+        }
+      });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    if (Password !== ConfirmPassword) {
-      return alert("비밀번호가 다릅니다.");
-    }
+    // if (Password !== ConfirmPassword) {
+    //   return alert("비밀번호가 다릅니다.");
+    // }
 
     let data = {
-      id: Id,
-      nickname: Nickname,
-      password: Password,
-      position: Position,
-      skills: Skills,
-      careers: Careers,
-      githubaddress: GitHubAddress,
+      // password: Password,
+      objId: UserObjId,
+      position: UserPosition,
+      skills: UserSkills,
+      careers: UserCareers,
+      githubaddress: UserGitHubAddress,
     };
 
-    if (
-      data.id === "" ||
-      data.nickname === "" ||
-      data.position === "" ||
-      data.skills === ""
-    ) {
+
+    if(data.position === "" || data.skills === ""){
       alert("입력하지 않은 필수 내용이 있습니다.");
-    } else {
-      dispatch(signupUser(data)).then((response) => {
-        if (response.payload.success) {
-          props.history.push("/signin"); // withRouter 필요
-        } else {
-          alert("계정을 만드는데 실패했습니다.");
-        }
-      });
+    }
+    else{
+      UpdateUserInfo(data);
     }
   };
 
@@ -116,8 +145,8 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={Id}
-          onChange={onIdHandler}
+          value={UserId}
+          disabled={true}
           style={{ height: "2.5rem" }}
         />
         <br />
@@ -127,8 +156,8 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={Nickname}
-          onChange={onNicknameHandler}
+          value={UserNickame}
+          disabled={true}
           style={{ height: "2.5rem" }}
         />
         <br />
@@ -137,8 +166,9 @@ function SignUpPage(props) {
           <p style={{ color: "red", display: "inline" }}>*</p> Password
         </label>
         <Input.Password
-          value={Password}
-          onChange={onPasswordHandler}
+          // value={Password}
+          // onChange={onPasswordHandler}
+          disabled={true}
           style={{ height: "2.5rem" }}
         />
         <br />
@@ -147,8 +177,9 @@ function SignUpPage(props) {
           <p style={{ color: "red", display: "inline" }}>*</p> Confirm Password
         </label>
         <Input.Password
-          value={ConfirmPassword}
-          onChange={onConfirmPasswordHandler}
+          // value={ConfirmPassword}
+          // onChange={onConfirmPasswordHandler}
+          disabled={true}
           style={{ height: "2.5rem" }}
         />
         <br />
@@ -158,7 +189,7 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={Position}
+          value={UserPosition}
           onChange={onPositionHandler}
           style={{ height: "2.5rem" }}
           placeholder="ex) Frontend, Backend, Full Stack, ...etc"
@@ -170,7 +201,7 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={Skills}
+          value={UserSkills}
           onChange={onSkillsHandler}
           style={{ height: "2.5rem" }}
           placeholder="ex) Java, Javascript, Kotlin, ...etc"
@@ -182,7 +213,7 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={Careers}
+          value={UserCareers}
           onChange={onCareersHandler}
           style={{ height: "2.5rem" }}
           placeholder="ex) 1 year, ...etc"
@@ -194,7 +225,7 @@ function SignUpPage(props) {
         </label>
         <Input
           type="text"
-          value={GitHubAddress}
+          value={UserGitHubAddress}
           onChange={onGitHubAddressHandler}
           style={{ height: "2.5rem" }}
           placeholder="https://github.com/"
@@ -210,11 +241,11 @@ function SignUpPage(props) {
           }}
           htmlType="submit"
         >
-          Sign Up
+          Edit
         </Button>
       </form>
     </div>
   );
 }
 
-export default withRouter(SignUpPage);
+export default UpdateMyInfo;

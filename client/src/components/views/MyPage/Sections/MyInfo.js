@@ -46,7 +46,11 @@ function MyInfo() {
         title="User Info"
         size="default"
         column={1}
-        extra={<Button type="primary">Edit</Button>}
+        extra={
+          <Button type="primary">
+            <a href="/mypage/update">Edit</a>
+          </Button>
+        }
       >
         <Descriptions.Item label="image" labelStyle={{ width: "100px" }}>
           {UserImage}
