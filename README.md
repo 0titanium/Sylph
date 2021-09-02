@@ -94,22 +94,22 @@ Recruits project team members. Participate in the project.
     - "/users"
 
 
-        - POST "/users/signup" // register users
+        - POST "/users/signup" // signup users
 
 
-        - POST "/users/signin" // login users
+        - POST "/users/signin" // signin users
 
 
-        - GET "/users/userId" // display user's avatar, name
+        - GET "/users/auth" // user authentication
 
 
-        - POST "/users/logout" // logout users
-
-        
-        - GET "/users/mypage/profile/ // enter mypage, get user info
+        - POST "/users/signout" // signout users
 
 
-        - UPDATE "/users/mypage/profile" // udpate user's profile
+        - GET "/users/userInfo" // user info
+
+
+        - PATCH "/users/userInfo" // udpate user's profile
 
 
         - DELETE "/users/mypage/profile" // witdrwal users
@@ -118,16 +118,19 @@ Recruits project team members. Participate in the project.
     - "/recruits"
 
 
-        - GET "/recruits/post" // get latest posts or get a post
+        - GET "/recruits/latestRecruits" // get latest recruits
 
 
-        - POST "/recruits/post" // users post recruitement post
+        - GET "/recruits/recruitDetail" // get a specific recruit
 
 
-        - UPDATE "/recruits/post" // update posts
+        - POST "/recruits/recruit" // users post recruitement recruit
 
 
-        - DELETE "/recruits/post" // delete posts
+        - PATCH "/recruits/recruit" // update recruit
+
+
+        - DELETE "/recruits/recruit" // delete recruit
 
 
 <br/>
@@ -178,7 +181,7 @@ Recruits project team members. Participate in the project.
 - 해야할 일
 
 
--> 지원 기능, 지원 확인 기능, 지원 취소 기능, 지원 수락 기능, 지원 거절 기능, ...etc
+-> 회원 탈퇴 기능, 지원 기능, 지원 확인 기능, 지원 취소 기능, 지원 수락 기능, 지원 거절 기능, ...etc
 
 
 <br />
