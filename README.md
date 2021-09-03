@@ -138,7 +138,7 @@ Recruits project team members. Participate in the project.
 - database
 
 
-    - users
+    - user
         - id (string)
         - nickname (string)
         - password (string)
@@ -146,9 +146,13 @@ Recruits project team members. Participate in the project.
         - skills (string)
         - career (string)
         - github address (string)
+        - image (String?)
+        - recruit (string? boolean?)
+        - applyto (string)
+        - applyfor (string)
 
 
-    - posts
+    - recruit
         - writer (objectId)
         - title (string)
         - project detail (string)
@@ -161,6 +165,17 @@ Recruits project team members. Participate in the project.
 
 
 <br />
+
+
+***
+
+2021-09-03
+
+
+- 회원 탈퇴 기능 작성
+
+
+- 지원 기능 작성
 
 
 ***

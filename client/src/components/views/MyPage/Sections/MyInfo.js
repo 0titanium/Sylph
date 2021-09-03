@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { USER_SERVER } from "../../../../Config";
-import { Descriptions, Button } from "antd";
+import { getCookie } from "../../../../utils/getCookie";
 
-function MyInfo() {
+import { Descriptions, Button, Modal } from "antd";
+
+function MyInfo(props) {
+  const userId = getCookie("user_id", document.cookie);
+
   const [UserImage, setUserImage] = useState("");
   const [UserId, setUserId] = useState("");
   const [UserNickame, setUserNickame] = useState("");
@@ -37,7 +42,82 @@ function MyInfo() {
 
   useEffect(() => {
     fetchUserInfo();
+    return () => setConfirmLoading(false);
   }, []);
+
+  // delete request
+  const deleteRequest = (user) => {
+    fetch(`${USER_SERVER}/withdrawal`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ user }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          props.history.push("/");
+        } else {
+          alert("회원 탈퇴에 실패했습니다.");
+        }
+      });
+  };
+
+  // modal
+
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState("탈퇴하시겠습니까?");
+
+  const deleteComponent = () => {
+    const showModal = () => {
+      setVisible(true);
+    };
+
+    const handleCancel = () => {
+      setVisible(false);
+    };
+
+    const handleOk = () => {
+      let user = { userId: userId };
+
+      setModalText("탈퇴하시겠습니까?");
+      setConfirmLoading(true);
+      deleteRequest(user);
+      setTimeout(() => {
+        setVisible(false);
+        setConfirmLoading(false);
+      }, 2000);
+    };
+    return (
+      <React.Fragment>
+        <Button
+          onClick={showModal}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            backgroundColor: "red",
+            width: "5rem",
+            height: "2.5rem",
+          }}
+        >
+          Withdrawal
+        </Button>
+        <Modal
+          title="Withdrawal"
+          visible={visible}
+          onOk={handleOk}
+          confirmLoading={confirmLoading}
+          onCancel={handleCancel}
+        >
+          <p>{modalText}</p>
+        </Modal>
+      </React.Fragment>
+    );
+  };
 
   return (
     <div style={{ height: "100%" }}>
@@ -63,9 +143,12 @@ function MyInfo() {
         <Descriptions.Item label="GitHub Address">
           {UserGitHubAddress}
         </Descriptions.Item>
+        <Descriptions.Item label="Withdrawal" style={{ color: "red" }}>
+          {deleteComponent()}
+        </Descriptions.Item>
       </Descriptions>
     </div>
   );
 }
 
-export default MyInfo;
+export default withRouter(MyInfo);

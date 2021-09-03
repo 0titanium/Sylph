@@ -134,4 +134,21 @@ router.patch("/userInfo", (req, res) => {
   });
 });
 
+// withdrawal user
+
+router.delete("/withdrawal", (req, res) => {
+  let user = req.cookies.user_id;
+
+  User.findByIdAndDelete(user, null, (err, user) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
+
+    res.clearCookie("x_auth");
+    res.clearCookie("user_id");
+
+    return res.status(200).json({ success: true });
+  });
+});
+
 module.exports = router;
