@@ -47,8 +47,9 @@ function LandingPage() {
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <Title level={2}>Latest</Title>
       <hr />
-      <br />
-      <Row gutter={(32, 16)}>{Recruits !== [] && renderCards}</Row>
+      <Row gutter={(32, 16)} style={{ marginTop: "2rem" }}>
+        {Recruits !== [] && renderCards}
+      </Row>
     </div>
   );
 }

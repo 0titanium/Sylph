@@ -110,7 +110,7 @@ function UpdateRecruitPage(props) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "90vh",
+        height: "120vh",
       }}
     >
       <form
@@ -126,52 +126,54 @@ function UpdateRecruitPage(props) {
         >
           <h2>Recruit</h2>
         </div>
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>제목</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>제목</label>
         <Input
           style={{ height: "2.5rem" }}
           type="text"
           value={Title}
           onChange={onTitleHandler}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>프로젝트 상세</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
+          프로젝트 상세
+        </label>
         <TextArea
           style={{ resize: "none" }}
           rows={4}
           value={ProjectDetail}
           onChange={onProjectDetailHandler}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>모집 포지션</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
+          모집 포지션
+        </label>
         <TextArea
           style={{ resize: "none" }}
           rows={4}
           value={RecruitPositions}
           onChange={onRecruitPositionsHandler}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>요구 경력</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
+          요구 경력
+        </label>
         <Input
           style={{ height: "2.5rem" }}
           type="text"
           value={RequiredExperience}
           onChange={onRequiredExperienceHandler}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>모임 장소</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
+          모임 장소
+        </label>
         <Input
           style={{ height: "2.5rem" }}
           type="text"
           value={MeetingLocation}
           onChange={onMeetingLocationHandler}
         />
-        <br />
 
         <Button
           style={{
@@ -181,6 +183,7 @@ function UpdateRecruitPage(props) {
             color: "white",
             backgroundColor: "#4b7bec",
             height: "2.5rem",
+            marginTop: "2rem",
           }}
           htmlType="submit"
         >

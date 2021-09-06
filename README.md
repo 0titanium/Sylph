@@ -133,6 +133,9 @@ Recruits project team members. Participate in the project.
         - DELETE "/recruits/recruit" // delete recruit
 
 
+        - POST "/recruits/apply" // apply to recruit
+
+
 <br/>
 
 - database
@@ -166,6 +169,29 @@ Recruits project team members. Participate in the project.
 
 <br />
 
+
+***
+
+
+2021-09-06
+
+
+- firefox에서는 <br />로 여백이 만들어지지 않음. 검색 결과 좋은 방법도 아니라고 함. 
+
+
+-> 제거 후 margin을 통해 여백 생성.
+
+
+<br />
+
+
+- 지원 관련 기능. User, Recruit schema에 추가 필요.
+
+
+-> 지원 버튼 클릭 -> 지원한 유저 데이터베이스에 지원 정보 저장, 리쿠르트 데이터베이스에 지원자 정보 저장 -> 리쿠르트 작성자에게 알림
+
+
+<br />
 
 ***
 

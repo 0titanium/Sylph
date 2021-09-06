@@ -18,7 +18,6 @@ function UpdateMyInfo(props) {
   //   setPassword(event.currentTarget.value);
   // };
 
-
   // const onConfirmPasswordHandler = (event) => {
   //   setConfirmPassword(event.currentTarget.value);
   // };
@@ -103,11 +102,9 @@ function UpdateMyInfo(props) {
       githubaddress: UserGitHubAddress,
     };
 
-
-    if(data.position === "" || data.skills === ""){
+    if (data.position === "" || data.skills === "") {
       alert("입력하지 않은 필수 내용이 있습니다.");
-    }
-    else{
+    } else {
       UpdateUserInfo(data);
     }
   };
@@ -135,9 +132,8 @@ function UpdateMyInfo(props) {
         >
           <h2>Sign Up</h2>
         </div>
-        <br />
 
-        <p style={{ color: "red" }}>* 필수입력</p>
+        <p style={{ color: "red", marginTop: "2rem" }}>* 필수입력</p>
         <p style={{ marginBottom: "2rem" }}>* 선택입력</p>
 
         <label style={{ marginBottom: "5px" }}>
@@ -149,9 +145,8 @@ function UpdateMyInfo(props) {
           disabled={true}
           style={{ height: "2.5rem" }}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Nickname
         </label>
         <Input
@@ -160,9 +155,8 @@ function UpdateMyInfo(props) {
           disabled={true}
           style={{ height: "2.5rem" }}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Password
         </label>
         <Input.Password
@@ -171,9 +165,8 @@ function UpdateMyInfo(props) {
           disabled={true}
           style={{ height: "2.5rem" }}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Confirm Password
         </label>
         <Input.Password
@@ -182,9 +175,8 @@ function UpdateMyInfo(props) {
           disabled={true}
           style={{ height: "2.5rem" }}
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Position
         </label>
         <Input
@@ -194,9 +186,8 @@ function UpdateMyInfo(props) {
           style={{ height: "2.5rem" }}
           placeholder="ex) Frontend, Backend, Full Stack, ...etc"
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Skills
         </label>
         <Input
@@ -206,9 +197,8 @@ function UpdateMyInfo(props) {
           style={{ height: "2.5rem" }}
           placeholder="ex) Java, Javascript, Kotlin, ...etc"
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ display: "inline" }}>*</p> Careers
         </label>
         <Input
@@ -218,9 +208,8 @@ function UpdateMyInfo(props) {
           style={{ height: "2.5rem" }}
           placeholder="ex) 1 year, ...etc"
         />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ display: "inline" }}>*</p> GitHub Address
         </label>
         <Input
@@ -230,14 +219,13 @@ function UpdateMyInfo(props) {
           style={{ height: "2.5rem" }}
           placeholder="https://github.com/"
         />
-        <br />
-        <br />
 
         <Button
           style={{
             color: "white",
             backgroundColor: "#4b7bec",
             height: "2.5rem",
+            marginTop: "2rem",
           }}
           htmlType="submit"
         >

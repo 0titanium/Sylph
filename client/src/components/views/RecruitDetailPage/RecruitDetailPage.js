@@ -114,21 +114,24 @@ function RecruitDetailPage(props) {
     );
   };
 
-  const onApplyHandler = (e) => {
-    e.preventDefault();
-
-    if (userId) {
-    } else {
-      alert("로그인이 필요한 기능입니다.");
-    }
-
-    // after writing mypage
+  const applyRequest = (userId) => {
     // fetch(`${RECRUIT_SERVER}/apply`, {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
     //   mode: "cors",
     //   credentials: "include",
+    //   body: {userId: userId}
     // }).then((response) => response.json());
+  };
+
+  const onApplyHandler = (e) => {
+    e.preventDefault();
+
+    if (userId) {
+      applyRequest(userId);
+    } else {
+      alert("로그인이 필요한 기능입니다.");
+    }
   };
 
   useEffect(() => {

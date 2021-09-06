@@ -69,8 +69,9 @@ function MyRecruit() {
         </Descriptions>
       ) : (
         <div>
-          <br />
-          <h3>모집글이 없습니다. 프로젝트 팀원을 모집해 보세요. </h3>
+          <h3 style={{ marginTop: "2rem" }}>
+            모집글이 없습니다. 프로젝트 팀원을 모집해 보세요.{" "}
+          </h3>
         </div>
       )}
     </div>

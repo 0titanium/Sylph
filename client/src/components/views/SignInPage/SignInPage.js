@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Input, Button } from "antd";
 
 function SignInPage(props) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
@@ -25,7 +25,7 @@ function SignInPage(props) {
       id: Id,
       password: Password,
     };
-    
+
     dispatch(signinUser(data)).then((response) => {
       if (response.payload.signinSuccess) {
         props.history.push("/"); // withRouter 필요
@@ -58,23 +58,21 @@ function SignInPage(props) {
         >
           <h2>Sign In</h2>
         </div>
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>ID</label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>ID</label>
         <Input type="text" value={Id} onChange={onIdHandler} />
-        <br />
 
-        <label style={{ marginBottom: "5px" }}>Password</label>
+        <label style={{ marginBottom: "5px", marginTop: "1rem" }}>
+          Password
+        </label>
         <Input.Password value={Password} onChange={onPasswordHandler} />
-
-        <br />
-        <br />
 
         <Button
           style={{
             color: "white",
             backgroundColor: "#4b7bec",
             height: "2.5rem",
+            marginTop: "2rem",
           }}
           htmlType="submit"
         >
