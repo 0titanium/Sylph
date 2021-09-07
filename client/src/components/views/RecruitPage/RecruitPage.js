@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { RECRUIT_SERVER } from "../../../Config";
+import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
-
 import { Input, Button } from "antd";
 
 function RecruitPage(props) {
@@ -26,6 +25,23 @@ function RecruitPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          console.log(data.recruitPost);
+          fetch(`${USER_SERVER}/recruit`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            mode: "cors",
+            credentials: "include",
+            body: JSON.stringify({
+              userId: userId,
+              recruitId: data.recruitPost._id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (!data.success) {
+                alert("모집글 작성에 실패했습니다.");
+              }
+            });
           props.history.push("/");
         } else {
           alert("모집글 작성에 실패했습니다.");

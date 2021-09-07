@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RECRUIT_SERVER } from "../../../Config";
+import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
 
 import { Button, Divider, Modal } from "antd";
@@ -114,21 +114,50 @@ function RecruitDetailPage(props) {
     );
   };
 
-  const applyRequest = (userId) => {
-    // fetch(`${RECRUIT_SERVER}/apply`, {
-    //   method: "POST",
+  const applyRequest = (userId, recruitId) => {
+    fetch(`${RECRUIT_SERVER}/applyment`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ userId: userId, recruitId: recruitId }),
+    }).then((response) => response.json());
+
+    fetch(`${USER_SERVER}/applyment`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ userId: userId, recruitId: recruitId }),
+    }).then((response) => response.json());
+  };
+
+  const completeRequest = (recruitId) => {
+    // fetch(`${RECRUIT_SERVER}/complete`, {
+    //   method: "PATCH",
     //   headers: { "Content-Type": "application/json" },
     //   mode: "cors",
     //   credentials: "include",
-    //   body: {userId: userId}
+    //   body: { recruitId: recruitId },
     // }).then((response) => response.json());
   };
 
   const onApplyHandler = (e) => {
     e.preventDefault();
+    console.log("click");
 
     if (userId) {
-      applyRequest(userId);
+      applyRequest(userId, recruitId);
+    } else {
+      alert("로그인이 필요한 기능입니다.");
+    }
+  };
+
+  const onCompleteHandler = (e) => {
+    e.preventDefault();
+
+    if (userId) {
+      completeRequest(recruitId);
     } else {
       alert("로그인이 필요한 기능입니다.");
     }
@@ -214,6 +243,21 @@ function RecruitDetailPage(props) {
                 }}
               >
                 <a href={`/recruit/update/${recruitId}`}>Edit</a>
+              </Button>
+              <Button
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "white",
+                  backgroundColor: "#4b7bec",
+                  width: "5rem",
+                  height: "2.5rem",
+                  marginRight: "2rem",
+                }}
+                onClick={onCompleteHandler}
+              >
+                Complete
               </Button>
               {deleteComponent()}
             </>
