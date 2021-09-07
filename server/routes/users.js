@@ -151,4 +151,47 @@ router.delete("/withdrawal", (req, res) => {
   });
 });
 
+
+// apply to recruit route
+
+router.patch("/applyment", (req, res) => {
+  let userId = mongoose.Types.ObjectId(req.body.userId);
+
+  console.log(req.body.recruitId, req.body.userId)
+
+  User.findByIdAndUpdate(
+    userId,
+    { $push: { applyto: req.body.recruitId } },
+    (err) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+
+});
+
+
+// add recruit id route
+
+router.patch("/recruit", (req, res) => {
+  let userId = mongoose.Types.ObjectId(req.body.userId);
+
+  console.log(req.body.recruitId, req.body.userId)
+
+  User.findByIdAndUpdate(
+    userId,
+    {recruitWriting: req.body.recruitId},
+    (err) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+})
+
 module.exports = router;

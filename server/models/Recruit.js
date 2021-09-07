@@ -23,6 +23,13 @@ const recruitSchema = mongoose.Schema(
     meetingLocation: {
       type: String,
     },
+    personnel: {
+      type: Number,
+    },
+    applyfor: {
+      type: Array,
+      default: [],
+    },
     recruitCompleted: {
       type: Boolean,
       default: false,

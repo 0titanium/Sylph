@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
@@ -28,9 +29,17 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   githubaddress: {
-    type: String
+    type: String,
   },
   image: String,
+  applyto: {
+    type: Array,
+    default: [],
+  },
+  recruitWriting: {
+    type: Schema.Types.ObjectId,
+    ref: "Recruit",
+  },
   token: {
     type: String,
   },

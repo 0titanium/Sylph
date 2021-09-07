@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const { Recruit } = require("../models/Recruit");
+const { User } = require("../models/User");
 // const { User } = require("../models/User");
 
 // post recruit content route
@@ -14,7 +15,7 @@ router.post("/recruit", (req, res) => {
       return res.status(400).json({ success: false, err });
     }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, recruitPost });
   });
 });
 
@@ -88,5 +89,47 @@ router.delete("/recruit", (req, res) => {
     return res.status(200).json({ success: true });
   });
 });
+
+// apply recruit route
+
+router.patch("/applyment", (req, res) => {
+  let recruitId = mongoose.Types.ObjectId(req.body.recruitId);
+
+  console.log(req.body.recruitId, req.body.userId);
+
+  Recruit.findByIdAndUpdate(
+    recruitId,
+    { $push: { applyfor: req.body.userId } },
+    (err) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+});
+
+// alarm to writer route
+
+router.get("/applyment", (req, res) => {
+  let userId = req.cookies.user_id;
+
+  User.findById(userId, null, (err, user) => {
+    let recruitId = user.recruitWriting;
+
+    Recruit.findById(recruitId, (err, recruit) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true, recruit });
+    });
+  });
+});
+
+// complete recruit route
+
+// router.patch();
 
 module.exports = router;
