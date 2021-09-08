@@ -35,16 +35,19 @@ router.get("/latestRecruits", (req, res) => {
 
 // get a specific recruit route
 
-router.get("/recruitDetail", (req, res) => {
-  Recruit.findOne()
-    .populate("_id")
-    .exec((err, recruit) => {
+router.get("/recruitDetail/:rid", (req, res) => {
+  console.log(req.params);
+  Recruit.findById(req.params.rid, null, (err, recruit) => {
+    User.findById(recruit.writer, null, (err, writer) => {
       if (err) {
         return res.status(400).json({ success: false, err });
       }
 
-      return res.status(200).json({ success: true, recruitDetail: recruit });
+      return res
+        .status(200)
+        .json({ success: true, recruitDetail: recruit, writer });
     });
+  });
 });
 
 // update a specific reqcruit route
@@ -119,11 +122,41 @@ router.get("/applyment", (req, res) => {
     let recruitId = user.recruitWriting;
 
     Recruit.findById(recruitId, (err, recruit) => {
+      let applyUsers = recruit.applyfor;
+
+      for (let i = 0; i < applyUsers.length; i++) {
+        let arrayApplyUsers = [];
+
+        User.findById(applyUsers[i], null, (err, writer) => {
+          if (err) {
+            return res.status(400).json({ success: false, err });
+          }
+
+          arrayApplyUsers.push(writer);
+
+          return res
+            .status(200)
+            .json({ success: true, recruit, arrayApplyUsers });
+        });
+      }
+    });
+  });
+});
+
+// my recruit route
+
+router.get("/myRecruit", (req, res) => {
+  let userId = req.cookies.user_id;
+
+  User.findById(userId, null, (err, user) => {
+    let recruitId = user.recruitWriting;
+
+    Recruit.findById(recruitId, (err, recruit) => {
       if (err) {
         return res.status(400).json({ success: false, err });
       }
 
-      return res.status(200).json({ success: true, recruit });
+      return res.status(200).json({ success: true, recruitDetail: recruit, user });
     });
   });
 });

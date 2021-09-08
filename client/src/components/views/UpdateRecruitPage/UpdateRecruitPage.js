@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { RECRUIT_SERVER } from "../../../Config";
 
 import { Button, Input } from "antd";
@@ -13,9 +14,13 @@ function UpdateRecruitPage(props) {
   const [RequiredExperience, setRequiredExperience] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
+  const rid = useParams().recruitId;
+
+  console.log("rid", rid);
+
   // fetch data before update
   const fetchRecruitDetail = () => {
-    fetch(`${RECRUIT_SERVER}/recruitDetail`, {
+    fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

@@ -173,6 +173,30 @@ Recruits project team members. Participate in the project.
 ***
 
 
+2021-09-08
+
+
+- 여러 글이 있어도 하나의 글만 불러오는 문제.
+
+
+-> 수정 완료.
+
+
+- 글 수정 페이지에서 원본 내용을 가져오지 못하는 문제.
+
+
+-> 수정 완료.
+
+
+- recruitId, useParams의 rid가 같은 값이라고 생각하는데 recrutId는 알 수없는 문제가 있음.
+
+
+- applyto 다듬기
+
+
+***
+
+
 2021-09-07
 
 

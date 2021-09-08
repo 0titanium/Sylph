@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
 
@@ -9,14 +10,18 @@ function RecruitDetailPage(props) {
   const [recruitId, setRecruitId] = useState("");
   const [Title, setTitle] = useState("");
   const [Writer, setWriter] = useState("");
+  const [WriterId, setWriterId] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
   const [RecruitPositions, setRecruitPositions] = useState("");
   const [RequiredExperience, setRequiredExperience] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
+  const [ReadingUserApply, setReadingUserApply] = useState([]);
+  const rid = useParams().recruitId;
 
-  // fetch recruit data
-  const fetchRecruitDetail = () => {
-    fetch(`${RECRUIT_SERVER}/recruitDetail`, {
+  console.log(useParams());
+  // fetch user info
+  const fetchUserInfo = () => {
+    fetch(`${USER_SERVER}/userInfo`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -25,10 +30,32 @@ function RecruitDetailPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.recruitDetail._id._id);
+          console.log("ui", data.user[0]);
+          console.log("a", data.user[0].applyto);
+          setReadingUserApply(data.user[0].applyto);
+        } else {
+          alert("유저 정보를 불러오는데 실패했습니다.");
+        }
+      });
+  };
+  console.log("rua", ReadingUserApply);
+
+  // fetch recruit data
+  const fetchRecruitDetail = () => {
+    fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data.writer);
           setRecruitId(data.recruitDetail._id._id);
           setTitle(data.recruitDetail.title);
-          setWriter(data.recruitDetail.writer);
+          setWriter(data.writer.nickname);
+          setWriterId(data.writer._id);
           setProjectDetail(data.recruitDetail.projectDetail);
           setRecruitPositions(data.recruitDetail.recruitPositions);
           setRequiredExperience(data.recruitDetail.requiredExperience);
@@ -59,7 +86,6 @@ function RecruitDetailPage(props) {
   };
 
   // modal
-
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("삭제하시겠습니까?");
@@ -74,7 +100,7 @@ function RecruitDetailPage(props) {
     };
 
     const handleOk = () => {
-      let submitRecruitDetail = { recruitId: recruitId };
+      let submitRecruitDetail = { recruitId: rid };
 
       setModalText("삭제하시겠습니까?");
       setConfirmLoading(true);
@@ -114,13 +140,14 @@ function RecruitDetailPage(props) {
     );
   };
 
-  const applyRequest = (userId, recruitId) => {
+  // apply
+  const applyRequest = (userId, rid) => {
     fetch(`${RECRUIT_SERVER}/applyment`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
       credentials: "include",
-      body: JSON.stringify({ userId: userId, recruitId: recruitId }),
+      body: JSON.stringify({ userId: userId, recruitId: rid }),
     }).then((response) => response.json());
 
     fetch(`${USER_SERVER}/applyment`, {
@@ -128,10 +155,11 @@ function RecruitDetailPage(props) {
       headers: { "Content-Type": "application/json" },
       mode: "cors",
       credentials: "include",
-      body: JSON.stringify({ userId: userId, recruitId: recruitId }),
+      body: JSON.stringify({ userId: userId, recruitId: rid }),
     }).then((response) => response.json());
   };
 
+  // recruit completion
   const completeRequest = (recruitId) => {
     // fetch(`${RECRUIT_SERVER}/complete`, {
     //   method: "PATCH",
@@ -142,29 +170,49 @@ function RecruitDetailPage(props) {
     // }).then((response) => response.json());
   };
 
+  // if user click apply button
   const onApplyHandler = (e) => {
-    e.preventDefault();
     console.log("click");
 
     if (userId) {
-      applyRequest(userId, recruitId);
+      applyRequest(userId, rid);
     } else {
       alert("로그인이 필요한 기능입니다.");
     }
   };
 
+  // if writer click complete button
   const onCompleteHandler = (e) => {
     e.preventDefault();
 
     if (userId) {
-      completeRequest(recruitId);
+      completeRequest(rid);
     } else {
       alert("로그인이 필요한 기능입니다.");
     }
   };
 
+  // verify if user already clicked apply
+
+  const verifyApply = () => {
+    if(ReadingUserApply === []){
+      return true;
+    }
+
+    for (let i = 0; i < ReadingUserApply.length; i++) {
+      if (recruitId === ReadingUserApply[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  console.log("V", verifyApply())
+
   useEffect(() => {
     fetchRecruitDetail();
+    fetchUserInfo();
     return () => setConfirmLoading(false);
   }, []);
 
@@ -209,7 +257,7 @@ function RecruitDetailPage(props) {
             alignItems: "center",
           }}
         >
-          {userId !== Writer && (
+          {userId !== WriterId && verifyApply === true && (
             <Button
               style={{
                 display: "flex",
@@ -228,7 +276,7 @@ function RecruitDetailPage(props) {
           )}
 
           {/* only writer can see this button */}
-          {userId === Writer && (
+          {userId === WriterId && (
             <>
               <Button
                 style={{
@@ -242,7 +290,7 @@ function RecruitDetailPage(props) {
                   marginRight: "2rem",
                 }}
               >
-                <a href={`/recruit/update/${recruitId}`}>Edit</a>
+                <a href={`/recruit/update/${rid}`}>Edit</a>
               </Button>
               <Button
                 style={{

@@ -11,8 +11,8 @@ function MyRecruit() {
   const [RequiredExperience, setRequiredExperience] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
-  const fetchRecruitDetail = () => {
-    fetch(`${RECRUIT_SERVER}/recruitDetail`, {
+  const fetchMyRecruit = () => { // fetchMyRecruit
+    fetch(`${RECRUIT_SERVER}/myRecruit`, { // `${RECRUIT_SERVER}/myRecruit`
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -21,10 +21,10 @@ function MyRecruit() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
+          console.log(data.user);
           if (data.recruitDetail) {
             setTitle(data.recruitDetail.title);
-            setWriter(data.recruitDetail.writer);
+            setWriter(data.user.nickname);
             setProjectDetail(data.recruitDetail.projectDetail);
             setRecruitPositions(data.recruitDetail.recruitPositions);
             setRequiredExperience(data.recruitDetail.requiredExperience);
@@ -37,7 +37,7 @@ function MyRecruit() {
   };
 
   useEffect(() => {
-    fetchRecruitDetail();
+    fetchMyRecruit();
   }, []);
 
   return (

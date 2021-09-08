@@ -6,6 +6,7 @@ function ApplyFor() {
   const userId = getCookie("user_id", document.cookie);
 
   const [UserRecruit, setUserRecruit] = useState("");
+  const [RecruitTitle, setRecruitTitle] = useState("");
   const [ApplyUsers, setApplyUsers] = useState([]);
 
   const fetchUserInfo = () => {
@@ -27,7 +28,6 @@ function ApplyFor() {
   };
 
   const alarmToWriter = () => {
-
     fetch(`${RECRUIT_SERVER}/applyment`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -37,7 +37,10 @@ function ApplyFor() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setApplyUsers(data.recruit.applyfor);
+          console.log("data", data.recruit);
+          setRecruitTitle(data.recruit.title);
+          let nicknames = data.arrayApplyUsers.map((user) => user.nickname);
+          setApplyUsers((prevState) => [...prevState, nicknames]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -51,11 +54,28 @@ function ApplyFor() {
 
   return (
     <div>
-      <p>Apply for me</p>
+      <p style={{ marginBottom: "2rem" }}>Apply for</p>
 
-      {ApplyUsers.length !== 0 && ApplyUsers.map((user, index) => {
-        return (<p key={index}>id: {user}</p>);
-      })}
+      {ApplyUsers.length !== 0 &&
+        ApplyUsers.map((user, index) => {
+          return (
+            <>
+              <div
+                style={{
+                  border: "1px solid black",
+                  width: "50%"
+                }}
+              >
+                <p style={{ marginLeft: "1rem" }}>
+                  Recruit Title: {RecruitTitle}
+                </p>
+                <p style={{ marginLeft: "1rem" }} key={index}>
+                  nickname: {user}
+                </p>
+              </div>
+            </>
+          );
+        })}
     </div>
   );
 }
