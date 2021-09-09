@@ -28,7 +28,7 @@ function LandingPage() {
     fetchRecruits();
   }, []);
 
-  const renderCards = Recruits.map((recruit, index) => {
+  const renderCards = Recruits.reverse().map((recruit, index) => {
     return (
       <Col key={index} lg={6} md={8} xs={24}>
         <Card

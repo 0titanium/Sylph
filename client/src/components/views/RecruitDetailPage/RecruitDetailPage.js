@@ -18,7 +18,6 @@ function RecruitDetailPage(props) {
   const [ReadingUserApply, setReadingUserApply] = useState([]);
   const rid = useParams().recruitId;
 
-  console.log(useParams());
   // fetch user info
   const fetchUserInfo = () => {
     fetch(`${USER_SERVER}/userInfo`, {
@@ -195,7 +194,7 @@ function RecruitDetailPage(props) {
   // verify if user already clicked apply
 
   const verifyApply = () => {
-    if(ReadingUserApply === []){
+    if (ReadingUserApply === []) {
       return true;
     }
 
@@ -208,7 +207,7 @@ function RecruitDetailPage(props) {
     return true;
   };
 
-  console.log("V", verifyApply())
+  console.log("V", verifyApply());
 
   useEffect(() => {
     fetchRecruitDetail();
@@ -257,7 +256,7 @@ function RecruitDetailPage(props) {
             alignItems: "center",
           }}
         >
-          {userId !== WriterId && verifyApply === true && (
+          {userId !== WriterId && (
             <Button
               style={{
                 display: "flex",

@@ -28,7 +28,6 @@ router.post("/signin", (req, res) => {
 
   User.findOne({ id: req.body.dataToSubmit.id }, (err, user) => {
     if (!user) {
-      console.log("아이디 없음");
       return res.json({
         signinSuccess: false,
         message: "제공된 아이디에 해당하는 유저가 없습니다.",
@@ -38,7 +37,6 @@ router.post("/signin", (req, res) => {
     // 2 요청된 아이디가 db에 있으면 암호가 맞는지 확인
     user.comparePassword(req.body.dataToSubmit.password, (err, isMatch) => {
       if (!isMatch) {
-        console.log("비밀번호 다름");
         return res.json({
           signinSuccess: false,
           message: "비밀번호가 다릅니다.",
@@ -48,7 +46,6 @@ router.post("/signin", (req, res) => {
       // 3 암호가 맞다면 토큰 생성
       user.generateToken((err, user) => {
         if (err) {
-          console.log("???");
           return res.status(400).send(err);
         }
 
@@ -85,7 +82,6 @@ router.get("/auth", auth, (req, res) => {
 
 // signout route
 router.post("/signout", auth, (req, res) => {
-  console.log(req.user);
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
     if (err) {
       return res.json({ signoutSuccess: false, err });
@@ -121,21 +117,17 @@ router.get("/userInfo", (req, res) => {
 });
 
 // update user info
-
 router.patch("/userInfo", (req, res) => {
   let userObjId = mongoose.Types.ObjectId(req.body.data.objId);
-  console.log(req.body.data);
   User.findByIdAndUpdate(userObjId, req.body.data, (err, recruit) => {
     if (err) {
       return res.status(400).json({ success: false, err });
     }
-    console.log("update");
     return res.status(200).json({ success: true });
   });
 });
 
 // withdrawal user
-
 router.delete("/withdrawal", (req, res) => {
   let user = req.cookies.user_id;
 
@@ -151,13 +143,9 @@ router.delete("/withdrawal", (req, res) => {
   });
 });
 
-
 // apply to recruit route
-
 router.patch("/applyment", (req, res) => {
   let userId = mongoose.Types.ObjectId(req.body.userId);
-
-  console.log(req.body.recruitId, req.body.userId)
 
   User.findByIdAndUpdate(
     userId,
@@ -170,20 +158,15 @@ router.patch("/applyment", (req, res) => {
       return res.status(200).json({ success: true });
     }
   );
-
 });
 
-
 // add recruit id route
-
 router.patch("/recruit", (req, res) => {
   let userId = mongoose.Types.ObjectId(req.body.userId);
 
-  console.log(req.body.recruitId, req.body.userId)
-
   User.findByIdAndUpdate(
     userId,
-    {recruitWriting: req.body.recruitId},
+    { recruitWriting: req.body.recruitId },
     (err) => {
       if (err) {
         return res.status(400).json({ success: false, err });
@@ -192,6 +175,6 @@ router.patch("/recruit", (req, res) => {
       return res.status(200).json({ success: true });
     }
   );
-})
+});
 
 module.exports = router;
