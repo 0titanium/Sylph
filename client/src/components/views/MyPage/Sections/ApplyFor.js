@@ -15,15 +15,16 @@ function ApplyFor() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("data", data.recruit);
-          setRecruitTitle(data.recruit.title);
-          let nicknames = data.arrayApplyUsers.map((user) => user.nickname);
-          setApplyUsers((prevState) => [...prevState, nicknames]);
+          console.log("data", data);
+          setRecruitTitle(data.title);
+          setApplyUsers((prevState) => [...prevState, ...data.usersNicknames]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
       });
   };
+
+  console.log(ApplyUsers);
 
   const renderApplyFor = ApplyUsers.reverse().map((apply, index) => {
     return (
@@ -31,6 +32,7 @@ function ApplyFor() {
         style={{
           border: "1px solid black",
           width: "50%",
+          marginBottom: "1rem",
         }}
         key={index}
       >

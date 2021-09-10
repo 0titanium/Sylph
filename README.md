@@ -112,19 +112,25 @@ Recruits project team members. Participate in the project.
         - PATCH "/users/userInfo" // udpate user's profile
 
 
-        - DELETE "/users/mypage/profile" // witdrwal users
+        - DELETE "/users/witdrwal" // witdrwal users
+
+
+        - PATCH "/users/applyment" // apply
+
+
+        - PATCH "/user/recruit" // save data writting recruit
 
 
     - "/recruits"
 
 
+        - POST "/recruits/recruit" // users post recruitement recruit
+
+
         - GET "/recruits/latestRecruits" // get latest recruits
 
 
-        - GET "/recruits/recruitDetail" // get a specific recruit
-
-
-        - POST "/recruits/recruit" // users post recruitement recruit
+        - GET "/recruits/recruitDetail:rid" // get a specific recruit
 
 
         - PATCH "/recruits/recruit" // update recruit
@@ -133,7 +139,16 @@ Recruits project team members. Participate in the project.
         - DELETE "/recruits/recruit" // delete recruit
 
 
-        - POST "/recruits/apply" // apply to recruit
+        - PATCH "/recruits/applyment" // apply to recruit
+
+
+        - GET "/recruits/applyment" // get data applying to recruit
+
+
+        - GET "/recruits/myRecruit" // get data recruit written by user
+
+
+        - GET "/recruits/myApply" // get data apply
 
 
 <br/>
@@ -150,9 +165,8 @@ Recruits project team members. Participate in the project.
         - career (string)
         - github address (string)
         - image (String?)
-        - recruit (string? boolean?)
-        - applyto (string)
-        - applyfor (string)
+        - recruitWriting (objectId)
+        - applyto (Array)
 
 
     - recruit
@@ -162,6 +176,7 @@ Recruits project team members. Participate in the project.
         - meeting location (string)
         - recruit positions (string)
         - required experience (string)
+        - applyfor (Array)
 
 
 <br />
@@ -171,6 +186,35 @@ Recruits project team members. Participate in the project.
 
 
 ***
+
+
+2021-09-10
+
+
+- for loop에서 쿼리를 돌리면 안되나?
+
+
+-> findById -> find { _id : { $in: } }로 해결.
+
+
+- apply to 흐름: 유저를 찾음 -> 유저 지원을 찾음 -> 지원한 모집들을 찾음
+
+
+- apply to, apply for 작성. 디자인은 나중에?
+
+
+- 남은 것 
+    - 지원 시 apply button disabled 처리 문제
+    - 모집글은 아이디당 한개씩만 쓸 수 있게 처리하는 문제.
+    - positions dropdown
+    - tech stacks dropdown
+    - when someone apply to recruit change alarm bell of right menu 
+
+
+<br />
+
+***
+
 
 2021-09-09
 

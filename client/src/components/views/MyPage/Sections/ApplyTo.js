@@ -3,27 +3,7 @@ import { RECRUIT_SERVER } from "../../../../Config";
 
 function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState([]);
-
-  // const fetchUserInfo = () => {
-  //   fetch(`${USER_SERVER}/userInfo`, {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //     mode: "cors",
-  //     credentials: "include",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         console.log("user", data.user);
-  //         setUserApplyTo((prevState) => [
-  //           ...prevState,
-  //           ...data.user[0].applyto,
-  //         ]);
-  //       } else {
-  //         alert("유저 정보를 불러오는데 실패했습니다.");
-  //       }
-  //     });
-  // };
+  const [RecruitId, setRecruitId] = useState([]);
 
   const fetchApplyTo = () => {
     fetch(`${RECRUIT_SERVER}/myApply`, {
@@ -35,18 +15,14 @@ function ApplyTo() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("data", data.applyData);
-          // setUserApplyTo((prevState) => [
-          //   ...prevState,
-          //   ...data.user[0].applyto,
-          // ]);
+          console.log("data", data);
+          setUserApplyTo((prevState) => [...prevState, ...data.recruitTitle]);
+          setRecruitId((prevState) => [...prevState, ...data.recruitId]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
       });
-  }
-
-  console.log("uat", UserApplyTo);
+  };
 
   const renderApplyTo = UserApplyTo.reverse().map((apply, index) => {
     return (
@@ -54,13 +30,17 @@ function ApplyTo() {
         style={{
           border: "1px solid black",
           width: "50%",
+          height: "3rem",
+          
         }}
         key={index}
       >
-        <p style={{ marginLeft: "1rem" }}>
-          {/* Recruit Title: {RecruitTitle} */}
-        </p>
-        <p style={{ marginLeft: "1rem" }}>nickname: {apply}</p>
+        <div style={{ marginLeft: "1rem" }}>
+          Recruit Title: {apply}
+          <button style={{ display: "inline-block", float: "right", marginRight: "1rem" }}>
+            <a href={`/recruit/${RecruitId[index]}`}>확인</a>
+          </button>
+        </div>
       </div>
     );
   });

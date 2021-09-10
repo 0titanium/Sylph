@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -113,19 +114,19 @@ router.get("/applyment", (req, res) => {
 
     // find recruit written by upper user
     Recruit.findById(recruitId, null, (err, recruit) => {
-      let applyUsers = recruit.applyfor;
+      let applyFor = recruit.applyfor;
+      let title = recruit.title;
 
-      // let arrayApplyUsers = applyUsers.map((userId) => {
-      //   let nickname = User.findById(userId, null, (err, user) => {
-      //     return user.nickname;
-      //   });
+      User.find({ _id: { $in: applyFor } }, (err, user) => {
+        if (err) {
+          return res.status(400).json({ success: false, err });
+        }
 
-      //   return nickname;
-      // });
+        let arrayApplyUsers = user;
+        let usersNicknames = arrayApplyUsers.map((user) => user.nickname);
 
-      // console.log(arrayApplyUsers);
-
-      // return res.status(200).json({success: true, arrayApplyUsers});
+        return res.status(200).json({ success: true, title, usersNicknames });
+      });
     });
   });
 });
@@ -149,20 +150,27 @@ router.get("/myRecruit", (req, res) => {
   });
 });
 
-// complete recruit route
+// get my apply to route
 router.get("/myApply", (req, res) => {
   let userId = req.cookies.user_id;
 
-  let applyData = [];
-
   User.findById(userId, null, (err, user) => {
-    if (err) {
-      return res.status(400).json({ success: false, err });
-    }
-
     let applyto = user.applyto;
 
-    return res.status(200).json({ success: true, applyData });
+    console.log("at", applyto);
+
+    Recruit.find({ _id: { $in: applyto } }, (err, recruit) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      let arrayRecruit = recruit;
+      let recruitTitle = arrayRecruit.map((recruit) => recruit.title);
+      let recruitId = arrayRecruit.map((recruit) => recruit._id);
+
+      console.log("r", recruit);
+      return res.status(200).json({ success: true, recruitTitle, recruitId });
+    });
   });
 });
 
