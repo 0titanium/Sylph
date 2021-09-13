@@ -188,6 +188,24 @@ Recruits project team members. Participate in the project.
 ***
 
 
+2021-09-13
+
+
+- 서버에서 데이터가 도착하지 않은 것, 저장된 데이터가 없는 것을 구분하는 방법.
+
+
+-> data === undefined ? loading state : data.length !== 0 ? component : string no data로 처리함.
+
+
+- left menu dropdown.
+
+
+-> each menu click -> landing page -> display recruits matching menu
+
+
+
+***
+
 2021-09-10
 
 
@@ -206,9 +224,9 @@ Recruits project team members. Participate in the project.
 - 남은 것 
     - 지원 시 apply button disabled 처리 문제
     - 모집글은 아이디당 한개씩만 쓸 수 있게 처리하는 문제.
-    - positions dropdown
-    - tech stacks dropdown
-    - when someone apply to recruit change alarm bell of right menu 
+    - positions dropdown (o)
+    - tech stacks dropdown (o)
+    - when someone apply to recruit change alarm bell of right menu () 
 
 
 <br />

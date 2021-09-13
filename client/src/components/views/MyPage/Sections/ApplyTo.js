@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
 
+import { List, Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
 function ApplyTo() {
-  const [UserApplyTo, setUserApplyTo] = useState([]);
+  const [UserApplyTo, setUserApplyTo] = useState(undefined);
   const [RecruitId, setRecruitId] = useState([]);
 
   const fetchApplyTo = () => {
@@ -16,7 +19,7 @@ function ApplyTo() {
       .then((data) => {
         if (data.success) {
           console.log("data", data);
-          setUserApplyTo((prevState) => [...prevState, ...data.recruitTitle]);
+          setUserApplyTo([...data.recruitTitle]);
           setRecruitId((prevState) => [...prevState, ...data.recruitId]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
@@ -24,37 +27,36 @@ function ApplyTo() {
       });
   };
 
-  const renderApplyTo = UserApplyTo.reverse().map((apply, index) => {
+  const renderApplyTo = () => {
     return (
-      <div
-        style={{
-          border: "1px solid black",
-          width: "50%",
-          height: "3rem",
-          
-        }}
-        key={index}
-      >
-        <div style={{ marginLeft: "1rem" }}>
-          Recruit Title: {apply}
-          <button style={{ display: "inline-block", float: "right", marginRight: "1rem" }}>
-            <a href={`/recruit/${RecruitId[index]}`}>확인</a>
-          </button>
-        </div>
-      </div>
+      <>
+        <List
+          header={<div>Apply To</div>}
+          bordered
+          dataSource={UserApplyTo}
+          renderItem={(item) => (
+            <List.Item>
+              <Typography.Text mark>[지원중]</Typography.Text> {item}
+            </List.Item>
+          )}
+        />
+      </>
     );
-  });
+  };
 
   useEffect(() => {
-    // fetchUserInfo();
     fetchApplyTo();
   }, []);
 
   return (
     <div>
-      <p style={{ marginBottom: "2rem" }}>Apply to</p>
-
-      {UserApplyTo.length !== 0 && renderApplyTo}
+      {UserApplyTo === undefined ? (
+        <LoadingOutlined style={{ fontSize: "3rem" }} />
+      ) : UserApplyTo.length !== 0 ? (
+        renderApplyTo()
+      ) : (
+        <p>지원한 프로젝트가 없습니다.</p>
+      )}
     </div>
   );
 }

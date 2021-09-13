@@ -1,15 +1,37 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu, Dropdown } from "antd";
 
 function LeftMenu(props) {
+  const onPositionsClick = () => {};
+  const onTechStacksClick = () => {};
+
+  const positionsMenu = (
+    <Menu onClick={onPositionsClick}>
+      <Menu.Item key="1">Frontend</Menu.Item>
+      <Menu.Item key="2">Backend</Menu.Item>
+      <Menu.Item key="3">Full stack</Menu.Item>
+    </Menu>
+  );
+
+  const techStacksMenu = (
+    <Menu onClick={onTechStacksClick}>
+      <Menu.Item key="1">JavaScript</Menu.Item>
+      <Menu.Item key="2">Java</Menu.Item>
+      <Menu.Item key="3">Python</Menu.Item>
+    </Menu>
+  );
 
   return (
     <Menu mode={props.mode}>
       <Menu.Item key="postions">
-        <a href="/">Positions</a>
+        <Dropdown overlay={positionsMenu}>
+          <div>Positions</div>
+        </Dropdown>
       </Menu.Item>
       <Menu.Item key="tech-stacks">
-        <a href="/">Tech Stacks</a>
+        <Dropdown overlay={techStacksMenu}>
+          <div>Tech Stacks</div>
+        </Dropdown>
       </Menu.Item>
     </Menu>
   );

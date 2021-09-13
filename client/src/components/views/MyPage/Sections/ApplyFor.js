@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
 
+import { List, Typography } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
 function ApplyFor() {
   const [RecruitTitle, setRecruitTitle] = useState("");
-  const [ApplyUsers, setApplyUsers] = useState([]);
+  const [ApplyUsers, setApplyUsers] = useState(undefined);
 
   const alarmToWriter = () => {
     fetch(`${RECRUIT_SERVER}/applyment`, {
@@ -17,7 +20,7 @@ function ApplyFor() {
         if (data.success) {
           console.log("data", data);
           setRecruitTitle(data.title);
-          setApplyUsers((prevState) => [...prevState, ...data.usersNicknames]);
+          setApplyUsers([...data.usersNicknames]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -26,21 +29,23 @@ function ApplyFor() {
 
   console.log(ApplyUsers);
 
-  const renderApplyFor = ApplyUsers.reverse().map((apply, index) => {
+  const renderApplyFor = () => {
     return (
-      <div
-        style={{
-          border: "1px solid black",
-          width: "50%",
-          marginBottom: "1rem",
-        }}
-        key={index}
-      >
-        <p style={{ marginLeft: "1rem" }}>Recruit Title: {RecruitTitle}</p>
-        <p style={{ marginLeft: "1rem" }}>nickname: {apply}</p>
-      </div>
+      <>
+        <List
+          header={<div>Apply For</div>}
+          bordered
+          dataSource={ApplyUsers}
+          renderItem={(item) => (
+            <List.Item>
+              <Typography.Text mark>[{RecruitTitle}]</Typography.Text> [지원자] {" "}
+              {item}
+            </List.Item>
+          )}
+        />
+      </>
     );
-  });
+  };
 
   useEffect(() => {
     alarmToWriter();
@@ -48,9 +53,13 @@ function ApplyFor() {
 
   return (
     <div>
-      <p style={{ marginBottom: "2rem" }}>Apply for</p>
-
-      {ApplyUsers.length !== 0 && renderApplyFor}
+      {ApplyUsers === undefined ? (
+        <LoadingOutlined style={{ fontSize: "3rem" }} />
+      ) : ApplyUsers.length !== 0 ? (
+        renderApplyFor()
+      ) : (
+        <p>지원자가 없습니다.</p>
+      )}
     </div>
   );
 }

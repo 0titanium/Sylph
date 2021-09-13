@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
 
 import { Descriptions, Button } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function MyRecruit() {
-  const [Title, setTitle] = useState("");
+  const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
   const [RecruitPositions, setRecruitPositions] = useState("");
   const [RequiredExperience, setRequiredExperience] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
-  const fetchMyRecruit = () => { // fetchMyRecruit
-    fetch(`${RECRUIT_SERVER}/myRecruit`, { // `${RECRUIT_SERVER}/myRecruit`
+  const fetchMyRecruit = () => {
+    fetch(`${RECRUIT_SERVER}/myRecruit`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -42,7 +43,7 @@ function MyRecruit() {
 
   return (
     <div style={{ height: "100%" }}>
-      {Title !== "" ? (
+      {Title === undefined ? <LoadingOutlined style={{fontSize: "3rem"}} /> : Title !== "" ? (
         <Descriptions
           bordered
           title="My Recruit"
