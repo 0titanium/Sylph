@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState(undefined);
-  const [RecruitId, setRecruitId] = useState([]);
+  // const [RecruitId, setRecruitId] = useState([]);
 
   const fetchApplyTo = () => {
     fetch(`${RECRUIT_SERVER}/myApply`, {
@@ -19,8 +19,8 @@ function ApplyTo() {
       .then((data) => {
         if (data.success) {
           console.log("data", data);
-          setUserApplyTo([...data.recruitTitle]);
-          setRecruitId((prevState) => [...prevState, ...data.recruitId]);
+          setUserApplyTo([...data.recruitTitle.reverse()]);
+          // setRecruitId((prevState) => [...prevState, ...data.recruitId]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }

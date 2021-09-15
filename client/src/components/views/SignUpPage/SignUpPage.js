@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
-import { Form, Input, Button } from "antd";
+import { Input, Button } from "antd";
 
 function SignUpPage(props) {
   const dispatch = useDispatch();

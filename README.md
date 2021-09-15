@@ -182,7 +182,50 @@ Recruits project team members. Participate in the project.
 <br />
 
 
-<br />
+
+***
+
+
+2021-09-15
+
+- 모집완료 기능 작성
+
+
+- click positions, tech stacks -> page filtered 작성중 (landigpage base)
+
+
+-> 모집 모델이 키워드를 포함하고 있어야 할 것 같다.
+
+
+- 1인 1모집 기능 작성 중.
+
+
+-> 작동하긴 하지만 딜레이가 있음.
+
+
+- 글을 삭제했을 때 유저 정보도 업데이트 해야함.
+
+
+-> 해결
+
+
+
+***
+
+
+2021-09-14
+
+
+- 이미 지원한 리쿠르트 버튼 disabled
+
+
+- 남은 일
+    - 모집완료 기능
+    - nav left menu detail
+    - one user, one recruit
+
+
+- recruit detail loading spinner
 
 
 ***

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signoutUser } from "../../../../_actions/user_action";
-import { Menu, Dropdown, Avatar, Button } from "antd";
-import { DownOutlined, BellOutlined } from "@ant-design/icons";
+import { Menu, Dropdown, Avatar } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { getCookie } from "../../../../utils/getCookie";
 import { USER_SERVER } from "../../../../Config";
 
@@ -13,6 +13,7 @@ function RightMenu(props) {
   const dispatch = useDispatch();
   const [UserNickame, setUserNickame] = useState("");
   const [UserImage, setUserImage] = useState("");
+  const [CheckRecruit, setCheckRecruit] = useState("");
 
   const fetchUser = () => {
     fetch(`${USER_SERVER}/userInfo`, {
@@ -26,6 +27,7 @@ function RightMenu(props) {
         if (data.success) {
           setUserImage(data.user[0].image);
           setUserNickame(data.user[0].nickname);
+          setCheckRecruit(data.user[0].recruitWriting);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -50,6 +52,15 @@ function RightMenu(props) {
       }
     });
   };
+
+  const onCheckHandler = () => {
+    if(CheckRecruit){
+      alert("모집글은 하나만 작성할 수 있습니다.");
+    }
+    else{
+      window.location.href="/recruit/post";
+    }
+  }
 
   const menu = (
     <Menu>
@@ -77,27 +88,33 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="recruit">
-          <a href="/recruit/post">Recruit</a>
+        <Menu.Item key="recruit" style={{ paddingRight: "0px" }} onClick={onCheckHandler}>
+          {/* <a href="/recruit/post">Recruit</a> */}
+          Recruit
         </Menu.Item>
-        <Menu.Item
+        {/* <Menu.Item
           key="notice"
           style={{ marginTop: "5px", textDecoration: "none" }}
         >
           <BellOutlined style={{ fontSize: "1.5rem" }} />
-        </Menu.Item>
+        </Menu.Item> */}
         {/* avatar + name - click - dropdown - mypage, logout */}
-        <Dropdown overlay={menu} trigger={["click"]}>
-          <a
-            className="ant-dropdown-link"
-            onClick={(e) => e.preventDefault()}
-            style={{ float: "right" }}
-          >
-            <Avatar src={UserImage} style={{ marginRight: "7px" }} />
-            <p style={{ display: "inline" }}>{UserNickame}</p>
-            <DownOutlined style={{ marginLeft: "5px" }} />
-          </a>
-        </Dropdown>
+        <Menu.Item key="dropdwon">
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <Avatar
+                className="nav-avatar"
+                src={UserImage}
+                style={{ marginRight: "7px" }}
+              />
+              <p style={{ display: "inline" }}>{UserNickame}</p>
+              <DownOutlined style={{ marginLeft: "5px" }} />
+            </a>
+          </Dropdown>
+        </Menu.Item>
       </Menu>
     );
   }

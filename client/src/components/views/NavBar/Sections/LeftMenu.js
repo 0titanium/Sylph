@@ -10,6 +10,9 @@ function LeftMenu(props) {
       <Menu.Item key="1">Frontend</Menu.Item>
       <Menu.Item key="2">Backend</Menu.Item>
       <Menu.Item key="3">Full stack</Menu.Item>
+      <Menu.Item key="4">iOS</Menu.Item>
+      <Menu.Item key="5">Android</Menu.Item>
+      <Menu.Item key="6">Game</Menu.Item>
     </Menu>
   );
 
@@ -18,6 +21,12 @@ function LeftMenu(props) {
       <Menu.Item key="1">JavaScript</Menu.Item>
       <Menu.Item key="2">Java</Menu.Item>
       <Menu.Item key="3">Python</Menu.Item>
+      <Menu.Item key="4">Swift</Menu.Item>
+      <Menu.Item key="5">Kotlin</Menu.Item>
+      <Menu.Item key="6">php</Menu.Item>
+      <Menu.Item key="7">C</Menu.Item>
+      <Menu.Item key="8">C++</Menu.Item>
+      <Menu.Item key="9">C#</Menu.Item>
     </Menu>
   );
 

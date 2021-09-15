@@ -20,14 +20,12 @@ function ApplyFor() {
         if (data.success) {
           console.log("data", data);
           setRecruitTitle(data.title);
-          setApplyUsers([...data.usersNicknames]);
+          setApplyUsers([...data.usersNicknames.reverse()]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
       });
   };
-
-  console.log(ApplyUsers);
 
   const renderApplyFor = () => {
     return (
@@ -38,7 +36,7 @@ function ApplyFor() {
           dataSource={ApplyUsers}
           renderItem={(item) => (
             <List.Item>
-              <Typography.Text mark>[{RecruitTitle}]</Typography.Text> [지원자] {" "}
+              <Typography.Text mark>[{RecruitTitle}]</Typography.Text> [지원자]{" "}
               {item}
             </List.Item>
           )}

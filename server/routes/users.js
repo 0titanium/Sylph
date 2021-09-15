@@ -102,7 +102,7 @@ router.get("/userInfo", (req, res) => {
       return res.status(400).json({ success: false, err });
     }
 
-    if (user[0].image) {
+    if (user[0].image !== "") {
       userImage = user[0].image;
     }
 
@@ -176,5 +176,22 @@ router.patch("/recruit", (req, res) => {
     }
   );
 });
+
+// change user recruitWriting
+// router.patch("/recruitWriting", (req, res) => {
+//   let userId = mongoose.Types.ObjectId(req.body.userId);
+
+//   User.findByIdAndUpdate(
+//     userId,
+//     { recruitWriting: "" },
+//     (err) => {
+//       if (err) {
+//         return res.status(400).json({ success: false, err });
+//       }
+
+//       return res.status(200).json({ success: true });
+//     }
+//   );
+// })
 
 module.exports = router;

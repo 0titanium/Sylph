@@ -114,8 +114,13 @@ router.get("/applyment", (req, res) => {
 
     // find recruit written by upper user
     Recruit.findById(recruitId, null, (err, recruit) => {
-      let applyFor = recruit.applyfor;
-      let title = recruit.title;
+      let applyFor = [];
+      let title = "";
+
+      if (recruit) {
+        applyFor = recruit.applyfor;
+        title = recruit.title;
+      }
 
       User.find({ _id: { $in: applyFor } }, (err, user) => {
         if (err) {
@@ -157,8 +162,6 @@ router.get("/myApply", (req, res) => {
   User.findById(userId, null, (err, user) => {
     let applyto = user.applyto;
 
-    console.log("at", applyto);
-
     Recruit.find({ _id: { $in: applyto } }, (err, recruit) => {
       if (err) {
         return res.status(400).json({ success: false, err });
@@ -168,12 +171,29 @@ router.get("/myApply", (req, res) => {
       let recruitTitle = arrayRecruit.map((recruit) => recruit.title);
       let recruitId = arrayRecruit.map((recruit) => recruit._id);
 
-      console.log("r", recruit);
       return res.status(200).json({ success: true, recruitTitle, recruitId });
     });
   });
 });
 
-// router.patch();
+// complete recruit route
+
+router.patch("/completion", (req, res) => {
+  let recruitId = req.body.recruitId;
+  let recruitTitle = req.body.title;
+
+  Recruit.findByIdAndUpdate(
+    recruitId,
+    { title: "[모집완료] - " + recruitTitle, recruitCompleted: true },
+    null,
+    (err, recruit) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+});
 
 module.exports = router;

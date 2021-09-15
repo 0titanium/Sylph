@@ -25,6 +25,7 @@ const recruitSchema = mongoose.Schema(
     },
     personnel: {
       type: Number,
+      default: 0,
     },
     applyfor: {
       type: Array,
