@@ -12,8 +12,9 @@ function RecruitDetailPage(props) {
   const [Writer, setWriter] = useState("");
   const [WriterId, setWriterId] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState("");
-  const [RequiredExperience, setRequiredExperience] = useState("");
+  const [RecruitPositions, setRecruitPositions] = useState([]);
+  const [Languages, setLanguages] = useState([]);
+  const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
   const [CheckApply, setCheckApply] = useState(false);
   const [IsCompleted, setIsCompleted] = useState(undefined);
@@ -56,7 +57,8 @@ function RecruitDetailPage(props) {
           setWriterId(data.writer._id);
           setProjectDetail(data.recruitDetail.projectDetail);
           setRecruitPositions(data.recruitDetail.recruitPositions);
-          setRequiredExperience(data.recruitDetail.requiredExperience);
+          setLanguages(data.recruitDetail.languages);
+          setQualifications(data.recruitDetail.Qualifications);
           setMeetingLocation(data.recruitDetail.meetingLocation);
           setIsCompleted(data.recruitDetail.recruitCompleted);
         } else {
@@ -102,7 +104,7 @@ function RecruitDetailPage(props) {
           alert("모집글 삭제에 실패했습니다.");
         }
       });
-  }
+  };
 
   // apply
   const applyRequest = (userId, rid) => {
@@ -247,10 +249,13 @@ function RecruitDetailPage(props) {
           <p>{ProjectDetail}</p>
           <Divider />
           <h2>Recruit Positions</h2>
-          <p>{RecruitPositions}</p>
+          <p>{RecruitPositions.map((position, index) => position + " ")}</p>
           <Divider />
-          <h2>Required Experience</h2>
-          <p>{RequiredExperience}</p>
+          <h2>Languages</h2>
+          <p>{Languages.map((language, index) => language + " ")}</p>
+          <Divider />
+          <h2>Qualifications</h2>
+          <p>{Qualifications}</p>
           <Divider />
           <h2>Meeting Location</h2>
           <p>{MeetingLocation}</p>

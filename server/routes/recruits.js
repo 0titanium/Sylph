@@ -53,7 +53,8 @@ router.patch("/recruit", (req, res) => {
     title,
     projectDetail,
     recruitPositions,
-    requiredExperience,
+    lanugages,
+    Qualifications,
     meetingLocation,
   } = req.body.submitRecruitDetail;
 

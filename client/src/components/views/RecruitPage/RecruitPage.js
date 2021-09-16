@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
-import { Input, Button } from "antd";
+import { Input, Button, Checkbox } from "antd";
+// import { ControlOutlined } from "@ant-design/icons";
 
 function RecruitPage(props) {
   const userId = getCookie("user_id", document.cookie);
@@ -10,9 +11,33 @@ function RecruitPage(props) {
 
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState("");
-  const [RequiredExperience, setRequiredExperience] = useState("");
+  const [RecruitPositions, setRecruitPositions] = useState([]);
+  const [Languages, setLanguages] = useState([]);
+  const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
+
+  const options = [
+    { label: "Frontend", value: "Frontend" },
+    { label: "Backend", value: "Backend" },
+    { label: "Full stack", value: "Full stack" },
+    { label: "iOS", value: "iOS" },
+    { label: "Android", value: "Android" },
+    { label: "Game Client", value: "Game Client" },
+    { label: "Game Server", value: "Game Server" },
+  ];
+
+  const languagesOptions = [
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Java", value: "Java" },
+    { label: "Python", value: "Python" },
+    { label: "Swift", value: "Swift" },
+    { label: "Kotlin", value: "Kotlin" },
+    { label: "php", value: "php" },
+    { label: "C", value: "C" },
+    { label: "C++", value: "C++" },
+    { label: "C#", value: "C#" },
+  ];
 
   const fetchRecruit = (submitRecruitDetail) => {
     fetch(`${RECRUIT_SERVER}/recruit`, {
@@ -58,11 +83,16 @@ function RecruitPage(props) {
   };
 
   const onRecruitPositionsHandler = (e) => {
-    setRecruitPositions(e.currentTarget.value);
+    console.log(e);
+    setRecruitPositions(e);
   };
 
-  const onRequiredExperienceHandler = (e) => {
-    setRequiredExperience(e.currentTarget.value);
+  const onLanguagesHandler = (e) => {
+    setLanguages(e);
+  }
+
+  const onQualificationsHandler = (e) => {
+    setQualifications(e.currentTarget.value);
   };
 
   const onMeetingLocationHandler = (e) => {
@@ -77,14 +107,16 @@ function RecruitPage(props) {
       title: Title,
       projectDetail: ProjectDetail,
       recruitPositions: RecruitPositions,
-      requiredExperience: RequiredExperience,
+      languages: Languages,
+      Qualifications: Qualifications,
       meetingLocation: MeetingLocation,
     };
 
     if (
       submitRecruitDetail.title === "" ||
       submitRecruitDetail.projectDetail === "" ||
-      submitRecruitDetail.recruitPositions === "" ||
+      submitRecruitDetail.recruitPositions === [] ||
+      submitRecruitDetail.languages === [] ||
       submitRecruitDetail.meetingLocation === ""
     ) {
       alert("입력하지 않은 내용이 있습니다.");
@@ -138,21 +170,33 @@ function RecruitPage(props) {
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           모집 포지션
         </label>
-        <TextArea
+        <Checkbox.Group
+          options={options}
+          onChange={onRecruitPositionsHandler}
+        />
+        {/* <TextArea
           style={{ resize: "none" }}
           rows={4}
           value={RecruitPositions}
           onChange={onRecruitPositionsHandler}
+        /> */}
+
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
+          언어
+        </label>
+        <Checkbox.Group
+          options={languagesOptions}
+          onChange={onLanguagesHandler}
         />
 
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          요구 경력
+          자격 요건
         </label>
-        <Input
-          style={{ height: "2.5rem" }}
-          type="text"
-          value={RequiredExperience}
-          onChange={onRequiredExperienceHandler}
+        <TextArea
+          style={{ resize: "none" }}
+          rows={4}
+          value={Qualifications}
+          onChange={onQualificationsHandler}
         />
 
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>

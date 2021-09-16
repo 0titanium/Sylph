@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
-import { Input, Button } from "antd";
+import { Input, Button, Checkbox} from "antd";
 
 function SignUpPage(props) {
   const dispatch = useDispatch();
@@ -11,10 +11,33 @@ function SignUpPage(props) {
   const [Password, setPassword] = useState("");
   const [Nickname, setNickname] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
-  const [Position, setPosition] = useState("");
-  const [Skills, setSkills] = useState("");
+  const [Position, setPosition] = useState([]);
+  const [Skills, setSkills] = useState([]);
   const [Careers, setCareers] = useState("");
   const [GitHubAddress, setGitHubAddress] = useState("https://github.com/");
+
+  const positionOptions = [
+    { label: "Frontend", value: "Frontend" },
+    { label: "Backend", value: "Backend" },
+    { label: "Full stack", value: "Full stack" },
+    { label: "iOS", value: "iOS" },
+    { label: "Android", value: "Android" },
+    { label: "Game Client", value: "Game Client" },
+    { label: "Game Server", value: "Game Server" },
+  ];
+
+  const options = [
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Java", value: "Java" },
+    { label: "Python", value: "Python" },
+    { label: "Swift", value: "Swift" },
+    { label: "Kotlin", value: "Kotlin" },
+    { label: "php", value: "php" },
+    { label: "C", value: "C" },
+    { label: "C++", value: "C++" },
+    { label: "C#", value: "C#" },
+  ];
 
   const onIdHandler = (event) => {
     setId(event.currentTarget.value);
@@ -33,11 +56,11 @@ function SignUpPage(props) {
   };
 
   const onPositionHandler = (event) => {
-    setPosition(event.currentTarget.value);
+    setPosition(event);
   };
 
   const onSkillsHandler = (event) => {
-    setSkills(event.currentTarget.value);
+    setSkills(event);
   };
 
   const onCareersHandler = (event) => {
@@ -68,8 +91,8 @@ function SignUpPage(props) {
     if (
       data.id === "" ||
       data.nickname === "" ||
-      data.position === "" ||
-      data.skills === ""
+      data.position === [] ||
+      data.skills === []
     ) {
       alert("입력하지 않은 필수 내용이 있습니다.");
     } else {
@@ -151,23 +174,17 @@ function SignUpPage(props) {
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Position
         </label>
-        <Input
-          type="text"
-          value={Position}
+        <Checkbox.Group
+          options={positionOptions}
           onChange={onPositionHandler}
-          style={{ height: "2.5rem" }}
-          placeholder="ex) Frontend, Backend, Full Stack, ...etc"
         />
 
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
           <p style={{ color: "red", display: "inline" }}>*</p> Skills
         </label>
-        <Input
-          type="text"
-          value={Skills}
+        <Checkbox.Group
+          options={options}
           onChange={onSkillsHandler}
-          style={{ height: "2.5rem" }}
-          placeholder="ex) Java, Javascript, Kotlin, ...etc"
         />
 
         <label style={{ marginBottom: "5px", marginTop: "2rem" }}>

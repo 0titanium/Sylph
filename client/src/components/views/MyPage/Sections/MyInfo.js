@@ -12,7 +12,7 @@ function MyInfo(props) {
   const [UserId, setUserId] = useState("");
   const [UserNickame, setUserNickame] = useState("");
   const [UserPosition, setUserPosition] = useState("");
-  const [UserSkills, setUserSkills] = useState("");
+  const [UserSkills, setUserSkills] = useState([]);
   const [UserCareers, setUserCareers] = useState("");
   const [UserGitHubAddress, setUserGitHubAddress] = useState("");
 
@@ -138,7 +138,7 @@ function MyInfo(props) {
         <Descriptions.Item label="id">{UserId}</Descriptions.Item>
         <Descriptions.Item label="nickname">{UserNickame}</Descriptions.Item>
         <Descriptions.Item label="position">{UserPosition}</Descriptions.Item>
-        <Descriptions.Item label="skills">{UserSkills}</Descriptions.Item>
+        <Descriptions.Item label="skills">{UserSkills.map((skill, index)=> (skill+" "))}</Descriptions.Item>
         <Descriptions.Item label="careers">{UserCareers}</Descriptions.Item>
         <Descriptions.Item label="GitHub Address">
           {UserGitHubAddress}

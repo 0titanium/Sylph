@@ -20,10 +20,12 @@ const userSchema = mongoose.Schema({
     minlength: 6,
   },
   position: {
-    type: String,
+    type: Array,
+    default: [],
   },
   skills: {
-    type: String,
+    type: Array,
+    default: [],
   },
   careers: {
     type: String,

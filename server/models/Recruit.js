@@ -15,9 +15,14 @@ const recruitSchema = mongoose.Schema(
       type: String,
     },
     recruitPositions: {
-      type: String,
+      type: Array,
+      default: [],
     },
-    requiredExperience: {
+    languages: {
+      type: Array,
+      default: [],
+    },
+    Qualifications: {
       type: String,
     },
     meetingLocation: {

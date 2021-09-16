@@ -5,11 +5,12 @@ import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function MyRecruit() {
+  const [Recruit, setRecruit] = useState(undefined);
   const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
   const [RecruitPositions, setRecruitPositions] = useState("");
-  const [RequiredExperience, setRequiredExperience] = useState("");
+  const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
   const fetchMyRecruit = () => {
@@ -23,12 +24,14 @@ function MyRecruit() {
       .then((data) => {
         if (data.success) {
           console.log(data.user);
+          setRecruit(data.recruitDetail);
+          console.log("r", Recruit);
           if (data.recruitDetail) {
             setTitle(data.recruitDetail.title);
             setWriter(data.user.nickname);
             setProjectDetail(data.recruitDetail.projectDetail);
             setRecruitPositions(data.recruitDetail.recruitPositions);
-            setRequiredExperience(data.recruitDetail.requiredExperience);
+            setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
           }
         } else {
@@ -43,7 +46,7 @@ function MyRecruit() {
 
   return (
     <div style={{ height: "100%" }}>
-      {Title === undefined ? <LoadingOutlined style={{fontSize: "3rem"}} /> : Title !== "" ? (
+      {Recruit === undefined ? <LoadingOutlined style={{fontSize: "3rem"}} /> : Recruit !== null ? (
         <Descriptions
           bordered
           title="My Recruit"
@@ -59,10 +62,10 @@ function MyRecruit() {
             {ProjectDetail}
           </Descriptions.Item>
           <Descriptions.Item label="RecruitPositions">
-            {RecruitPositions}
+            {RecruitPositions.map((position, index) => position + " ")}
           </Descriptions.Item>
-          <Descriptions.Item label="RequiredExperience">
-            {RequiredExperience}
+          <Descriptions.Item label="Qualifications">
+            {Qualifications}
           </Descriptions.Item>
           <Descriptions.Item label="MeetingLocation">
             {MeetingLocation}

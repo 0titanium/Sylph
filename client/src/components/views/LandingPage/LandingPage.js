@@ -40,7 +40,7 @@ function LandingPage() {
             style={{ width: 300 }}
           >
             <p>{recruit.projectDetail}</p>
-            <p>{recruit.recruitPositions}</p>
+            <p>{recruit.recruitPositions.map((position, index) => (position+" "))}</p>
           </Card>
         </Col>
       );

@@ -160,8 +160,8 @@ Recruits project team members. Participate in the project.
         - id (string)
         - nickname (string)
         - password (string)
-        - position (string)
-        - skills (string)
+        - position (Array)
+        - skills (Array)
         - career (string)
         - github address (string)
         - image (String?)
@@ -174,14 +174,33 @@ Recruits project team members. Participate in the project.
         - title (string)
         - project detail (string)
         - meeting location (string)
-        - recruit positions (string)
-        - required experience (string)
+        - recruit positions (Array)
+        - Qualifications (string)
         - applyfor (Array)
 
 
 <br />
 
 
+
+***
+
+2021-09-16
+
+
+- 모집 시 포지션을 체크박스로 선택, 필드를 array로 변경.
+
+
+-> 체크박스는 선택하면 저절로? 배열로 값이 채워진다?
+
+
+- 유저당 모집을 하나만 할 수 있게 하는 방법?
+
+
+-> 나중에
+
+
+- 포지션, 언어를 체크박스로 바꾸니 수정할 때 값이 제대로 전달되지 않음. 수정 필요.
 
 ***
 

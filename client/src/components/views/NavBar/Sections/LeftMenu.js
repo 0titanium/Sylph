@@ -2,31 +2,37 @@ import React from "react";
 import { Menu, Dropdown } from "antd";
 
 function LeftMenu(props) {
-  const onPositionsClick = () => {};
-  const onTechStacksClick = () => {};
+  const onPositionsClick = () => {
+    console.log("all");
+  };
+  const onLanguagesClick = () => {};
 
   const positionsMenu = (
-    <Menu onClick={onPositionsClick}>
-      <Menu.Item key="1">Frontend</Menu.Item>
+    <Menu>
+      <Menu.Item key="1" onClick={onPositionsClick}>
+        Frontend
+      </Menu.Item>
       <Menu.Item key="2">Backend</Menu.Item>
       <Menu.Item key="3">Full stack</Menu.Item>
       <Menu.Item key="4">iOS</Menu.Item>
       <Menu.Item key="5">Android</Menu.Item>
-      <Menu.Item key="6">Game</Menu.Item>
+      <Menu.Item key="6">Game Client</Menu.Item>
+      <Menu.Item key="7">Game Server</Menu.Item>
     </Menu>
   );
 
-  const techStacksMenu = (
-    <Menu onClick={onTechStacksClick}>
+  const languagesMenu = (
+    <Menu onClick={onLanguagesClick}>
       <Menu.Item key="1">JavaScript</Menu.Item>
-      <Menu.Item key="2">Java</Menu.Item>
-      <Menu.Item key="3">Python</Menu.Item>
-      <Menu.Item key="4">Swift</Menu.Item>
-      <Menu.Item key="5">Kotlin</Menu.Item>
-      <Menu.Item key="6">php</Menu.Item>
-      <Menu.Item key="7">C</Menu.Item>
-      <Menu.Item key="8">C++</Menu.Item>
-      <Menu.Item key="9">C#</Menu.Item>
+      <Menu.Item key="2">TypeScript</Menu.Item>
+      <Menu.Item key="3">Java</Menu.Item>
+      <Menu.Item key="4">Python</Menu.Item>
+      <Menu.Item key="5">Swift</Menu.Item>
+      <Menu.Item key="6">Kotlin</Menu.Item>
+      <Menu.Item key="7">php</Menu.Item>
+      <Menu.Item key="8">C</Menu.Item>
+      <Menu.Item key="9">C++</Menu.Item>
+      <Menu.Item key="10">C#</Menu.Item>
     </Menu>
   );
 
@@ -38,8 +44,8 @@ function LeftMenu(props) {
         </Dropdown>
       </Menu.Item>
       <Menu.Item key="tech-stacks">
-        <Dropdown overlay={techStacksMenu}>
-          <div>Tech Stacks</div>
+        <Dropdown overlay={languagesMenu}>
+          <div>Languages</div>
         </Dropdown>
       </Menu.Item>
     </Menu>

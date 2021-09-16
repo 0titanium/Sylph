@@ -13,7 +13,7 @@ function RightMenu(props) {
   const dispatch = useDispatch();
   const [UserNickame, setUserNickame] = useState("");
   const [UserImage, setUserImage] = useState("");
-  const [CheckRecruit, setCheckRecruit] = useState("");
+  const [CheckRecruit, setCheckRecruit] = useState(undefined);
 
   const fetchUser = () => {
     fetch(`${USER_SERVER}/userInfo`, {
@@ -38,7 +38,7 @@ function RightMenu(props) {
     if (userId) {
       fetchUser();
     }
-  }, [userId]);
+  }, [userId, CheckRecruit]);
 
   const signoutHandler = () => {
     dispatch(signoutUser()).then((response) => {
@@ -54,13 +54,10 @@ function RightMenu(props) {
   };
 
   const onCheckHandler = () => {
-    if(CheckRecruit){
-      alert("모집글은 하나만 작성할 수 있습니다.");
-    }
-    else{
-      window.location.href="/recruit/post";
-    }
-  }
+    console.log(CheckRecruit);
+
+    window.location.href = "/recruit/post";
+  };
 
   const menu = (
     <Menu>
@@ -88,9 +85,8 @@ function RightMenu(props) {
   } else {
     return (
       <Menu mode={props.mode}>
-        <Menu.Item key="recruit" style={{ paddingRight: "0px" }} onClick={onCheckHandler}>
-          {/* <a href="/recruit/post">Recruit</a> */}
-          Recruit
+        <Menu.Item key="recruit" onClick={onCheckHandler}>
+          <a>Recruit</a>
         </Menu.Item>
         {/* <Menu.Item
           key="notice"
