@@ -228,7 +228,7 @@ function RecruitDetailPage(props) {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: "110vh",
+        height: "120vh",
       }}
     >
       {Title === undefined ? (

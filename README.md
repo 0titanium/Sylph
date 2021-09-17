@@ -185,6 +185,17 @@ Recruits project team members. Participate in the project.
 
 ***
 
+
+2021-09-17
+
+
+
+- 체크박스 문제
+
+
+
+***
+
 2021-09-16
 
 

@@ -10,8 +10,8 @@ function UpdateRecruitPage(props) {
   const [RecruitId, setRecruitId] = useState("");
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState([]);
-  const [Languages, setLanguages] = useState([]);
+  const [RecruitPositions, setRecruitPositions] = useState(undefined);
+  const [Languages, setLanguages] = useState(undefined);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
@@ -43,8 +43,8 @@ function UpdateRecruitPage(props) {
   console.log("rid", rid);
 
   // fetch data before update
-  const fetchRecruitDetail = () => {
-    fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
+  const fetchRecruitDetail = async () => {
+    await fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -53,6 +53,7 @@ function UpdateRecruitPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          console.log(data);
           setRecruitId(data.recruitDetail._id._id);
           setTitle(data.recruitDetail.title);
           setProjectDetail(data.recruitDetail.projectDetail);
@@ -121,11 +122,13 @@ function UpdateRecruitPage(props) {
   };
 
   const onRecruitPositionsHandler = (e) => {
-    setRecruitPositions(e);
+    setRecruitPositions((prev) => prev.concat(e));
+    console.log(RecruitPositions);
   };
 
   const onLanguagesHandler = (e) => {
-    setLanguages(e);
+    setLanguages((prev) => prev.concat(e));
+    console.log(Languages);
   };
 
   const onQualificationsHandler = (e) => {
