@@ -80,6 +80,7 @@ function RecruitDetailPage(props) {
       .then((data) => {
         if (data.success) {
           props.history.push("/");
+          window.location.reload();
         } else {
           alert("모집글 삭제에 실패했습니다.");
         }

@@ -68,6 +68,7 @@ function RecruitPage(props) {
               }
             });
           props.history.push("/");
+          window.location.reload();
         } else {
           alert("모집글 작성에 실패했습니다.");
         }
