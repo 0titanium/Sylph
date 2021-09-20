@@ -206,6 +206,9 @@ Recruits project team members. Participate in the project.
 -> 리로드 하기 때문에 시간 지연이 발생하므로 사용자 경험 측면에서 좋은 방법은 아닌 것 같다.
 
 
+- filteredPage 작성 필요.
+
+
 ***
 
 
@@ -213,7 +216,7 @@ Recruits project team members. Participate in the project.
 
 
 
-- 체크박스 문제
+- 체크박스 문제 v
 
 
 
@@ -231,17 +234,17 @@ Recruits project team members. Participate in the project.
 - 유저당 모집을 하나만 할 수 있게 하는 방법?
 
 
--> 나중에
+-> 나중에 v
 
 
-- 포지션, 언어를 체크박스로 바꾸니 수정할 때 값이 제대로 전달되지 않음. 수정 필요.
+- 포지션, 언어를 체크박스로 바꾸니 수정할 때 값이 제대로 전달되지 않음. 수정 필요. v
 
 ***
 
 
 2021-09-15
 
-- 모집완료 기능 작성
+- 모집완료 기능 작성 v
 
 
 - click positions, tech stacks -> page filtered 작성중 (landigpage base)
