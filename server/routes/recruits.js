@@ -58,8 +58,9 @@ router.patch("/recruit", (req, res) => {
     meetingLocation,
   } = req.body.submitRecruitDetail;
 
-  recruitId = mongoose.Types.ObjectId(recruitId);
 
+  // recruitId = mongoose.Types.ObjectId(recruitId);
+  console.log(req.body.submitRecruitDetail);
   Recruit.findByIdAndUpdate(
     recruitId,
     req.body.submitRecruitDetail,

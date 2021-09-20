@@ -186,6 +186,26 @@ Recruits project team members. Participate in the project.
 ***
 
 
+2021-09-20
+
+
+- 체크박스문제가 아니고 모집글 아이디를 제대로 넘기지 않아서 생긴 문제였다.
+
+
+-> recruitId: RecruitId -> recruitId: rid로 변경해서 해결.
+
+
+- MyRecruit.js 수정
+
+
+- one user, one recruit 문제. 
+    - 1. 모집글을 작성한 직후 모집글 존재 여부를 확인하는 속도가 느려서? 모집글을 작성할 수 있음. 
+    - 2. 모집글을 삭제한 직후 모집글 존재 여부를 확인하는 속도가 느려서? 모집글을 작성할 수 없음.
+
+
+***
+
+
 2021-09-17
 
 

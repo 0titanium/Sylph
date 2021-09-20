@@ -10,8 +10,8 @@ function UpdateRecruitPage(props) {
   const [RecruitId, setRecruitId] = useState("");
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState(undefined);
-  const [Languages, setLanguages] = useState(undefined);
+  const [RecruitPositions, setRecruitPositions] = useState([]);
+  const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
@@ -43,8 +43,8 @@ function UpdateRecruitPage(props) {
   console.log("rid", rid);
 
   // fetch data before update
-  const fetchRecruitDetail = async () => {
-    await fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
+  const fetchRecruitDetail = () => {
+    fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -61,7 +61,12 @@ function UpdateRecruitPage(props) {
           setLanguages(data.recruitDetail.languages);
           setQualifications(data.recruitDetail.Qualifications);
           setMeetingLocation(data.recruitDetail.meetingLocation);
-          console.log("p", RecruitPositions, "l", Languages);
+          console.log(
+            "p",
+            data.recruitDetail.recruitPositions,
+            "l",
+            data.recruitDetail.languages
+          );
         } else {
           alert("모집글을 불러오는데 실패했습니다.");
         }
@@ -91,7 +96,7 @@ function UpdateRecruitPage(props) {
     e.preventDefault();
 
     let submitRecruitDetail = {
-      recruitId: RecruitId,
+      recruitId: rid,
       title: Title,
       projectDetail: ProjectDetail,
       recruitPositions: RecruitPositions,
@@ -99,6 +104,9 @@ function UpdateRecruitPage(props) {
       Qualifications: Qualifications,
       meetingLocation: MeetingLocation,
     };
+
+    console.log(submitRecruitDetail.recruitPositions);
+    console.log(submitRecruitDetail.languages);
 
     if (
       submitRecruitDetail.title === "" ||
@@ -122,15 +130,15 @@ function UpdateRecruitPage(props) {
   };
 
   const onRecruitPositionsHandler = (e) => {
-    setRecruitPositions((prev) => prev.concat(e));
-    console.log(RecruitPositions);
+    setRecruitPositions(e);
+    console.log("R", RecruitPositions);
   };
-
+  console.log("R1", RecruitPositions);
   const onLanguagesHandler = (e) => {
-    setLanguages((prev) => prev.concat(e));
-    console.log(Languages);
+    setLanguages(e);
+    console.log("L", Languages);
   };
-
+  console.log("L1", Languages);
   const onQualificationsHandler = (e) => {
     setQualifications(e.currentTarget.value);
   };

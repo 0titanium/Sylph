@@ -9,7 +9,8 @@ function MyRecruit() {
   const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState("");
+  const [RecruitPositions, setRecruitPositions] = useState([]);
+  const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
 
@@ -31,6 +32,7 @@ function MyRecruit() {
             setWriter(data.user.nickname);
             setProjectDetail(data.recruitDetail.projectDetail);
             setRecruitPositions(data.recruitDetail.recruitPositions);
+            setLanguages(data.recruitDetail.languages);
             setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
           }
@@ -63,6 +65,9 @@ function MyRecruit() {
           </Descriptions.Item>
           <Descriptions.Item label="RecruitPositions">
             {RecruitPositions.map((position, index) => position + " ")}
+          </Descriptions.Item>
+          <Descriptions.Item label="Languages">
+            {Languages.map((language, index) => language + " ")}
           </Descriptions.Item>
           <Descriptions.Item label="Qualifications">
             {Qualifications}
