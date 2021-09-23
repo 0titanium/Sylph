@@ -25,7 +25,7 @@ function RecruitPage(props) {
     { label: "Game Client", value: "Game Client" },
     { label: "Game Server", value: "Game Server" },
   ];
-
+   
   const languagesOptions = [
     { label: "JavaScript", value: "JavaScript" },
     { label: "TypeScript", value: "TypeScript" },

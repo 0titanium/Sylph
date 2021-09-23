@@ -185,6 +185,20 @@ Recruits project team members. Participate in the project.
 
 ***
 
+2021-09-23
+
+
+- pagesFilterd: /positions/:pid, /languages/:lid ?
+
+
+-> positions, languages 별 모집글 보여주기 완성.
+
+
+- mypage에서 지원 프로젝트 바로가기 기능, 지원자 프로필 보기 기능 작성중.
+
+
+***
+
 
 2021-09-20
 

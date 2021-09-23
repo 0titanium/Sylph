@@ -1,4 +1,3 @@
-const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
@@ -31,6 +30,28 @@ router.get("/latestRecruits", (req, res) => {
     });
 });
 
+// get recruits checked positions
+router.get("/positions/:pname", (req, res) => {
+  Recruit.find({ recruitPositions: req.params.pname }).exec((err, recruits) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
+
+    return res.status(200).json({ success: true, recruits });
+  });
+});
+
+// get recruits checked languages
+router.get("/languages/:lname", (req, res) => {
+  Recruit.find({ languages: req.params.lname }).exec((err, recruits) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
+
+    return res.status(200).json({ success: true, recruits });
+  });
+});
+
 // get a specific recruit route
 router.get("/recruitDetail/:rid", (req, res) => {
   Recruit.findById(req.params.rid, null, (err, recruit) => {
@@ -57,7 +78,6 @@ router.patch("/recruit", (req, res) => {
     Qualifications,
     meetingLocation,
   } = req.body.submitRecruitDetail;
-
 
   // recruitId = mongoose.Types.ObjectId(recruitId);
   console.log(req.body.submitRecruitDetail);
