@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState(undefined);
-  // const [RecruitId, setRecruitId] = useState([]);
+  const [RecruitId, setRecruitId] = useState([]);
 
   const fetchApplyTo = () => {
     fetch(`${RECRUIT_SERVER}/myApply`, {
@@ -20,12 +20,14 @@ function ApplyTo() {
         if (data.success) {
           console.log("data", data);
           setUserApplyTo([...data.recruitTitle.reverse()]);
-          // setRecruitId((prevState) => [...prevState, ...data.recruitId]);
+          setRecruitId([...data.recruitId.reverse()]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
       });
   };
+
+  console.log(RecruitId);
 
   const renderApplyTo = () => {
     return (
@@ -34,9 +36,18 @@ function ApplyTo() {
           header={<div>Apply To</div>}
           bordered
           dataSource={UserApplyTo}
-          renderItem={(item) => (
+          renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark>[지원중]</Typography.Text> {item}
+              <Typography.Text mark style={{ marginRight: "1rem" }}>[지원중]</Typography.Text>
+              {item}
+              {
+                <a
+                  href={`/recruit/${RecruitId[index]}`}
+                  style={{ marginLeft: "1rem" }}
+                >
+                  바로가기
+                </a>
+              }
             </List.Item>
           )}
         />

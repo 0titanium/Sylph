@@ -39,7 +39,7 @@ function RightMenu(props) {
     if (userId) {
       fetchUser();
     }
-  }, []);
+  }, [userId]);
 
   const signoutHandler = () => {
     dispatch(signoutUser()).then((response) => {

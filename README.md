@@ -185,16 +185,32 @@ Recruits project team members. Participate in the project.
 
 ***
 
+
 2021-09-23
 
 
 - pagesFilterd: /positions/:pid, /languages/:lid ?
 
 
--> positions, languages 별 모집글 보여주기 완성.
+-> positions, languages 별 모집글 보여주기 완료.
 
 
-- mypage에서 지원 프로젝트 바로가기 기능, 지원자 프로필 보기 기능 작성중.
+- myPage에서 
+    -MyRecruit - 인원 수 표시 
+    -ApplyTo - 지원 프로젝트 바로가기 기능 v
+    -ApplyFor - 지원자 프로필 보기 기능 필요.
+
+
+-> ApplyTo - 지원 프로젝트 바로가기 기능 완료.
+
+
+- 지원 수락하기 기능 필요.
+
+
+- recruit card에서 긴 글은 ... 처리하기. v
+
+
+-> 완료
 
 
 ***
@@ -220,7 +236,7 @@ Recruits project team members. Participate in the project.
 -> 리로드 하기 때문에 시간 지연이 발생하므로 사용자 경험 측면에서 좋은 방법은 아닌 것 같다.
 
 
-- filteredPage 작성 필요.
+- filteredPage 작성 필요. v
 
 
 ***
@@ -252,6 +268,8 @@ Recruits project team members. Participate in the project.
 
 
 - 포지션, 언어를 체크박스로 바꾸니 수정할 때 값이 제대로 전달되지 않음. 수정 필요. v
+
+
 
 ***
 

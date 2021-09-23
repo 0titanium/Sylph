@@ -32,15 +32,40 @@ function LandingPage() {
 
   const renderCards = () => {
     return Recruits.reverse().map((recruit, index) => {
+      let title =
+        recruit.title.length > 25
+          ? recruit.title.slice(0, 25) + "..."
+          : recruit.title;
+
+      let projectDetail =
+        recruit.projectDetail.length > 20
+          ? recruit.projectDetail.slice(0, 20) + "..."
+          : recruit.projectDetail;
+
+      let recruitPositions = "";
+
+      recruit.recruitPositions.map(
+        (position, index) => (recruitPositions += position + " ")
+      );
+
+      recruitPositions =
+        recruitPositions.length > 25
+          ? recruitPositions.slice(0, 25) + "..."
+          : recruitPositions;
+
       return (
         <Col key={index} lg={6} md={8} xs={24}>
           <Card
-            title={recruit.title}
+            title={title}
             extra={<a href={`/recruit/${recruit._id}`}>More</a>}
             style={{ width: 300 }}
           >
-            <p>{recruit.projectDetail}</p>
-            <p>{recruit.recruitPositions.map((position, index) => (position+" "))}</p>
+            <p>{projectDetail}</p>
+            <p>
+              {recruit.recruitPositions.map(
+                (position, index) => position + " "
+              )}
+            </p>
           </Card>
         </Col>
       );
