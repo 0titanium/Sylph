@@ -38,8 +38,13 @@ function ApplyTo() {
           dataSource={UserApplyTo}
           renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark style={{ marginRight: "1rem" }}>[지원중]</Typography.Text>
-              {item}
+              <Typography.Text mark style={{marginRight: "1rem"}}>
+                [지원중]
+              </Typography.Text>
+              {/* <p>
+                {item.length > 20 ? item.slice(0, 20) + "..." : item}
+              </p> */}
+              {item.length > 20 ? item.slice(0, 20) + "..." : item}
               {
                 <a
                   href={`/recruit/${RecruitId[index]}`}

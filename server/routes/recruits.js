@@ -152,7 +152,7 @@ router.get("/applyment", (req, res) => {
         let arrayApplyUsers = user;
         let usersNicknames = arrayApplyUsers.map((user) => user.nickname);
 
-        return res.status(200).json({ success: true, title, usersNicknames });
+        return res.status(200).json({ success: true, title, usersNicknames, user });
       });
     });
   });

@@ -182,6 +182,28 @@ Recruits project team members. Participate in the project.
 <br />
 
 
+***
+
+2021-09-24
+
+<br />
+
+- 지원자 프로필 보기 기능. ViewProfile.js. v
+
+
+-> 작성.
+
+
+- MyPage - MyRecruit 긴 글 "..." 적용 기능.
+
+
+- 지원 관련. 
+    - 지원 수락 기능 - 지원 수락 버튼 -> 모집 데이터에 지원자 아이디 추가? 
+    - 지원 거절 기능 - 지원 거절 버튼 -> 거절 메세지 전달? 재지원 불가? 
+
+
+- 모바일 화면에서의 디자인을 위한 css 작업이 필요. <component style={{}} /> -> component.css로 바꿔야
+
 
 ***
 
