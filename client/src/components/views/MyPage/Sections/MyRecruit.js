@@ -7,12 +7,61 @@ import { LoadingOutlined } from "@ant-design/icons";
 function MyRecruit() {
   const [Recruit, setRecruit] = useState(undefined);
   const [Title, setTitle] = useState(undefined);
-  const [Writer, setWriter] = useState("");
-  const [ProjectDetail, setProjectDetail] = useState("");
-  const [RecruitPositions, setRecruitPositions] = useState([]);
-  const [Languages, setLanguages] = useState([]);
-  const [Qualifications, setQualifications] = useState("");
-  const [MeetingLocation, setMeetingLocation] = useState("");
+  const [Writer, setWriter] = useState(undefined);
+  const [ProjectDetail, setProjectDetail] = useState(undefined);
+  const [RecruitPositions, setRecruitPositions] = useState(undefined);
+  const [Languages, setLanguages] = useState(undefined);
+  const [Qualifications, setQualifications] = useState(undefined);
+  const [MeetingLocation, setMeetingLocation] = useState(undefined);
+
+  const title =
+    Title === undefined ? (
+      <LoadingOutlined style={{ fontSize: "3rem" }} />
+    ) : Title.length > 100 ? (
+      Title.slice(0, 100) + "..."
+    ) : (
+      Title
+    );
+
+  const writer =
+    Writer === undefined ? (
+      <LoadingOutlined style={{ fontSize: "3rem" }} />
+    ) : Writer.length > 100 ? (
+      Writer.slice(0, 100) + "..."
+    ) : (
+      Writer
+    );
+
+  const projectDetail =
+    ProjectDetail === undefined ? (
+      <LoadingOutlined style={{ fontSize: "3rem" }} />
+    ) : ProjectDetail.length > 100 ? (
+      ProjectDetail.slice(0, 100) + "..."
+    ) : (
+      ProjectDetail
+    );
+
+  const recruitPositions =
+    RecruitPositions === undefined ? (
+      <LoadingOutlined style={{ fontSize: "3rem" }} />
+    ) : RecruitPositions.length > 7 ? (
+      RecruitPositions.slice(0, 7)
+        .map((position) => position)
+        .toString() + "..."
+    ) : (
+      RecruitPositions.map((position, index) => position + " ")
+    );
+
+  const languages =
+    Languages === undefined ? (
+      <LoadingOutlined style={{ fontSize: "3rem" }} />
+    ) : Languages.length > 7 ? (
+      Languages.slice(0, 7)
+        .map((language) => language)
+        .toString() + "..."
+    ) : (
+      RecruitPositions.map((language) => language + " ")
+    );
 
   const fetchMyRecruit = () => {
     fetch(`${RECRUIT_SERVER}/myRecruit`, {
@@ -48,7 +97,9 @@ function MyRecruit() {
 
   return (
     <div style={{ height: "100%" }}>
-      {Recruit === undefined ? <LoadingOutlined style={{fontSize: "3rem"}} /> : Recruit !== null ? (
+      {Recruit === undefined ? (
+        <LoadingOutlined style={{ fontSize: "3rem" }} />
+      ) : Recruit !== null ? (
         <Descriptions
           bordered
           title="My Recruit"
@@ -57,23 +108,33 @@ function MyRecruit() {
           extra={<Button type="primary">Edit</Button>}
         >
           <Descriptions.Item label="Title" labelStyle={{ width: "100px" }}>
-            {Title}
+            {title}
           </Descriptions.Item>
-          <Descriptions.Item label="Writer">{Writer}</Descriptions.Item>
+          <Descriptions.Item label="Writer">{writer}</Descriptions.Item>
           <Descriptions.Item label="ProjectDetail">
-            {ProjectDetail}
+            {projectDetail}
           </Descriptions.Item>
           <Descriptions.Item label="RecruitPositions">
-            {RecruitPositions.map((position, index) => position + " ")}
+            {recruitPositions}
           </Descriptions.Item>
-          <Descriptions.Item label="Languages">
-            {Languages.map((language, index) => language + " ")}
-          </Descriptions.Item>
+          <Descriptions.Item label="Languages">{languages}</Descriptions.Item>
           <Descriptions.Item label="Qualifications">
-            {Qualifications}
+            {Qualifications === undefined ? (
+              <LoadingOutlined style={{ fontSize: "3rem" }} />
+            ) : Qualifications.length > 100 ? (
+              Qualifications.slice(0, 100) + "..."
+            ) : (
+              Qualifications
+            )}
           </Descriptions.Item>
           <Descriptions.Item label="MeetingLocation">
-            {MeetingLocation}
+            {MeetingLocation === undefined ? (
+              <LoadingOutlined style={{ fontSize: "3rem" }} />
+            ) : MeetingLocation.length > 100 ? (
+              MeetingLocation.slice(0, 100) + "..."
+            ) : (
+              MeetingLocation
+            )}
           </Descriptions.Item>
         </Descriptions>
       ) : (

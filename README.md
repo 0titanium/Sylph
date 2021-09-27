@@ -184,6 +184,18 @@ Recruits project team members. Participate in the project.
 
 ***
 
+2021-09-27
+
+
+
+- MyPage - MyRecruit 긴 글 "..." 적용 기능. v
+
+
+-> 작성.
+
+
+***
+
 2021-09-24
 
 <br />
