@@ -3,6 +3,7 @@ import MyInfo from "./Sections/MyInfo";
 import MyRecruit from "./Sections/MyRecruit";
 import ApplyTo from "./Sections/ApplyTo";
 import ApplyFor from "./Sections/ApplyFor";
+import ProjectInProgress from "./Sections/ProjectInProgress";
 
 import { Tabs } from "antd";
 
@@ -18,10 +19,13 @@ function MyPage() {
         <TabPane tab="My Recruit" key="2">
           <MyRecruit />
         </TabPane>
-        <TabPane tab="Apply To" key="3">
+        <TabPane tab="Project In Progress" key="3">
+          <ProjectInProgress />
+        </TabPane>
+        <TabPane tab="Apply To" key="4">
           <ApplyTo />
         </TabPane>
-        <TabPane tab="Apply For" key="4">
+        <TabPane tab="Apply For" key="5">
           <ApplyFor />
         </TabPane>
       </Tabs>

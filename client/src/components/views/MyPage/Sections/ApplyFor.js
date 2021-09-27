@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
 import ViewProfile from "./ViewProfile";
 
-import { List, Typography } from "antd";
+import { List, Typography, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function ApplyFor() {
@@ -30,6 +30,14 @@ function ApplyFor() {
       });
   };
 
+  const onAcceptHandler = () => {
+
+  }
+
+  const onRefuseHandler = () => {
+    
+  }
+
   const renderApplyFor = () => {
     return (
       <>
@@ -51,6 +59,8 @@ function ApplyFor() {
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p>
               <ViewProfile userData={UserData[index]} />
+              <Button onClick={onAcceptHandler} style={{marginLeft: "1rem"}}>수락</Button>
+              <Button onClick={onRefuseHandler} style={{marginLeft: "1rem"}}>거절</Button>
             </List.Item>
           )}
         />
