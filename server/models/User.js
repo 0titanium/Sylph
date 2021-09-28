@@ -42,6 +42,10 @@ const userSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "Recruit",
   },
+  projectInProgress: {
+    type: Schema.Types.ObjectId,
+    ref: "Recruit",
+  },
   token: {
     type: String,
   },

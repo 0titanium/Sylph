@@ -13,6 +13,7 @@ function MyRecruit() {
   const [Languages, setLanguages] = useState(undefined);
   const [Qualifications, setQualifications] = useState(undefined);
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
+  const [RecruitId, setRecruitId] = useState("");
 
   const title =
     Title === undefined ? (
@@ -60,7 +61,7 @@ function MyRecruit() {
         .map((language) => language)
         .toString() + "..."
     ) : (
-      RecruitPositions.map((language) => language + " ")
+      Languages.map((language) => language + " ")
     );
 
   const fetchMyRecruit = () => {
@@ -76,6 +77,7 @@ function MyRecruit() {
           console.log(data.user);
           setRecruit(data.recruitDetail);
           console.log("r", Recruit);
+          console.log("rd", data.recruitDetail);
           if (data.recruitDetail) {
             setTitle(data.recruitDetail.title);
             setWriter(data.user.nickname);
@@ -84,6 +86,7 @@ function MyRecruit() {
             setLanguages(data.recruitDetail.languages);
             setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
+            setRecruitId(data.recruitDetail._id);
           }
         } else {
           alert("모집글을 불러오는데 실패했습니다.");
@@ -105,8 +108,17 @@ function MyRecruit() {
           title="My Recruit"
           size="default"
           column={1}
-          extra={<Button type="primary">Edit</Button>}
+          extra={
+            <Button type="primary">
+              <a href={`/recruit/update/${RecruitId}`}>Edit</a>
+            </Button>
+          }
         >
+          <Descriptions.Item label="바로가기" labelStyle={{ width: "100px" }}>
+            <Button style={{ color: "white", backgroundColor: "#4b7bec" }}>
+              <a href={`/recruit/${RecruitId}`}>바로가기</a>
+            </Button>
+          </Descriptions.Item>
           <Descriptions.Item label="Title" labelStyle={{ width: "100px" }}>
             {title}
           </Descriptions.Item>
