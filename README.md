@@ -141,13 +141,25 @@ Recruits project team members. Participate in the project.
     - recruit positions (Array)
     - Qualifications (string)
     - applyfor (Array)
+    - personnel (Number)
+    - member (Array)
 
 <br />
 
 ---
 
-2021-09-28
+2021-09-29
 
+- 모집글 작성 시 작성자 member에 추가 v
+
+- 0. 지원 취소 기능 - 버튼 클릭 - update user applyto, update recruit applyfor v 
+  1. 수락 기능 - 버튼 클릭 - push recruit member
+  2. 거절 기능 - 버튼 클릭 - recruit app
+  3. 모집 완료 기능 - 버튼 클릭 - add projectInProgress
+
+---
+
+2021-09-28
 
 - click complete -> 모집자, 팀원들 projectInProgress 필드에 리쿠르트 아이디 저장. mypage progressinproject에 정보 표시.
 

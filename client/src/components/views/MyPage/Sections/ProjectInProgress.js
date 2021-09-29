@@ -5,63 +5,63 @@ import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 function ProjectInProgress() {
-  const [Recruit, setRecruit] = useState(undefined);
-  const [Title, setTitle] = useState(undefined);
-  const [Writer, setWriter] = useState(undefined);
-  const [ProjectDetail, setProjectDetail] = useState(undefined);
-  const [RecruitPositions, setRecruitPositions] = useState(undefined);
-  const [Languages, setLanguages] = useState(undefined);
-  const [Qualifications, setQualifications] = useState(undefined);
-  const [MeetingLocation, setMeetingLocation] = useState(undefined);
+  // const [Recruit, setRecruit] = useState(undefined);
+  // const [Title, setTitle] = useState(undefined);
+  // const [Writer, setWriter] = useState(undefined);
+  // const [ProjectDetail, setProjectDetail] = useState(undefined);
+  // const [RecruitPositions, setRecruitPositions] = useState(undefined);
+  // const [Languages, setLanguages] = useState(undefined);
+  // const [Qualifications, setQualifications] = useState(undefined);
+  // const [MeetingLocation, setMeetingLocation] = useState(undefined);
 
-  const title =
-    Title === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : Title.length > 100 ? (
-      Title.slice(0, 100) + "..."
-    ) : (
-      Title
-    );
+  // const title =
+  //   Title === undefined ? (
+  //     <LoadingOutlined style={{ fontSize: "3rem" }} />
+  //   ) : Title.length > 100 ? (
+  //     Title.slice(0, 100) + "..."
+  //   ) : (
+  //     Title
+  //   );
 
-  const writer =
-    Writer === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : Writer.length > 100 ? (
-      Writer.slice(0, 100) + "..."
-    ) : (
-      Writer
-    );
+  // const writer =
+  //   Writer === undefined ? (
+  //     <LoadingOutlined style={{ fontSize: "3rem" }} />
+  //   ) : Writer.length > 100 ? (
+  //     Writer.slice(0, 100) + "..."
+  //   ) : (
+  //     Writer
+  //   );
 
-  const projectDetail =
-    ProjectDetail === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : ProjectDetail.length > 100 ? (
-      ProjectDetail.slice(0, 100) + "..."
-    ) : (
-      ProjectDetail
-    );
+  // const projectDetail =
+  //   ProjectDetail === undefined ? (
+  //     <LoadingOutlined style={{ fontSize: "3rem" }} />
+  //   ) : ProjectDetail.length > 100 ? (
+  //     ProjectDetail.slice(0, 100) + "..."
+  //   ) : (
+  //     ProjectDetail
+  //   );
 
-  const recruitPositions =
-    RecruitPositions === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : RecruitPositions.length > 7 ? (
-      RecruitPositions.slice(0, 7)
-        .map((position) => position)
-        .toString() + "..."
-    ) : (
-      RecruitPositions.map((position, index) => position + " ")
-    );
+  // const recruitPositions =
+  //   RecruitPositions === undefined ? (
+  //     <LoadingOutlined style={{ fontSize: "3rem" }} />
+  //   ) : RecruitPositions.length > 7 ? (
+  //     RecruitPositions.slice(0, 7)
+  //       .map((position) => position)
+  //       .toString() + "..."
+  //   ) : (
+  //     RecruitPositions.map((position, index) => position + " ")
+  //   );
 
-  const languages =
-    Languages === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : Languages.length > 7 ? (
-      Languages.slice(0, 7)
-        .map((language) => language)
-        .toString() + "..."
-    ) : (
-      Languages.map((language) => language + " ")
-    );
+  // const languages =
+  //   Languages === undefined ? (
+  //     <LoadingOutlined style={{ fontSize: "3rem" }} />
+  //   ) : Languages.length > 7 ? (
+  //     Languages.slice(0, 7)
+  //       .map((language) => language)
+  //       .toString() + "..."
+  //   ) : (
+  //     Languages.map((language) => language + " ")
+  //   );
     
   //     return (
   //         <div style={{ height: "100%" }}>

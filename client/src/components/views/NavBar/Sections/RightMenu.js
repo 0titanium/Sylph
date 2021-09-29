@@ -58,11 +58,11 @@ function RightMenu(props) {
     console.log(CheckRecruit);
     fetchUser();
     setCheckRecruit(CheckRecruit);
-    if (CheckRecruit !== (null || undefined)) {
-      alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
-    } else {
+    // if (CheckRecruit !== (null || undefined)) {
+    //   alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
+    // } else {
       window.location.href = "/recruit/post";
-    }
+    // }
   };
 
   const menu = (

@@ -36,6 +36,10 @@ const recruitSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    member: {
+      type: Array,
+      default: [],
+    },
     recruitCompleted: {
       type: Boolean,
       default: false,

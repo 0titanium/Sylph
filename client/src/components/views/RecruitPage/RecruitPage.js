@@ -25,7 +25,7 @@ function RecruitPage(props) {
     { label: "Game Client", value: "Game Client" },
     { label: "Game Server", value: "Game Server" },
   ];
-   
+
   const languagesOptions = [
     { label: "JavaScript", value: "JavaScript" },
     { label: "TypeScript", value: "TypeScript" },
@@ -90,7 +90,7 @@ function RecruitPage(props) {
 
   const onLanguagesHandler = (e) => {
     setLanguages(e);
-  }
+  };
 
   const onQualificationsHandler = (e) => {
     setQualifications(e.currentTarget.value);
@@ -111,6 +111,7 @@ function RecruitPage(props) {
       languages: Languages,
       Qualifications: Qualifications,
       meetingLocation: MeetingLocation,
+      member: userId,
     };
 
     if (
@@ -182,9 +183,7 @@ function RecruitPage(props) {
           onChange={onRecruitPositionsHandler}
         /> */}
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          언어
-        </label>
+        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>언어</label>
         <Checkbox.Group
           options={languagesOptions}
           onChange={onLanguagesHandler}

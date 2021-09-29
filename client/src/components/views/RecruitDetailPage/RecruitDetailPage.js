@@ -124,6 +124,26 @@ function RecruitDetailPage(props) {
       credentials: "include",
       body: JSON.stringify({ userId: userId, recruitId: rid }),
     }).then((response) => response.json());
+    setCheckApply(true);
+  };
+
+  const cancelRequest = (userId, rid) => {
+    fetch(`${RECRUIT_SERVER}/cancelApplyment`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ userId: userId, recruitId: rid }),
+    }).then((response) => response.json());
+
+    fetch(`${USER_SERVER}/cancelApplyment`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({ userId: userId, recruitId: rid }),
+    }).then((response) => response.json());
+    setCheckApply(false);
   };
 
   // recruit completion
@@ -143,7 +163,12 @@ function RecruitDetailPage(props) {
   // if user click apply button
   const onApplyHandler = (e) => {
     if (userId) {
-      applyRequest(userId, rid);
+      if (!CheckApply) {
+        applyRequest(userId, rid);
+      } else {
+        console.log(CheckApply);
+        cancelRequest(userId, rid);
+      }
     } else {
       alert("로그인이 필요한 기능입니다.");
     }
@@ -289,19 +314,19 @@ function RecruitDetailPage(props) {
                 </Button>
               ) : (
                 <Button
-                  disabled
                   style={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     color: "white",
-                    backgroundColor: "gray",
+                    backgroundColor: "red",
                     width: "4rem",
                     height: "2.5rem",
                     marginRight: "2rem",
                   }}
+                  htmlType="submit"
                 >
-                  Apply
+                  Cancel
                 </Button>
               )
             ) : IsCompleted === undefined ? (

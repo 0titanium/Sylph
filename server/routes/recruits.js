@@ -126,6 +126,23 @@ router.patch("/applyment", (req, res) => {
   );
 });
 
+// cancel application route
+router.patch("/cancelApplyment", (req, res) => {
+  let recruitId = mongoose.Types.ObjectId(req.body.recruitId);
+
+  Recruit.findByIdAndUpdate(
+    recruitId,
+    { $pull: { applyfor: req.body.userId } },
+    (err) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+});
+
 // alarm to writer route
 router.get("/applyment", (req, res) => {
   let userId = req.cookies.user_id;
@@ -152,7 +169,9 @@ router.get("/applyment", (req, res) => {
         let arrayApplyUsers = user;
         let usersNicknames = arrayApplyUsers.map((user) => user.nickname);
 
-        return res.status(200).json({ success: true, title, usersNicknames, user });
+        return res
+          .status(200)
+          .json({ success: true, title, usersNicknames, user });
       });
     });
   });

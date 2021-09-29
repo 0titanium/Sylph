@@ -31,7 +31,16 @@ function ApplyFor() {
   };
 
   const onAcceptHandler = () => {
-
+    // fetch(`${RECRUIT_SERVER}/completion`, {
+    //   method: "PATCH",
+    //   headers: { "Content-Type": "application/json" },
+    //   mode: "cors",
+    //   credentials: "include",
+    //   body: JSON.stringify({
+    //     recruitId: recruitId.toString(),
+    //     title: Title.toString(),
+    //   }),
+    // }).then((response) => response.json());
   }
 
   const onRefuseHandler = () => {
