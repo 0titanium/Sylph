@@ -148,11 +148,31 @@ Recruits project team members. Participate in the project.
 
 ---
 
+
+2021-10-12
+
+- 수락 기능 v
+
+- 거절 기능 - 어떤 처리? (alarm에서 제거 && 지원자에게 거절 메세지)?  
+
+- 모집 완료 기능 - add recruit id in projectInProgress of User
+
+
+---
+
+2021-10-01
+
+1. 수락 기능 - 버튼 클릭 - push recruit member
+2. 거절 기능 - 버튼 클릭 - recruit app
+3. 모집 완료 기능 - 버튼 클릭 - add projectInProgress
+
+---
+
 2021-09-29
 
 - 모집글 작성 시 작성자 member에 추가 v
 
-- 0. 지원 취소 기능 - 버튼 클릭 - update user applyto, update recruit applyfor v 
+- 0. 지원 취소 기능 - 버튼 클릭 - update user applyto, update recruit applyfor v
   1. 수락 기능 - 버튼 클릭 - push recruit member
   2. 거절 기능 - 버튼 클릭 - recruit app
   3. 모집 완료 기능 - 버튼 클릭 - add projectInProgress

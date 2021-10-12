@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const { User } = require("../models/User");
 const { auth } = require("../middleware/auth");
+const { Recruit } = require("../models/Recruit");
 
 // signup route
 router.post("/signup", (req, res) => {
@@ -193,6 +194,13 @@ router.patch("/recruit", (req, res) => {
     }
   );
 });
+
+// add project route
+// router.post("/completion", (req, res) => {
+//   Recruit.find(
+//     User.find()
+//   )
+// })
 
 // change user recruitWriting
 // router.patch("/recruitWriting", (req, res) => {

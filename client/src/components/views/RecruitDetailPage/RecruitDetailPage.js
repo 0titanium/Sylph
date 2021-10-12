@@ -158,10 +158,20 @@ function RecruitDetailPage(props) {
         title: Title.toString(),
       }),
     }).then((response) => response.json());
+
+    fetch(`${USER_SERVER}/completion`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        recruitId: recruitId.toString(),
+      }),
+    }).then((response) => response.json());
   };
 
   // if user click apply button
-  const onApplyHandler = (e) => {
+  const onApplyHandler = () => {
     if (userId) {
       if (!CheckApply) {
         applyRequest(userId, rid);
@@ -177,7 +187,9 @@ function RecruitDetailPage(props) {
   // if writer click complete button
   const onCompleteHandler = () => {
     if (userId) {
+      setIsCompleted(true);
       completeRequest(rid);
+      window.location.reload();
     } else {
       alert("로그인이 필요한 기능입니다.");
     }

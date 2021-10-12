@@ -7,8 +7,9 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 function ApplyFor() {
   const [RecruitTitle, setRecruitTitle] = useState("");
+  const [RecruitId, setRecruitId] = useState("");
   const [ApplyUsers, setApplyUsers] = useState(undefined);
-  const [UserData, setUserData] = useState([]);
+  const [UserData, setUserData] = useState(undefined);
 
   const alarmToWriter = () => {
     fetch(`${RECRUIT_SERVER}/applyment`, {
@@ -22,6 +23,7 @@ function ApplyFor() {
         if (data.success) {
           console.log("data", data);
           setRecruitTitle(data.title);
+          setRecruitId(data.recruitId);
           setApplyUsers([...data.usersNicknames.reverse()]);
           setUserData([...data.user.reverse()]);
         } else {
@@ -30,22 +32,21 @@ function ApplyFor() {
       });
   };
 
-  const onAcceptHandler = () => {
-    // fetch(`${RECRUIT_SERVER}/completion`, {
-    //   method: "PATCH",
-    //   headers: { "Content-Type": "application/json" },
-    //   mode: "cors",
-    //   credentials: "include",
-    //   body: JSON.stringify({
-    //     recruitId: recruitId.toString(),
-    //     title: Title.toString(),
-    //   }),
-    // }).then((response) => response.json());
-  }
+  const onAcceptHandler = (RecruitId, applyUserId) => {
+    fetch(`${RECRUIT_SERVER}/acceptance`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        recruitId: RecruitId.toString(),
+        addUserId: applyUserId,
+      }),
+    }).then((response) => response.json());
+    console.log(RecruitId, applyUserId);
+  };
 
-  const onRefuseHandler = () => {
-    
-  }
+  const onRefuseHandler = () => {};
 
   const renderApplyFor = () => {
     return (
@@ -67,9 +68,29 @@ function ApplyFor() {
               <p style={{ display: "inline", marginLeft: "1rem" }}>
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p>
-              <ViewProfile userData={UserData[index]} />
-              <Button onClick={onAcceptHandler} style={{marginLeft: "1rem"}}>수락</Button>
-              <Button onClick={onRefuseHandler} style={{marginLeft: "1rem"}}>거절</Button>
+              {UserData === undefined ? (
+                <LoadingOutlined style={{ fontSize: "3rem" }} />
+              ) : (
+                <ViewProfile userData={UserData[index]} />
+              )}
+              {UserData === undefined ? (
+                <LoadingOutlined style={{ fontSize: "3rem" }} />
+              ) : (
+                <>
+                  <Button
+                    onClick={() => onAcceptHandler(RecruitId, UserData[index]._id)}
+                    style={{ marginLeft: "1rem" }}
+                  >
+                    수락
+                  </Button>
+                  <Button
+                    onClick={onRefuseHandler}
+                    style={{ marginLeft: "1rem" }}
+                  >
+                    거절
+                  </Button>
+                </>
+              )}
             </List.Item>
           )}
         />

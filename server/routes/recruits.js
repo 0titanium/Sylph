@@ -155,10 +155,12 @@ router.get("/applyment", (req, res) => {
     Recruit.findById(recruitId, null, (err, recruit) => {
       let applyFor = [];
       let title = "";
+      let recruitId;
 
       if (recruit) {
         applyFor = recruit.applyfor;
         title = recruit.title;
+        recruitId = recruit._id;
       }
 
       User.find({ _id: { $in: applyFor } }, (err, user) => {
@@ -171,7 +173,7 @@ router.get("/applyment", (req, res) => {
 
         return res
           .status(200)
-          .json({ success: true, title, usersNicknames, user });
+          .json({ success: true, recruitId, title, usersNicknames, user });
       });
     });
   });
@@ -218,7 +220,6 @@ router.get("/myApply", (req, res) => {
 });
 
 // complete recruit route
-
 router.patch("/completion", (req, res) => {
   let recruitId = req.body.recruitId;
   let recruitTitle = req.body.title;
@@ -228,6 +229,24 @@ router.patch("/completion", (req, res) => {
     { title: "[모집완료] - " + recruitTitle, recruitCompleted: true },
     null,
     (err, recruit) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+});
+
+// acceptance route
+router.patch("/acceptance", (req, res) => {
+  let recruitId = req.body.recruitId;
+  let userId = req.body.addUserId;
+
+  Recruit.findByIdAndUpdate(
+    recruitId,
+    { $push: { member: userId } },
+    (err, applyUser) => {
       if (err) {
         return res.status(400).json({ success: false, err });
       }
