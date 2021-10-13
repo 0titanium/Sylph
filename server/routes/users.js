@@ -164,7 +164,7 @@ router.patch("/applyment", (req, res) => {
 // cancel application route
 router.patch("/cancelApplyment", (req, res) => {
   let userId = mongoose.Types.ObjectId(req.body.userId);
-  console.log("a")
+  console.log("a");
   User.findByIdAndUpdate(
     userId,
     { $pull: { applyto: req.body.recruitId } },
@@ -196,27 +196,20 @@ router.patch("/recruit", (req, res) => {
 });
 
 // add project route
-// router.post("/completion", (req, res) => {
-//   Recruit.find(
-//     User.find()
-//   )
-// })
+router.patch("/completion", (req, res) => {
+  Recruit.findById(req.body.recruitId, (err, recruit) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
 
-// change user recruitWriting
-// router.patch("/recruitWriting", (req, res) => {
-//   let userId = mongoose.Types.ObjectId(req.body.userId);
+    let team = recruit.member;
 
-//   User.findByIdAndUpdate(
-//     userId,
-//     { recruitWriting: "" },
-//     (err) => {
-//       if (err) {
-//         return res.status(400).json({ success: false, err });
-//       }
+    team.forEach((member) => {
+      User.findByIdAndUpdate(member, { projectInProgress: req.body.recruitId });
+    });
 
-//       return res.status(200).json({ success: true });
-//     }
-//   );
-// })
+    return res.status(200).json({ success: true });
+  });
+});
 
 module.exports = router;

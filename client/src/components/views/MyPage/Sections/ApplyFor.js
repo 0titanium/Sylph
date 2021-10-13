@@ -46,7 +46,19 @@ function ApplyFor() {
     console.log(RecruitId, applyUserId);
   };
 
-  const onRefuseHandler = () => {};
+  const onRefuseHandler = (RecruitId, applyUserId) => {
+    fetch(`${RECRUIT_SERVER}/refusal`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        recruitId: RecruitId.toString(),
+        removeUserId: applyUserId,
+      }),
+    }).then((response) => response.json());
+    console.log(RecruitId, applyUserId);
+  };
 
   const renderApplyFor = () => {
     return (
@@ -78,13 +90,17 @@ function ApplyFor() {
               ) : (
                 <>
                   <Button
-                    onClick={() => onAcceptHandler(RecruitId, UserData[index]._id)}
+                    onClick={() =>
+                      onAcceptHandler(RecruitId, UserData[index]._id)
+                    }
                     style={{ marginLeft: "1rem" }}
                   >
                     수락
                   </Button>
                   <Button
-                    onClick={onRefuseHandler}
+                    onClick={() =>
+                      onRefuseHandler(RecruitId, UserData[index]._id)
+                    }
                     style={{ marginLeft: "1rem" }}
                   >
                     거절

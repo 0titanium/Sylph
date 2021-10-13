@@ -7,6 +7,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState(undefined);
   const [RecruitId, setRecruitId] = useState([]);
+  const [isRefused, setisRefused] = useState(undefined);
 
   const fetchApplyTo = () => {
     fetch(`${RECRUIT_SERVER}/myApply`, {
@@ -27,8 +28,26 @@ function ApplyTo() {
       });
   };
 
-  console.log(RecruitId);
+  const checkApplyFor = () => {
+    fetch(`${RECRUIT_SERVER}/applicationData`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("data1", data);
+          setisRefused(data.isRefused);
+        } else {
+          alert("유저 정보를 불러오는데 실패했습니다.");
+        }
+      });
+  }
 
+  console.log(RecruitId);
+  console.log(isRefused)
   const renderApplyTo = () => {
     return (
       <>
@@ -45,6 +64,7 @@ function ApplyTo() {
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p> */}
               {item.length > 20 ? item.slice(0, 20) + "..." : item}
+              {isRefused[index]}
               {
                 <a
                   href={`/recruit/${RecruitId[index]}`}
@@ -62,6 +82,7 @@ function ApplyTo() {
 
   useEffect(() => {
     fetchApplyTo();
+    checkApplyFor();
   }, []);
 
   return (

@@ -160,11 +160,12 @@ function RecruitDetailPage(props) {
     }).then((response) => response.json());
 
     fetch(`${USER_SERVER}/completion`, {
-      method: "POST",
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
       credentials: "include",
       body: JSON.stringify({
+        userId: userId,
         recruitId: recruitId.toString(),
       }),
     }).then((response) => response.json());

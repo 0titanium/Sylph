@@ -149,6 +149,24 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-13
+
+
+- 수락 기능 작성. v
+  - 수락 후 수락/거절 버튼 처리 필요.
+
+
+- 거절 기능 작성. v
+  - 거절 후 recruit applyfor에서 지원자 제거. v
+  - 지원자 applyTo - 거절 메세지. 작성중
+
+- 모집 완료 기능 작성. v
+  - 모집 완료 - 프로젝트 시작 - 프로젝트 멤버 모집, 모집 완료 기능 제한?
+
+
+---
+
+
 2021-10-12
 
 - 수락 기능 v

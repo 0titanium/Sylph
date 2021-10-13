@@ -256,4 +256,44 @@ router.patch("/acceptance", (req, res) => {
   );
 });
 
+// refusal route
+router.patch("/refusal", (req, res) => {
+  let recruitId = mongoose.Types.ObjectId(req.body.recruitId);
+
+  Recruit.findByIdAndUpdate(
+    recruitId,
+    { $pull: { applyfor: req.body.removeUserId } },
+    (err, applyUser) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      return res.status(200).json({ success: true });
+    }
+  );
+});
+
+// check apply route
+router.get("/applicationData", (req, res) => {
+  let userId = req.cookies.user_id;
+
+  User.findById(userId, (err, user) => {
+    let applyToRecruit = user.applyto;
+
+    Recruit.find({ _id: { $in: applyToRecruit } }, (err, recruit) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+
+      let isRefused = [];
+
+      if(recruit.applyFor){
+        isRefused = recruit.applyFor;
+      }
+
+      return res.status(200).json({ success: true, isRefused });
+    });
+  });
+});
+
 module.exports = router;
