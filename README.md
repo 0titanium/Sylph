@@ -149,6 +149,26 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-14
+
+
+- 거절 메세지 기능 작성중.
+  - 미지원 - 처리 없음
+  - 지원 
+    - 대기 recruit applyfor, user applyto 둘 다 존재
+    - 수락 recruit applyfor, user applyto 둘 다 존재하면서 recruit member에 존재
+    - 거절 recruit applyfor 없음, user applyto 있음. 
+
+
+- 모집 완료 후 유저들 기능 제한은 어떻게?
+
+
+- projectInProgress.js 작성중.
+
+
+---
+
+
 2021-10-13
 
 

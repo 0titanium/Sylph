@@ -274,24 +274,37 @@ router.patch("/refusal", (req, res) => {
 });
 
 // check apply route
-router.get("/applicationData", (req, res) => {
+router.get("/applicationInfo", (req, res) => {
   let userId = req.cookies.user_id;
 
   User.findById(userId, (err, user) => {
-    let applyToRecruit = user.applyto;
+    let userApplyTo = user.applyto; // [...recruitId]
+    let i = 0;
 
-    Recruit.find({ _id: { $in: applyToRecruit } }, (err, recruit) => {
+    Recruit.find({ _id: { $in: userApplyTo } }, (err, recruit) => {
+      // [...], [...], ... ,[...]
       if (err) {
         return res.status(400).json({ success: false, err });
       }
 
-      let isRefused = [];
+      let applyTo = userApplyTo[i];
+      let applyFor = recruit.applyFor; // [...userId]
 
-      if(recruit.applyFor){
-        isRefused = recruit.applyFor;
+      // waiting - applyto 1 && applyfor 1 && member 0 - push 2
+      if(applyFor){
+        if(applyFor.includes(applyTo)){
+          check.push(2);
+        }
       }
 
-      return res.status(200).json({ success: true, isRefused });
+      // accenptace - applyto 1 && applyfor 1 && member 1 - push 1
+
+
+      // refusal - applyto 1 && applyfor 0 - push 0
+
+      i++;
+
+      return res.status(200).json({ success: true, check });
     });
   });
 });

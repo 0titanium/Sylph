@@ -29,7 +29,7 @@ function ApplyTo() {
   };
 
   const checkApplyFor = () => {
-    fetch(`${RECRUIT_SERVER}/applicationData`, {
+    fetch(`${RECRUIT_SERVER}/applicationInfo`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -39,15 +39,13 @@ function ApplyTo() {
       .then((data) => {
         if (data.success) {
           console.log("data1", data);
-          setisRefused(data.isRefused);
+          setisRefused([...data.check]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
       });
-  }
+  };
 
-  console.log(RecruitId);
-  console.log(isRefused)
   const renderApplyTo = () => {
     return (
       <>
@@ -57,22 +55,21 @@ function ApplyTo() {
           dataSource={UserApplyTo}
           renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark style={{marginRight: "1rem"}}>
+              <Typography.Text mark style={{ marginRight: "1rem" }}>
                 [지원중]
               </Typography.Text>
-              {/* <p>
-                {item.length > 20 ? item.slice(0, 20) + "..." : item}
-              </p> */}
               {item.length > 20 ? item.slice(0, 20) + "..." : item}
-              {isRefused[index]}
-              {
-                <a
-                  href={`/recruit/${RecruitId[index]}`}
-                  style={{ marginLeft: "1rem" }}
-                >
-                  바로가기
-                </a>
-              }
+              <a
+                href={`/recruit/${RecruitId[index]}`}
+                style={{ marginLeft: "1rem" }}
+              >
+                바로가기
+              </a>
+              {isRefused[index] === true ? (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>수락되었습니다.</p>
+              ) : (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>거절되었습니다.</p>
+              )}
             </List.Item>
           )}
         />
@@ -82,7 +79,7 @@ function ApplyTo() {
 
   useEffect(() => {
     fetchApplyTo();
-    checkApplyFor();
+    // checkApplyFor();
   }, []);
 
   return (
