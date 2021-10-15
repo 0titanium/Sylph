@@ -149,6 +149,26 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-15
+
+
+- mongoose query 비동기 문제?
+  - recruit는 로그에 찍힌다.
+  - recruit.applyfor는 undefined.
+  - 왜?
+  - 배열에 담겨있었기 때문.
+
+
+- 거절 메세지 기능 작성. v
+
+
+- projectInProgress.js 작성중
+  - 모집 완료 기능 추가사항 - member.map(eachMember=> eachMember.projectInProgress = eachMember.applyto).
+
+
+---
+
+
 2021-10-14
 
 

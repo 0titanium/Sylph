@@ -59,17 +59,27 @@ function ApplyTo() {
                 [지원중]
               </Typography.Text>
               {item.length > 20 ? item.slice(0, 20) + "..." : item}
+              {isRefused === undefined ? (
+                <LoadingOutlined style={{ fontSize: "3rem" }} />
+              ) : isRefused[index] === 1 ? (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                  수락되었습니다.
+                </p>
+              ) : isRefused[index] === 2 ? (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                  대기중입니다.
+                </p>
+              ) : (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                  거절되었습니다.
+                </p>
+              )}
               <a
                 href={`/recruit/${RecruitId[index]}`}
                 style={{ marginLeft: "1rem" }}
               >
                 바로가기
               </a>
-              {isRefused[index] === true ? (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>수락되었습니다.</p>
-              ) : (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>거절되었습니다.</p>
-              )}
             </List.Item>
           )}
         />
@@ -79,7 +89,7 @@ function ApplyTo() {
 
   useEffect(() => {
     fetchApplyTo();
-    // checkApplyFor();
+    checkApplyFor();
   }, []);
 
   return (

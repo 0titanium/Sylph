@@ -212,4 +212,23 @@ router.patch("/completion", (req, res) => {
   });
 });
 
+// projectInProgress route
+router.get("/myProject", (req, res) => {
+  let userId = req.cookies.user_id;
+
+  User.findById(userId, null, (err, user) => {
+    // let recruitId = user.recruitWriting;
+    let projectId = user.projectInProgress;
+
+    Recruit.findById(projectId, (err, project) => {
+      if (err) {
+        return res.status(400).json({ success: false, err });
+      }
+      return res
+        .status(200)
+        .json({ success: true, recruitDetail: project });
+    });
+  });
+});
+
 module.exports = router;

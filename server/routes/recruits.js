@@ -279,6 +279,8 @@ router.get("/applicationInfo", (req, res) => {
 
   User.findById(userId, (err, user) => {
     let userApplyTo = user.applyto; // [...recruitId]
+    console.log("uat", userApplyTo);
+    let check = [];
     let i = 0;
 
     Recruit.find({ _id: { $in: userApplyTo } }, (err, recruit) => {
@@ -287,20 +289,22 @@ router.get("/applicationInfo", (req, res) => {
         return res.status(400).json({ success: false, err });
       }
 
-      let applyTo = userApplyTo[i];
-      let applyFor = recruit.applyFor; // [...userId]
+      let applyFor = recruit[i].applyfor; // [...userId]
 
-      // waiting - applyto 1 && applyfor 1 && member 0 - push 2
-      if(applyFor){
-        if(applyFor.includes(applyTo)){
+      if (applyFor) {
+        // waiting - recruitId in user.applyto 1 && userId in recruit.applyfor 1 && userId in recruit.member 0 - push 2
+        if (applyFor.includes(userId) && !recruit[i].member.includes(userId)) {
           check.push(2);
+        } else if (
+          // accenptace - recruitId in user.applyto 1 && userId in recruit.applyfor 1 && userId in recruit.member 1 - push 1
+          applyFor.includes(userId) &&
+          recruit.member[i].includes(userId)
+        ) {
+          check.push(1);
+        } else if (!applyFor.includes(userId)) {
+          check.push(0);
         }
       }
-
-      // accenptace - applyto 1 && applyfor 1 && member 1 - push 1
-
-
-      // refusal - applyto 1 && applyfor 0 - push 0
 
       i++;
 
