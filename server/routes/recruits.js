@@ -279,7 +279,6 @@ router.get("/applicationInfo", (req, res) => {
 
   User.findById(userId, (err, user) => {
     let userApplyTo = user.applyto; // [...recruitId]
-    console.log("uat", userApplyTo);
     let check = [];
     let i = 0;
 

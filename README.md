@@ -149,6 +149,17 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-18
+
+
+- projectInProgress.js
+  - fetchMyProject - 400 error - why? - 없는 필드를 불러서? - 클라이언트 잘못?
+  - 수정 전엔 완료버튼 클릭시 멤버 필드에 들어갔는데 error를 고치니까 안들어간다.
+
+
+---
+
+
 2021-10-15
 
 
@@ -163,7 +174,7 @@ Recruits project team members. Participate in the project.
 
 
 - projectInProgress.js 작성중
-  - 모집 완료 기능 추가사항 - member.map(eachMember=> eachMember.projectInProgress = eachMember.applyto).
+  - 모집 완료 기능 추가사항 - member.map(eachMember=> eachMember.projectInProgress = eachMember.applyto).은 있었음.
 
 
 ---

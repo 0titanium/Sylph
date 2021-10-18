@@ -197,6 +197,7 @@ router.patch("/recruit", (req, res) => {
 
 // add project route
 router.patch("/completion", (req, res) => {
+  console.log(req.body.recruitId);
   Recruit.findById(req.body.recruitId, (err, recruit) => {
     if (err) {
       return res.status(400).json({ success: false, err });
@@ -216,17 +217,22 @@ router.patch("/completion", (req, res) => {
 router.get("/myProject", (req, res) => {
   let userId = req.cookies.user_id;
 
-  User.findById(userId, null, (err, user) => {
+  User.findById(userId, (err, user) => {
     // let recruitId = user.recruitWriting;
-    let projectId = user.projectInProgress;
+    let projectId;
+
+    if (user.projectInProgress) {
+      projectId = user.projectInProgress;
+    } else {
+      return res.status(200).json({ success: true, recruitDetail: "" });
+    }
 
     Recruit.findById(projectId, (err, project) => {
       if (err) {
         return res.status(400).json({ success: false, err });
       }
-      return res
-        .status(200)
-        .json({ success: true, recruitDetail: project });
+
+      return res.status(200).json({ success: true, recruitDetail: project });
     });
   });
 });

@@ -148,6 +148,7 @@ function RecruitDetailPage(props) {
 
   // recruit completion
   const completeRequest = (recruitId) => {
+    console.log(recruitId);
     fetch(`${RECRUIT_SERVER}/completion`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

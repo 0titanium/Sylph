@@ -15,6 +15,38 @@ function ProjectInProgress() {
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
   const [RecruitId, setRecruitId] = useState("");
 
+  const fetchMyProject = () => {
+    fetch(`${USER_SERVER}/myProject`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("r", Recruit);
+          console.log("d", data);
+          console.log("rd", data.recruitDetail);
+
+          if (data.recruitDetail !== "") {
+            setRecruit(data.recruitDetail);
+            setTitle(data.recruitDetail.title);
+            setProjectDetail(data.recruitDetail.projectDetail);
+            setRecruitPositions(data.recruitDetail.recruitPositions);
+            setLanguages(data.recruitDetail.languages);
+            setQualifications(data.recruitDetail.Qualifications);
+            setMeetingLocation(data.recruitDetail.meetingLocation);
+            setRecruitId(data.recruitDetail._id);
+          }else{
+            setRecruit(null);
+          }
+        } else {
+          alert("프로젝트를 불러오는데 실패했습니다.");
+        }
+      });
+  };
+
   const title =
     Title === undefined ? (
       <LoadingOutlined style={{ fontSize: "3rem" }} />
@@ -64,36 +96,6 @@ function ProjectInProgress() {
       Languages.map((language) => language + " ")
     );
 
-  const fetchMyProject = () => {
-    fetch(`${USER_SERVER}/myProject`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      mode: "cors",
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          console.log(data.user);
-          setRecruit(data.recruitDetail);
-          console.log("r", Recruit);
-          console.log("rd", data.recruitDetail);
-          if (data.recruitDetail) {
-            setTitle(data.recruitDetail.title);
-            setWriter(data.user.nickname);
-            setProjectDetail(data.recruitDetail.projectDetail);
-            setRecruitPositions(data.recruitDetail.recruitPositions);
-            setLanguages(data.recruitDetail.languages);
-            setQualifications(data.recruitDetail.Qualifications);
-            setMeetingLocation(data.recruitDetail.meetingLocation);
-            setRecruitId(data.recruitDetail._id);
-          }
-        } else {
-          alert("모집글을 불러오는데 실패했습니다.");
-        }
-      });
-  };
-
   useEffect(() => {
     fetchMyProject();
   }, []);
@@ -101,12 +103,12 @@ function ProjectInProgress() {
   return (
     <div style={{ height: "100%" }}>
       {Recruit === undefined ? (
-        <LoadingOutlined style={{ fontSize: "3rem" }} />
+        <LoadingOutlined style={{ fontSize: "2rem" }} />
       ) : Recruit !== null ? (
         <Descriptions
           bordered
           title="My Project"
-          size="default"
+          size="small"
           column={1}
           extra={
             <Button type="primary">
@@ -151,9 +153,7 @@ function ProjectInProgress() {
         </Descriptions>
       ) : (
         <div>
-          <h3 style={{ marginTop: "2rem" }}>
-            진행중인 프로젝트가 없습니다.
-          </h3>
+          <h3 style={{ marginTop: "2rem" }}>진행중인 프로젝트가 없습니다.</h3>
         </div>
       )}
     </div>
