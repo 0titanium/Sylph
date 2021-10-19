@@ -197,19 +197,26 @@ router.patch("/recruit", (req, res) => {
 
 // add project route
 router.patch("/completion", (req, res) => {
-  console.log(req.body.recruitId);
   Recruit.findById(req.body.recruitId, (err, recruit) => {
-    if (err) {
-      return res.status(400).json({ success: false, err });
-    }
 
     let team = recruit.member;
 
+    console.log("t", team);
+
     team.forEach((member) => {
-      User.findByIdAndUpdate(member, { projectInProgress: req.body.recruitId });
+      User.findByIdAndUpdate(
+        member,
+        { projectInProgress: req.body.recruitId },
+        (err, user) => {
+          if (err) {
+            return res.status(400).json({ success: false, err });
+          }
+
+          return res.status(200).json({ success: true });
+        }
+      );
     });
 
-    return res.status(200).json({ success: true });
   });
 });
 
@@ -218,7 +225,6 @@ router.get("/myProject", (req, res) => {
   let userId = req.cookies.user_id;
 
   User.findById(userId, (err, user) => {
-    // let recruitId = user.recruitWriting;
     let projectId;
 
     if (user.projectInProgress) {

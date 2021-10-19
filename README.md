@@ -149,6 +149,34 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-19
+
+
+- projectInProgress
+  - 멤버필드에는 들어가는 것이었고, 각 멤버 프로젝트 필드에 들어가지않는다.
+  - 쿼리 블록 중 가장 안쪽에 있는 블록에서 리턴을 해줘야한다.
+
+
+- 이번엔 applyfor, applyto에 fetch error -> cannot read property
+
+
+- 예외처리.
+
+
+- recruit.js - "/applicaitonInfo" 다시.
+  - 데이터 타입을 잘 숙지할 것.
+
+
+- applyfor - 수락한 메세지의 버튼 처리.
+  - 미처리
+  - 수락 - recruit.member에 있음 - recruit.member를 확인해서
+    - applyUser in recruit.member ? 수락(버튼 가리기) : 수락 && 거절 버튼
+  - 거절 - applyfor에서 삭제됨. 
+
+
+---
+
+
 2021-10-18
 
 
@@ -396,7 +424,7 @@ Recruits project team members. Participate in the project.
 - apply to, apply for 작성. 디자인은 나중에?
 
 - 남은 것
-  - 지원 시 apply button disabled 처리 문제
+  - 지원 시 apply button disabled 처리 문제 
   - 모집글은 아이디당 한개씩만 쓸 수 있게 처리하는 문제.
   - positions dropdown (o)
   - tech stacks dropdown (o)
@@ -462,9 +490,9 @@ Recruits project team members. Participate in the project.
 
 2021-09-03
 
-- 회원 탈퇴 기능 작성
+- 회원 탈퇴 기능 작성 v
 
-- 지원 기능 작성
+- 지원 기능 작성 v
 
 ---
 
@@ -478,7 +506,7 @@ Recruits project team members. Participate in the project.
 
 - 해야할 일
 
--> 회원 탈퇴 기능, 지원 기능, 지원 확인 기능, 지원 취소 기능, 지원 수락 기능, 지원 거절 기능, ...etc
+-> 회원 탈퇴 기능 v, 지원 기능 v, 지원 확인 기능 v, 지원 취소 기능 v, 지원 수락 기능 v, 지원 거절 기능 v, ...etc
 
 <br />
 

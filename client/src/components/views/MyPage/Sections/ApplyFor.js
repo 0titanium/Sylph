@@ -76,15 +76,19 @@ function ApplyFor() {
                   : RecruitTitle}
                 ]
               </Typography.Text>
+
               [지원자]
+
               <p style={{ display: "inline", marginLeft: "1rem" }}>
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p>
+
               {UserData === undefined ? (
                 <LoadingOutlined style={{ fontSize: "3rem" }} />
               ) : (
                 <ViewProfile userData={UserData[index]} />
               )}
+
               {UserData === undefined ? (
                 <LoadingOutlined style={{ fontSize: "3rem" }} />
               ) : (
@@ -107,6 +111,7 @@ function ApplyFor() {
                   </Button>
                 </>
               )}
+              
             </List.Item>
           )}
         />

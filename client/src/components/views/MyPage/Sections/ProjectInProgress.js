@@ -7,7 +7,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 function ProjectInProgress() {
   const [Recruit, setRecruit] = useState(undefined);
   const [Title, setTitle] = useState(undefined);
-  const [Writer, setWriter] = useState(undefined);
   const [ProjectDetail, setProjectDetail] = useState(undefined);
   const [RecruitPositions, setRecruitPositions] = useState(undefined);
   const [Languages, setLanguages] = useState(undefined);
@@ -54,15 +53,6 @@ function ProjectInProgress() {
       Title.slice(0, 100) + "..."
     ) : (
       Title
-    );
-
-  const writer =
-    Writer === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
-    ) : Writer.length > 100 ? (
-      Writer.slice(0, 100) + "..."
-    ) : (
-      Writer
     );
 
   const projectDetail =
@@ -124,7 +114,6 @@ function ProjectInProgress() {
           <Descriptions.Item label="Title" labelStyle={{ width: "100px" }}>
             {title}
           </Descriptions.Item>
-          <Descriptions.Item label="Writer">{writer}</Descriptions.Item>
           <Descriptions.Item label="ProjectDetail">
             {projectDetail}
           </Descriptions.Item>
