@@ -149,6 +149,21 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-20
+
+
+- applyfor 버튼, 수락, 거절 작성.
+
+
+- 모집글 개수 제한?
+
+
+- 리팩터링
+
+
+---
+
+
 2021-10-19
 
 

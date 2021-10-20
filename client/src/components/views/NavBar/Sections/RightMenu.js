@@ -29,6 +29,7 @@ function RightMenu(props) {
           setUserNickame(data.user[0].nickname);
           setCheckRecruit(data.user[0].recruitWriting);
           console.log("CheckRecruit", CheckRecruit);
+          console.log(data);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }

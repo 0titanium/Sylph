@@ -10,6 +10,8 @@ function ApplyFor() {
   const [RecruitId, setRecruitId] = useState("");
   const [ApplyUsers, setApplyUsers] = useState(undefined);
   const [UserData, setUserData] = useState(undefined);
+  const [Member, setMember] = useState(undefined);
+  const [Recruit, setRecruit] = useState(undefined);
 
   const alarmToWriter = () => {
     fetch(`${RECRUIT_SERVER}/applyment`, {
@@ -22,8 +24,12 @@ function ApplyFor() {
       .then((data) => {
         if (data.success) {
           console.log("data", data);
-          setRecruitTitle(data.title);
-          setRecruitId(data.recruitId);
+          if (data.recruit) {
+            setRecruitTitle(data.recruit.title);
+            setRecruitId(data.recruit._id);
+            setMember([...data.recruit.member]);
+            setRecruit(data.recruit);
+          }
           setApplyUsers([...data.usersNicknames.reverse()]);
           setUserData([...data.user.reverse()]);
         } else {
@@ -76,22 +82,26 @@ function ApplyFor() {
                   : RecruitTitle}
                 ]
               </Typography.Text>
-
               [지원자]
-
               <p style={{ display: "inline", marginLeft: "1rem" }}>
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p>
-
               {UserData === undefined ? (
                 <LoadingOutlined style={{ fontSize: "3rem" }} />
               ) : (
                 <ViewProfile userData={UserData[index]} />
               )}
-
               {UserData === undefined ? (
                 <LoadingOutlined style={{ fontSize: "3rem" }} />
-              ) : (
+              ) : Member === undefined ? (
+                <LoadingOutlined style={{ fontSize: "3rem" }} />
+              ) : Member.includes(UserData[index]._id) ? (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                  수락했습니다.
+                </p>
+              ) : Recruit === undefined ? (
+                <LoadingOutlined style={{ fontSize: "3rem" }} />
+              ) : Recruit.applyfor.includes(UserData[index]._id) ? (
                 <>
                   <Button
                     onClick={() =>
@@ -110,8 +120,11 @@ function ApplyFor() {
                     거절
                   </Button>
                 </>
+              ) : (
+                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                  거절했습니다.
+                </p>
               )}
-              
             </List.Item>
           )}
         />

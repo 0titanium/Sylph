@@ -173,7 +173,7 @@ router.get("/applyment", (req, res) => {
 
         return res
           .status(200)
-          .json({ success: true, recruitId, title, usersNicknames, user });
+          .json({ success: true, usersNicknames, user, recruit });
       });
     });
   });
