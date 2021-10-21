@@ -4,7 +4,7 @@
 
 <br/>
 
-Sylph means Start your lovely projects here.
+Sylph means 'S'tart 'y'our 'l'ovely 'p'rojects 'h'ere.
 
 Recruits project team members. Participate in the project.
 
@@ -13,6 +13,7 @@ Recruits project team members. Participate in the project.
 ---
 
 <br/>
+
 - frontend: react, antd
 
 - backend: nodejs, express
@@ -32,15 +33,13 @@ Recruits project team members. Participate in the project.
     - not login
       - logo ("a href="/" Sylph /a")
       - dropdown ("li a href="/category/positions" postions /a /li")
-        - dropdown ("li a href="/category/techs" techs /a /li")
-      - searchBar ("? /?")
+        - dropdown ("li a href="/category/languages" languages /a /li")
       - sign in ("a href="/signin" /a")
       - sign up ("a href="/signup" /a")
     - login
       - logo ("a href="/" Sylph /a ")
       - dropdown ("li a href="/category/positions" postions /a /li")
-        - dropdown ("li a href="/category/techs" techs /a /li")
-      - searchBar ("? /?")
+        - dropdown ("li a href="/category/languages" languages /a /li")
       - dropdown ("a href="/myPage" myPage /a") && ("a logout /a")
 
   - RegisterPage ("/register")
@@ -49,7 +48,7 @@ Recruits project team members. Participate in the project.
 
   - LandingPage ("/")
 
-    - position || tech stack filter dropdown
+    - positions || languages filter dropdown
     - project recruitment cards ("a href="/recruitment/posts/:postId" detail /a")
 
   - RecruitDetailPage ("/recruit/:recruitId")
@@ -145,6 +144,50 @@ Recruits project team members. Participate in the project.
     - member (Array)
 
 <br />
+
+---
+
+
+2021-10-21
+
+
+- 기능
+  - 회원 가입 //
+  - 회원 탈퇴 //
+  - 로그인 //
+  - 로그아웃 //
+  - 포지션별 모집글 확인 //
+  - 언어별 모집글 확인 //
+  - 모집글 작성 //
+  - 모집글 열람 //
+  - 모집글 수정 //
+  - 모집글 삭제 //
+  - 프로젝트 지원 //
+  - 프로젝트 지원 취소 //
+  - 유저 정보 열람 //
+  - 유저 정보 수정 //
+  - 유저 모집글 확인 // 모집글 개수를 하나로 제한하지 않으면 문제가 생길듯.
+  - 유저 모집글 바로가기 //
+  - 유저 진행 중인 프로젝트 확인 // 진행 중인 프로젝트를 하나로 제한하지 않으면 문제가 생길듯.
+  - 유저 진행 중인 프로젝트 모집글 바로가기 //
+  - 유저 지원한 프로젝트 모집글 확인 //
+  - 유저 지원한 프로젝트 지원 상태 확인(대기, 거절, 수락) //
+  - 프로젝트 지원자 확인 //
+  - 프로젝트 지원자 프로필 열람 //
+  - 프로젝트 지원자 참가 수락 //
+  - 프로젝트 지원자 참가 거절 //
+
+
+- css
+  - inline style // 코드가 지저분해보인다. 없어도 깔끔한 것 같지는 않음.
+  - styled component // 이 방법은 가장 인기있다고 하는데 좋은 점이 무엇인지는 잘 모르겠다.
+  - import css file // 피곤하다.
+
+
+- 배포
+  - firebase & heroku - update가 힘든 것 같다.
+  - aws s3 & ec2 - 프리티어에서 요금이 청구된 경험때문에 꺼려짐.
+
 
 ---
 
