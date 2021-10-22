@@ -4,6 +4,7 @@ import ViewProfile from "./ViewProfile";
 
 import { List, Typography, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./ApplyFor.module.css";
 
 function ApplyFor() {
   const [RecruitTitle, setRecruitTitle] = useState("");
@@ -75,7 +76,7 @@ function ApplyFor() {
           dataSource={ApplyUsers}
           renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark style={{ marginRight: "1rem" }}>
+              <Typography.Text mark className={styles.typoText}>
                 [
                 {RecruitTitle.length > 20
                   ? RecruitTitle.slice(0, 20) + "..."
@@ -83,31 +84,29 @@ function ApplyFor() {
                 ]
               </Typography.Text>
               [지원자]
-              <p style={{ display: "inline", marginLeft: "1rem" }}>
+              <p className={styles.pst}>
                 {item.length > 20 ? item.slice(0, 20) + "..." : item}
               </p>
               {UserData === undefined ? (
-                <LoadingOutlined style={{ fontSize: "3rem" }} />
+                <LoadingOutlined className={styles.loading} />
               ) : (
                 <ViewProfile userData={UserData[index]} />
               )}
               {UserData === undefined ? (
-                <LoadingOutlined style={{ fontSize: "3rem" }} />
+                <LoadingOutlined className={styles.loading} />
               ) : Member === undefined ? (
-                <LoadingOutlined style={{ fontSize: "3rem" }} />
+                <LoadingOutlined className={styles.loading} />
               ) : Member.includes(UserData[index]._id) ? (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>
-                  수락했습니다.
-                </p>
+                <p className={styles.pst}>수락했습니다.</p>
               ) : Recruit === undefined ? (
-                <LoadingOutlined style={{ fontSize: "3rem" }} />
+                <LoadingOutlined className={styles.loading} />
               ) : Recruit.applyfor.includes(UserData[index]._id) ? (
                 <>
                   <Button
                     onClick={() =>
                       onAcceptHandler(RecruitId, UserData[index]._id)
                     }
-                    style={{ marginLeft: "1rem" }}
+                    className={styles.btn}
                   >
                     수락
                   </Button>
@@ -115,15 +114,13 @@ function ApplyFor() {
                     onClick={() =>
                       onRefuseHandler(RecruitId, UserData[index]._id)
                     }
-                    style={{ marginLeft: "1rem" }}
+                    className={styles.btn}
                   >
                     거절
                   </Button>
                 </>
               ) : (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>
-                  거절했습니다.
-                </p>
+                <p className={styles.pst}>거절했습니다.</p>
               )}
             </List.Item>
           )}
@@ -139,7 +136,7 @@ function ApplyFor() {
   return (
     <div>
       {ApplyUsers === undefined ? (
-        <LoadingOutlined style={{ fontSize: "3rem" }} />
+        <LoadingOutlined className={styles.loading} />
       ) : ApplyUsers.length !== 0 ? (
         renderApplyFor()
       ) : (

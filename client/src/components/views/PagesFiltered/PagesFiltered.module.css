@@ -1,0 +1,16 @@
+.card {
+    width: 300px;
+}
+
+.container {
+    width: 85%;
+    margin: 3rem auto;
+}
+
+.row {
+    margin-top: 2rem;
+}
+
+.loading {
+    font-size: 3rem;
+}

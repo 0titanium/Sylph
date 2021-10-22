@@ -3,6 +3,7 @@ import { USER_SERVER } from "../../../../Config";
 
 import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./ProjectInProgress.module.css";
 
 function ProjectInProgress() {
   const [Recruit, setRecruit] = useState(undefined);
@@ -37,7 +38,7 @@ function ProjectInProgress() {
             setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
             setRecruitId(data.recruitDetail._id);
-          }else{
+          } else {
             setRecruit(null);
           }
         } else {
@@ -48,7 +49,7 @@ function ProjectInProgress() {
 
   const title =
     Title === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : Title.length > 100 ? (
       Title.slice(0, 100) + "..."
     ) : (
@@ -57,7 +58,7 @@ function ProjectInProgress() {
 
   const projectDetail =
     ProjectDetail === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : ProjectDetail.length > 100 ? (
       ProjectDetail.slice(0, 100) + "..."
     ) : (
@@ -66,7 +67,7 @@ function ProjectInProgress() {
 
   const recruitPositions =
     RecruitPositions === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : RecruitPositions.length > 7 ? (
       RecruitPositions.slice(0, 7)
         .map((position) => position)
@@ -77,7 +78,7 @@ function ProjectInProgress() {
 
   const languages =
     Languages === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : Languages.length > 7 ? (
       Languages.slice(0, 7)
         .map((language) => language)
@@ -91,9 +92,9 @@ function ProjectInProgress() {
   }, []);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div className={styles.container}>
       {Recruit === undefined ? (
-        <LoadingOutlined style={{ fontSize: "2rem" }} />
+        <LoadingOutlined className={styles.loading} />
       ) : Recruit !== null ? (
         <Descriptions
           bordered
@@ -107,7 +108,7 @@ function ProjectInProgress() {
           }
         >
           <Descriptions.Item label="바로가기" labelStyle={{ width: "100px" }}>
-            <Button style={{ color: "white", backgroundColor: "#4b7bec" }}>
+            <Button className={styles.btn}>
               <a href={`/recruit/${RecruitId}`}>바로가기</a>
             </Button>
           </Descriptions.Item>
@@ -123,7 +124,7 @@ function ProjectInProgress() {
           <Descriptions.Item label="Languages">{languages}</Descriptions.Item>
           <Descriptions.Item label="Qualifications">
             {Qualifications === undefined ? (
-              <LoadingOutlined style={{ fontSize: "3rem" }} />
+              <LoadingOutlined className={styles.loading} />
             ) : Qualifications.length > 100 ? (
               Qualifications.slice(0, 100) + "..."
             ) : (
@@ -132,7 +133,7 @@ function ProjectInProgress() {
           </Descriptions.Item>
           <Descriptions.Item label="MeetingLocation">
             {MeetingLocation === undefined ? (
-              <LoadingOutlined style={{ fontSize: "3rem" }} />
+              <LoadingOutlined className={styles.loading} />
             ) : MeetingLocation.length > 100 ? (
               MeetingLocation.slice(0, 100) + "..."
             ) : (
@@ -142,7 +143,7 @@ function ProjectInProgress() {
         </Descriptions>
       ) : (
         <div>
-          <h3 style={{ marginTop: "2rem" }}>진행중인 프로젝트가 없습니다.</h3>
+          <h3 className={styles.alarm}>진행중인 프로젝트가 없습니다.</h3>
         </div>
       )}
     </div>

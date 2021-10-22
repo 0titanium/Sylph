@@ -3,6 +3,7 @@ import { RECRUIT_SERVER } from "../../../../Config";
 
 import { List, Typography } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./ApplyTo.module.css";
 
 function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState(undefined);
@@ -55,28 +56,28 @@ function ApplyTo() {
           dataSource={UserApplyTo}
           renderItem={(item, index) => (
             <List.Item>
-              <Typography.Text mark style={{ marginRight: "1rem" }}>
+              <Typography.Text mark className={styles.typoText}>
                 [지원중]
               </Typography.Text>
               {item.length > 20 ? item.slice(0, 20) + "..." : item}
               {isRefused === undefined ? (
-                <LoadingOutlined style={{ fontSize: "3rem" }} />
+                <LoadingOutlined className={styles.loading} />
               ) : isRefused[index] === 1 ? (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                <p className={styles.pst}>
                   수락되었습니다.
                 </p>
               ) : isRefused[index] === 2 ? (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                <p className={styles.pst}>
                   대기중입니다.
                 </p>
               ) : (
-                <p style={{ display: "inline", marginLeft: "1rem" }}>
+                <p className={styles.pst}>
                   거절되었습니다.
                 </p>
               )}
               <a
                 href={`/recruit/${RecruitId[index]}`}
-                style={{ marginLeft: "1rem" }}
+                className={styles.ast}
               >
                 바로가기
               </a>
@@ -95,7 +96,7 @@ function ApplyTo() {
   return (
     <div>
       {UserApplyTo === undefined ? (
-        <LoadingOutlined style={{ fontSize: "3rem" }} />
+        <LoadingOutlined className={styles.loading} />
       ) : UserApplyTo.length !== 0 ? (
         renderApplyTo()
       ) : (

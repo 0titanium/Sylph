@@ -1,0 +1,16 @@
+.loading {
+    font-size: 3rem;
+}
+
+.container {
+    height: 100%;
+}
+
+.btn {
+    color: white;
+    background-color: #4b7bec;
+}
+
+.alarm {
+    margin-top: 2rem;
+}

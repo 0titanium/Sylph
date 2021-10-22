@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
-import { Input, Button, Checkbox} from "antd";
+
+import { Input, Button, Checkbox } from "antd";
+import styles from "./SignUpPage.module.css";
 
 function SignUpPage(props) {
   const dispatch = useDispatch();
@@ -107,117 +109,88 @@ function SignUpPage(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "145vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column", width: "30%" }}
-        onSubmit={onSubmitHandler}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <div className={styles.container}>
+      <form className={styles.formSt} onSubmit={onSubmitHandler}>
+        <div className={styles.formContainer}>
           <h2>Sign Up</h2>
         </div>
 
-        <p style={{ color: "red", marginTop: "2rem" }}>* 필수입력</p>
-        <p style={{ marginBottom: "2rem" }}>* 선택입력</p>
+        <p className={styles.essential}>* 필수입력</p>
+        <p className={styles.choice}>* 선택입력</p>
 
-        <label style={{ marginBottom: "5px" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> ID
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> ID
         </label>
         <Input
           type="text"
           value={Id}
           onChange={onIdHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Nickname
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Nickname
         </label>
         <Input
           type="text"
           value={Nickname}
           onChange={onNicknameHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Password
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Password
         </label>
         <Input.Password
           value={Password}
           onChange={onPasswordHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Confirm Password
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Confirm Password
         </label>
         <Input.Password
           value={ConfirmPassword}
           onChange={onConfirmPasswordHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Position
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Position
         </label>
         <Checkbox.Group
           options={positionOptions}
           onChange={onPositionHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Skills
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Skills
         </label>
-        <Checkbox.Group
-          options={options}
-          onChange={onSkillsHandler}
-        />
+        <Checkbox.Group options={options} onChange={onSkillsHandler} />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ display: "inline" }}>*</p> Careers
+        <label className={styles.labelSt}>
+          <p className={styles.choicepst}>*</p> Careers
         </label>
         <Input
           type="text"
           value={Careers}
           onChange={onCareersHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           placeholder="ex) 1 year, ...etc"
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ display: "inline" }}>*</p> GitHub Address
+        <label className={styles.labelSt}>
+          <p className={styles.choicepst}>*</p> GitHub Address
         </label>
         <Input
           type="text"
           value={GitHubAddress}
           onChange={onGitHubAddressHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           placeholder="https://github.com/"
         />
-
-        <Button
-          style={{
-            color: "white",
-            backgroundColor: "#4b7bec",
-            height: "2.5rem",
-            marginTop: "2rem",
-          }}
-          htmlType="submit"
-        >
+        <Button className={styles.btn} htmlType="submit">
           Sign Up
         </Button>
       </form>

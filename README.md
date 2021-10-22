@@ -88,7 +88,7 @@ Recruits project team members. Participate in the project.
 
     - PATCH "/users/userInfo" // udpate user's profile
 
-    - DELETE "/users/witdrwal" // witdrwal users
+    - DELETE "/users/withdrawl" // withdraw users
 
     - PATCH "/users/applyment" // apply
 
@@ -144,6 +144,19 @@ Recruits project team members. Participate in the project.
     - member (Array)
 
 <br />
+
+---
+
+
+2021-10-22
+
+
+- change css using css module 
+  - responsive design is required
+
+
+- maybe need to make api folder
+
 
 ---
 

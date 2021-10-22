@@ -4,6 +4,7 @@ import { RECRUIT_SERVER } from "../../../Config";
 
 import { Typography, Row, Col, Card } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./PagesFiltered.module.css";
 
 function PagesFilteredByPositions() {
   const { Title } = Typography;
@@ -41,7 +42,7 @@ function PagesFilteredByPositions() {
           <Card
             title={recruit.title}
             extra={<a href={`/recruit/${recruit._id}`}>More</a>}
-            style={{ width: 300 }}
+            className={styles.card}
           >
             <p>{recruit.projectDetail}</p>
             <p>{recruit.recruitPositions}</p>
@@ -52,12 +53,12 @@ function PagesFilteredByPositions() {
   };
 
   return (
-    <div style={{ width: "85%", margin: "3rem auto" }}>
+    <div className={styles.container}>
       <Title level={2}>{pname}</Title>
       <hr />
-      <Row gutter={(32, 16)} style={{ marginTop: "2rem" }}>
+      <Row gutter={(32, 16)} className={styles.row}>
         {Recruits === null ? (
-          <LoadingOutlined style={{ fontSize: "3rem" }} />
+          <LoadingOutlined className={styles.card} />
         ) : Recruits.length !== 0 ? (
           renderCards()
         ) : (

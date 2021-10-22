@@ -4,6 +4,7 @@ import { USER_SERVER } from "../../../../Config";
 import { getCookie } from "../../../../utils/getCookie";
 
 import { Descriptions, Button, Modal } from "antd";
+import styles from "./MyInfo.module.css";
 
 function MyInfo(props) {
   const userId = getCookie("user_id", document.cookie);
@@ -92,18 +93,7 @@ function MyInfo(props) {
     };
     return (
       <React.Fragment>
-        <Button
-          onClick={showModal}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            backgroundColor: "red",
-            width: "5rem",
-            height: "2.5rem",
-          }}
-        >
+        <Button onClick={showModal} className={styles.btn}>
           Withdrawal
         </Button>
         <Modal
@@ -120,7 +110,7 @@ function MyInfo(props) {
   };
 
   return (
-    <div style={{ height: "100%" }}>
+    <div className={styles.container}>
       <Descriptions
         bordered
         title="User Info"
@@ -138,7 +128,9 @@ function MyInfo(props) {
         <Descriptions.Item label="id">{UserId}</Descriptions.Item>
         <Descriptions.Item label="nickname">{UserNickame}</Descriptions.Item>
         <Descriptions.Item label="position">{UserPosition}</Descriptions.Item>
-        <Descriptions.Item label="skills">{UserSkills.map((skill, index)=> (skill+" "))}</Descriptions.Item>
+        <Descriptions.Item label="skills">
+          {UserSkills.map((skill, index) => skill + " ")}
+        </Descriptions.Item>
         <Descriptions.Item label="careers">{UserCareers}</Descriptions.Item>
         <Descriptions.Item label="GitHub Address">
           {UserGitHubAddress}

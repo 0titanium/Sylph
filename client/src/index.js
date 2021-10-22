@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import "./index.module.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
@@ -15,7 +15,6 @@ const createStoreWithMiddleware = applyMiddleware(
   promiseMiddleware,
   ReduxThunk
 )(createStore);
-
 
 ReactDOM.render(
   <Provider

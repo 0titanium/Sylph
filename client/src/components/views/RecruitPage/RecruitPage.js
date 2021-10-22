@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
+
 import { Input, Button, Checkbox } from "antd";
 // import { ControlOutlined } from "@ant-design/icons";
+import styles from "./RecruitPage.module.css";
 
 function RecruitPage(props) {
   const userId = getCookie("user_id", document.cookie);
@@ -128,99 +130,57 @@ function RecruitPage(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "120vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column", width: "40%" }}
-        onSubmit={onSubmitHandler}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <div className={styles.container}>
+      <form className={styles.submitForm} onSubmit={onSubmitHandler}>
+        <div className={styles.formSt}>
           <h2>Recruit</h2>
         </div>
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>제목</label>
+        <label className={styles.labelSt}>제목</label>
         <Input
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           type="text"
           value={Title}
           onChange={onTitleHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          프로젝트 상세
-        </label>
+        <label className={styles.labelSt}>프로젝트 상세</label>
         <TextArea
-          style={{ resize: "none" }}
+          className={styles.textareaSt}
           rows={4}
           value={ProjectDetail}
           onChange={onProjectDetailHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          모집 포지션
-        </label>
+        <label className={styles.labelSt}>모집 포지션</label>
         <Checkbox.Group
           options={options}
           onChange={onRecruitPositionsHandler}
         />
-        {/* <TextArea
-          style={{ resize: "none" }}
-          rows={4}
-          value={RecruitPositions}
-          onChange={onRecruitPositionsHandler}
-        /> */}
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>언어</label>
+        <label className={styles.labelSt}>언어</label>
         <Checkbox.Group
           options={languagesOptions}
           onChange={onLanguagesHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          자격 요건
-        </label>
+        <label className={styles.labelSt}>자격 요건</label>
         <TextArea
-          style={{ resize: "none" }}
+          className={styles.textareaSt}
           rows={4}
           value={Qualifications}
           onChange={onQualificationsHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          모임 장소
-        </label>
+        <label className={styles.labelSt}>모임 장소</label>
         <Input
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           type="text"
           value={MeetingLocation}
           onChange={onMeetingLocationHandler}
         />
 
-        <Button
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            backgroundColor: "#4b7bec",
-            height: "2.5rem",
-            marginTop: "2rem",
-          }}
-          htmlType="submit"
-        >
+        <Button className={styles.btn} htmlType="submit">
           Recruit
         </Button>
       </form>

@@ -1,0 +1,16 @@
+.landing {
+  width: 85%;
+  margin: 3rem auto;
+}
+
+.oneCard {
+    width: 300px;
+}
+
+.row {
+    margin-top: 2rem;
+}
+
+.loading {
+    font-size: 3rem;
+}

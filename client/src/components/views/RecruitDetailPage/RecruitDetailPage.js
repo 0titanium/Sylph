@@ -5,6 +5,7 @@ import { getCookie } from "../../../utils/getCookie";
 
 import { Button, Divider, Modal } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./RecruitDetailPage.module.css";
 
 function RecruitDetailPage(props) {
   const userId = getCookie("user_id", document.cookie);
@@ -226,18 +227,7 @@ function RecruitDetailPage(props) {
 
     return (
       <React.Fragment>
-        <Button
-          onClick={showModal}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            backgroundColor: "#4b7bec",
-            width: "4rem",
-            height: "2.5rem",
-          }}
-        >
+        <Button onClick={showModal} className={styles.btn}>
           Delete
         </Button>
         <Modal
@@ -262,27 +252,11 @@ function RecruitDetailPage(props) {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-        marginTop: "2rem",
-      }}
-    >
+    <div className={styles.container}>
       {Title === undefined ? (
-        <LoadingOutlined style={{ fontSize: "3rem" }} />
+        <LoadingOutlined className={styles.loading} />
       ) : (
-        <div
-          style={{
-            width: "50%",
-            border: "1rem solid black",
-            padding: "2rem",
-            borderRadius: "2rem",
-          }}
-        >
+        <div className={styles.page}>
           <h3>Title: {Title}</h3>
           <h3>Writer: {Writer}</h3>
           <Divider />
@@ -301,77 +275,28 @@ function RecruitDetailPage(props) {
           <h2>Meeting Location</h2>
           <p>{MeetingLocation}</p>
           <Divider />
-          <form
-            onSubmit={onApplyHandler}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <form onSubmit={onApplyHandler} className={styles.apply}>
             {userId !== WriterId ? (
               CheckApply === false ? (
-                <Button
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "#4b7bec",
-                    width: "4rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
-                  htmlType="submit"
-                >
+                <Button className={styles.apply_btn} htmlType="submit">
                   Apply
                 </Button>
               ) : (
-                <Button
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "red",
-                    width: "4rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
-                  htmlType="submit"
-                >
+                <Button className={styles.cancel_btn} htmlType="submit">
                   Cancel
                 </Button>
               )
             ) : IsCompleted === undefined ? (
-              <LoadingOutlined style={{ fontSize: "3rem" }} />
+              <LoadingOutlined className={styles.loading} />
             ) : IsCompleted === false ? (
               <>
                 <Button
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "#4b7bec",
-                    width: "4rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
+                  className={styles.apply_btn}
                 >
                   <a href={`/recruit/update/${rid}`}>Edit</a>
                 </Button>
                 <Button
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "#4b7bec",
-                    width: "5rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
+                  className={styles.apply_btn}
                   onClick={onCompleteHandler}
                 >
                   Complete
@@ -382,31 +307,13 @@ function RecruitDetailPage(props) {
               <>
                 <Button
                   disabled
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "gray",
-                    width: "4rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
+                  className={styles.gray_btn}
                 >
                   <a href={`/recruit/update/${rid}`}>Edit</a>
                 </Button>
                 <Button
                   disabled
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    backgroundColor: "gray",
-                    width: "5rem",
-                    height: "2.5rem",
-                    marginRight: "2rem",
-                  }}
+                  className={styles.gray_btn}
                   onClick={onCompleteHandler}
                 >
                   Complete

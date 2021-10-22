@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signinUser } from "../../../_actions/user_action";
 import { withRouter } from "react-router-dom";
+
 import { Input, Button } from "antd";
+import styles from "./SignInPage.module.css";
 
 function SignInPage(props) {
   const dispatch = useDispatch();
@@ -36,46 +38,19 @@ function SignInPage(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "70vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={onSubmitHandler}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <div className={styles.container}>
+      <form className={styles.formSt}>
+        <div className={styles.formContainer}>
           <h2>Sign In</h2>
         </div>
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>ID</label>
+        <label className={styles.labelSt}>ID</label>
         <Input type="text" value={Id} onChange={onIdHandler} />
 
-        <label style={{ marginBottom: "5px", marginTop: "1rem" }}>
-          Password
-        </label>
+        <label className={styles.labelSt}>Password</label>
         <Input.Password value={Password} onChange={onPasswordHandler} />
 
-        <Button
-          style={{
-            color: "white",
-            backgroundColor: "#4b7bec",
-            height: "2.5rem",
-            marginTop: "2rem",
-          }}
-          htmlType="submit"
-        >
+        <Button className={styles.btn} htmlType="submit">
           Sign In
         </Button>
       </form>

@@ -3,6 +3,7 @@ import { RECRUIT_SERVER } from "../../../Config";
 
 import { Typography, Row, Col, Card } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./LandingPage.module.css";
 
 function LandingPage() {
   const { Title } = Typography;
@@ -58,7 +59,7 @@ function LandingPage() {
           <Card
             title={title}
             extra={<a href={`/recruit/${recruit._id}`}>More</a>}
-            style={{ width: 300 }}
+            className={styles.oneCard}
           >
             <p>{projectDetail}</p>
             <p>
@@ -73,12 +74,12 @@ function LandingPage() {
   };
 
   return (
-    <div style={{ width: "85%", margin: "3rem auto" }}>
+    <div className={styles.landing}>
       <Title level={2}>Latest</Title>
       <hr />
-      <Row gutter={(32, 16)} style={{ marginTop: "2rem" }}>
+      <Row gutter={(32, 16)} className={styles.row}>
         {Recruits === undefined ? (
-          <LoadingOutlined style={{ fontSize: "3rem" }} />
+          <LoadingOutlined className={styles.loading} />
         ) : Recruits.length !== 0 ? (
           renderCards()
         ) : (

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import { Button, Modal, Descriptions } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./ViewProfile.module.css";
 
 function ViewProfile(props) {
   const [visible, setVisible] = useState(false);
@@ -14,7 +16,7 @@ function ViewProfile(props) {
   return (
     <>
       <Button
-        style={{ marginLeft: "1rem" }}
+        className={styles.btn}
         type="primary"
         onClick={() => setVisible(true)}
       >
@@ -29,7 +31,7 @@ function ViewProfile(props) {
         width={800}
       >
         {UserData === undefined ? (
-          <LoadingOutlined style={{ fontSize: "3rem" }} />
+          <LoadingOutlined className={styles.loading} />
         ) : (
           <Descriptions bordered size="default" column={1}>
             <Descriptions.Item label="image" labelStyle={{ width: "100px" }}>

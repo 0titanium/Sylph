@@ -3,6 +3,7 @@ import { RECRUIT_SERVER } from "../../../../Config";
 
 import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import styles from "./MyRecruit.module.css";
 
 function MyRecruit() {
   const [Recruit, setRecruit] = useState(undefined);
@@ -17,7 +18,7 @@ function MyRecruit() {
 
   const title =
     Title === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : Title.length > 100 ? (
       Title.slice(0, 100) + "..."
     ) : (
@@ -26,7 +27,7 @@ function MyRecruit() {
 
   const writer =
     Writer === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : Writer.length > 100 ? (
       Writer.slice(0, 100) + "..."
     ) : (
@@ -35,7 +36,7 @@ function MyRecruit() {
 
   const projectDetail =
     ProjectDetail === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : ProjectDetail.length > 100 ? (
       ProjectDetail.slice(0, 100) + "..."
     ) : (
@@ -44,7 +45,7 @@ function MyRecruit() {
 
   const recruitPositions =
     RecruitPositions === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : RecruitPositions.length > 7 ? (
       RecruitPositions.slice(0, 7)
         .map((position) => position)
@@ -55,7 +56,7 @@ function MyRecruit() {
 
   const languages =
     Languages === undefined ? (
-      <LoadingOutlined style={{ fontSize: "3rem" }} />
+      <LoadingOutlined className={styles.loading} />
     ) : Languages.length > 7 ? (
       Languages.slice(0, 7)
         .map((language) => language)
@@ -99,9 +100,9 @@ function MyRecruit() {
   }, []);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div className={styles.container}>
       {Recruit === undefined ? (
-        <LoadingOutlined style={{ fontSize: "3rem" }} />
+        <LoadingOutlined className={styles.loading} />
       ) : Recruit !== null ? (
         <Descriptions
           bordered
@@ -115,7 +116,7 @@ function MyRecruit() {
           }
         >
           <Descriptions.Item label="바로가기" labelStyle={{ width: "100px" }}>
-            <Button style={{ color: "white", backgroundColor: "#4b7bec" }}>
+            <Button className={styles.btn}>
               <a href={`/recruit/${RecruitId}`}>바로가기</a>
             </Button>
           </Descriptions.Item>
@@ -132,7 +133,7 @@ function MyRecruit() {
           <Descriptions.Item label="Languages">{languages}</Descriptions.Item>
           <Descriptions.Item label="Qualifications">
             {Qualifications === undefined ? (
-              <LoadingOutlined style={{ fontSize: "3rem" }} />
+              <LoadingOutlined className={styles.loading} />
             ) : Qualifications.length > 100 ? (
               Qualifications.slice(0, 100) + "..."
             ) : (
@@ -141,7 +142,7 @@ function MyRecruit() {
           </Descriptions.Item>
           <Descriptions.Item label="MeetingLocation">
             {MeetingLocation === undefined ? (
-              <LoadingOutlined style={{ fontSize: "3rem" }} />
+              <LoadingOutlined className={styles.loading} />
             ) : MeetingLocation.length > 100 ? (
               MeetingLocation.slice(0, 100) + "..."
             ) : (
@@ -151,7 +152,7 @@ function MyRecruit() {
         </Descriptions>
       ) : (
         <div>
-          <h3 style={{ marginTop: "2rem" }}>
+          <h3 className={styles.alarm}>
             모집글이 없습니다. 프로젝트 팀원을 모집해 보세요.{" "}
           </h3>
         </div>

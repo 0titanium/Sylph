@@ -62,7 +62,7 @@ function RightMenu(props) {
     // if (CheckRecruit !== (null || undefined)) {
     //   alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
     // } else {
-      window.location.href = "/recruit/post";
+    window.location.href = "/recruit/post";
     // }
   };
 
@@ -95,12 +95,6 @@ function RightMenu(props) {
         <Menu.Item key="recruit" onClick={onCheckHandler}>
           <a>Recruit</a>
         </Menu.Item>
-        {/* <Menu.Item
-          key="notice"
-          style={{ marginTop: "5px", textDecoration: "none" }}
-        >
-          <BellOutlined style={{ fontSize: "1.5rem" }} />
-        </Menu.Item> */}
         {/* avatar + name - click - dropdown - mypage, logout */}
         <Menu.Item key="dropdwon">
           <Dropdown overlay={menu} trigger={["click"]}>

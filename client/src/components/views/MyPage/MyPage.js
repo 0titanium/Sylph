@@ -6,12 +6,13 @@ import ApplyFor from "./Sections/ApplyFor";
 import ProjectInProgress from "./Sections/ProjectInProgress";
 
 import { Tabs } from "antd";
+import styles from "./MyPage.module.css";
 
 function MyPage() {
   const { TabPane } = Tabs;
 
   return (
-    <div style={{ width: "65%", height: "80vh", margin: "3rem auto" }}>
+    <div className={styles.container}>
       <Tabs defaultActiveKey="1">
         <TabPane tab="My Info" key="1">
           <MyInfo />

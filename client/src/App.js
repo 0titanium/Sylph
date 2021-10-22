@@ -14,15 +14,25 @@ import UpdateRecruitPage from "./components/views/UpdateRecruitPage/UpdateRecrui
 import Footer from "./components/views/Footer/Footer";
 import Auth from "./hoc/auth";
 
+import styles from "./App.module.css";
+
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <NavBar />
-      <div style={{ paddingTop: "69px", minHeight: "calc(100vh - 80px)" }}>
+      <div className={styles.container}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/positions/:pname" component={Auth(PagesFilteredByPositions, null)} />
-          <Route exact path="/languages/:lname" component={Auth(PagesFilteredByLanguages, null)} />
+          <Route
+            exact
+            path="/positions/:pname"
+            component={Auth(PagesFilteredByPositions, null)}
+          />
+          <Route
+            exact
+            path="/languages/:lname"
+            component={Auth(PagesFilteredByLanguages, null)}
+          />
           <Route exact path="/signup" component={Auth(SignUpPage, false)} />
           <Route exact path="/signin" component={Auth(SignInPage, false)} />
           <Route
@@ -31,7 +41,11 @@ function App() {
             component={Auth(RecruitPage, true)}
           />
           <Route exact path="/mypage" component={Auth(MyPage, true)} />
-          <Route exact path="/mypage/update" component={Auth(UpdateMyInfo, true)} />
+          <Route
+            exact
+            path="/mypage/update"
+            component={Auth(UpdateMyInfo, true)}
+          />
           <Route
             exact
             path="/recruit/:recruitId"
