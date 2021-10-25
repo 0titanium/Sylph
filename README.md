@@ -148,6 +148,21 @@ Recruits project team members. Participate in the project.
 ---
 
 
+2021-10-25
+
+
+- 왜 갑자기 로그인이 안될까.
+ - css 밖에 안건드렸을 텐데.
+ - onsubmit을 삭제했었다. 확인을 잘하자.
+
+- inline styles 중에서 import css 하면 이상해지는 부분말고는 다 옮겼다.
+  - mobile에서 이상한 부분을 찾아서 고쳐보자.
+  - @media 처리만 하면 되는 것이 아닐까.
+  - 디자인이 진짜 별로다.
+
+---
+
+
 2021-10-22
 
 

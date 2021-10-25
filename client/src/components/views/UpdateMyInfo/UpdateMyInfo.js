@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { USER_SERVER } from "../../../Config";
 
 import { Input, Button } from "antd";
+import styles from "./UpdateMyInfo.module.css";
 
 function UpdateMyInfo(props) {
   // const [Password, setPassword] = useState("");
@@ -110,125 +111,100 @@ function UpdateMyInfo(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "135vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column", width: "30%" }}
-        onSubmit={onSubmitHandler}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <h2>Sign Up</h2>
+    <div className={styles.container}>
+      <form className={styles.formSt} onSubmit={onSubmitHandler}>
+        <div className={styles.formDiv}>
+          <h2>Update Info</h2>
         </div>
 
-        <p style={{ color: "red", marginTop: "2rem" }}>* 필수입력</p>
-        <p style={{ marginBottom: "2rem" }}>* 선택입력</p>
+        <p className={styles.essential}>* 필수입력</p>
+        <p className={styles.choice}>* 선택입력</p>
 
-        <label style={{ marginBottom: "5px" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> ID
+        <label className={styles.labelId}>
+          <p className={styles.pst}>*</p> ID
         </label>
         <Input
           type="text"
           value={UserId}
           disabled={true}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Nickname
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Nickname
         </label>
         <Input
           type="text"
           value={UserNickame}
           disabled={true}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Password
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Password
         </label>
         <Input.Password
           // value={Password}
           // onChange={onPasswordHandler}
           disabled={true}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Confirm Password
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Confirm Password
         </label>
         <Input.Password
           // value={ConfirmPassword}
           // onChange={onConfirmPasswordHandler}
           disabled={true}
-          style={{ height: "2.5rem" }}
+          className={styles.inpuSt}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Position
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Position
         </label>
         <Input
           type="text"
           value={UserPosition}
           onChange={onPositionHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inpuSt}
           placeholder="ex) Frontend, Backend, Full Stack, ...etc"
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ color: "red", display: "inline" }}>*</p> Skills
+        <label className={styles.labelSt}>
+          <p className={styles.pst}>*</p> Skills
         </label>
         <Input
           type="text"
           value={UserSkills}
           onChange={onSkillsHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           placeholder="ex) Java, Javascript, Kotlin, ...etc"
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ display: "inline" }}>*</p> Careers
+        <label className={styles.labelSt}>
+          <p className={styles.choicepst}>*</p> Careers
         </label>
         <Input
           type="text"
           value={UserCareers}
           onChange={onCareersHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           placeholder="ex) 1 year, ...etc"
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          <p style={{ display: "inline" }}>*</p> GitHub Address
+        <label className={styles.labelSt}>
+          <p className={styles.choicepst}>*</p> GitHub Address
         </label>
         <Input
           type="text"
           value={UserGitHubAddress}
           onChange={onGitHubAddressHandler}
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           placeholder="https://github.com/"
         />
 
-        <Button
-          style={{
-            color: "white",
-            backgroundColor: "#4b7bec",
-            height: "2.5rem",
-            marginTop: "2rem",
-          }}
-          htmlType="submit"
-        >
+        <Button className={styles.btn} htmlType="submit">
           Edit
         </Button>
       </form>

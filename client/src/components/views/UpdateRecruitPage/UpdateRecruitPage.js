@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { RECRUIT_SERVER } from "../../../Config";
 
 import { Button, Input, Checkbox } from "antd";
+import styles from "./UpdateRecruitPage.module.css";
 
 function UpdateRecruitPage(props) {
   const { TextArea } = Input;
@@ -152,95 +153,59 @@ function UpdateRecruitPage(props) {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "120vh",
-      }}
-    >
-      <form
-        style={{ display: "flex", flexDirection: "column", width: "40%" }}
-        onSubmit={onSubmitHandler}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <div className={styles.container}>
+      <form className={styles.formSt} onSubmit={onSubmitHandler}>
+        <div className={styles.formDiv}>
           <h2>Recruit</h2>
         </div>
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>제목</label>
+        <label className={styles.labelSt}>제목</label>
         <Input
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           type="text"
           value={Title}
           onChange={onTitleHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          프로젝트 상세
-        </label>
+        <label className={styles.labelSt}>프로젝트 상세</label>
         <TextArea
-          style={{ resize: "none" }}
+          className={styles.textSt}
           rows={4}
           value={ProjectDetail}
           onChange={onProjectDetailHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          모집 포지션
-        </label>
+        <label className={styles.labelSt}>모집 포지션</label>
         <Checkbox.Group
           options={options}
           value={RecruitPositions}
           onChange={onRecruitPositionsHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>언어</label>
+        <label className={styles.labelSt}>언어</label>
         <Checkbox.Group
           options={languagesOptions}
           value={Languages}
           onChange={onLanguagesHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          자격 요건
-        </label>
+        <label className={styles.labelSt}>자격 요건</label>
         <TextArea
-          style={{ resize: "none" }}
+          className={styles.textSt}
           rows={4}
           value={Qualifications}
           onChange={onQualificationsHandler}
         />
 
-        <label style={{ marginBottom: "5px", marginTop: "2rem" }}>
-          모임 장소
-        </label>
+        <label className={styles.labelSt}>모임 장소</label>
         <Input
-          style={{ height: "2.5rem" }}
+          className={styles.inputSt}
           type="text"
           value={MeetingLocation}
           onChange={onMeetingLocationHandler}
         />
 
-        <Button
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            backgroundColor: "#4b7bec",
-            height: "2.5rem",
-            marginTop: "2rem",
-          }}
-          htmlType="submit"
-        >
+        <Button className={styles.btn} htmlType="submit">
           Edit Recruit
         </Button>
       </form>

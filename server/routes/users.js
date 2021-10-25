@@ -26,7 +26,6 @@ router.post("/signup", (req, res) => {
 // signin route
 router.post("/signin", (req, res) => {
   // 1 요청된 아이디가 db에 있는지 찾기
-
   User.findOne({ id: req.body.dataToSubmit.id }, (err, user) => {
     if (!user) {
       return res.json({
@@ -198,7 +197,6 @@ router.patch("/recruit", (req, res) => {
 // add project route
 router.patch("/completion", (req, res) => {
   Recruit.findById(req.body.recruitId, (err, recruit) => {
-
     let team = recruit.member;
 
     console.log("t", team);
@@ -216,7 +214,6 @@ router.patch("/completion", (req, res) => {
         }
       );
     });
-
   });
 });
 

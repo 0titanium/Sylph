@@ -3,3 +3,9 @@
   height: 80vh;
   margin: 3rem auto;
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}

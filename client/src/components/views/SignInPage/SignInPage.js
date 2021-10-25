@@ -39,7 +39,7 @@ function SignInPage(props) {
 
   return (
     <div className={styles.container}>
-      <form className={styles.formSt}>
+      <form className={styles.formSt} onSubmit={onSubmitHandler}>
         <div className={styles.formContainer}>
           <h2>Sign In</h2>
         </div>
