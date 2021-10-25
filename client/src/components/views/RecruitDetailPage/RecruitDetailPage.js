@@ -52,7 +52,6 @@ function RecruitDetailPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("wr", data.writer);
           setTitle(data.recruitDetail.title);
           setWriter(data.writer.nickname);
           setWriterId(data.writer._id);
@@ -149,7 +148,6 @@ function RecruitDetailPage(props) {
 
   // recruit completion
   const completeRequest = (recruitId) => {
-    console.log(recruitId);
     fetch(`${RECRUIT_SERVER}/completion`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -179,7 +177,6 @@ function RecruitDetailPage(props) {
       if (!CheckApply) {
         applyRequest(userId, rid);
       } else {
-        console.log(CheckApply);
         cancelRequest(userId, rid);
       }
     } else {
@@ -290,9 +287,7 @@ function RecruitDetailPage(props) {
               <LoadingOutlined className={styles.loading} />
             ) : IsCompleted === false ? (
               <>
-                <Button
-                  className={styles.apply_btn}
-                >
+                <Button className={styles.apply_btn}>
                   <a href={`/recruit/update/${rid}`}>Edit</a>
                 </Button>
                 <Button
@@ -305,10 +300,7 @@ function RecruitDetailPage(props) {
               </>
             ) : (
               <>
-                <Button
-                  disabled
-                  className={styles.gray_btn}
-                >
+                <Button disabled className={styles.gray_btn}>
                   <a href={`/recruit/update/${rid}`}>Edit</a>
                 </Button>
                 <Button

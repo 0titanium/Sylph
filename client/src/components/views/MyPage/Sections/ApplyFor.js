@@ -24,7 +24,6 @@ function ApplyFor() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("data", data);
           if (data.recruit) {
             setRecruitTitle(data.recruit.title);
             setRecruitId(data.recruit._id);
@@ -50,7 +49,6 @@ function ApplyFor() {
         addUserId: applyUserId,
       }),
     }).then((response) => response.json());
-    console.log(RecruitId, applyUserId);
   };
 
   const onRefuseHandler = (RecruitId, applyUserId) => {
@@ -64,7 +62,6 @@ function ApplyFor() {
         removeUserId: applyUserId,
       }),
     }).then((response) => response.json());
-    console.log(RecruitId, applyUserId);
   };
 
   const renderApplyFor = () => {

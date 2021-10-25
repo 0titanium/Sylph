@@ -41,8 +41,6 @@ function UpdateRecruitPage(props) {
     { label: "C#", value: "C#" },
   ];
 
-  console.log("rid", rid);
-
   // fetch data before update
   const fetchRecruitDetail = () => {
     fetch(`${RECRUIT_SERVER}/recruitDetail/${rid}`, {
@@ -54,7 +52,6 @@ function UpdateRecruitPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
           setRecruitId(data.recruitDetail._id._id);
           setTitle(data.recruitDetail.title);
           setProjectDetail(data.recruitDetail.projectDetail);
@@ -62,12 +59,6 @@ function UpdateRecruitPage(props) {
           setLanguages(data.recruitDetail.languages);
           setQualifications(data.recruitDetail.Qualifications);
           setMeetingLocation(data.recruitDetail.meetingLocation);
-          console.log(
-            "p",
-            data.recruitDetail.recruitPositions,
-            "l",
-            data.recruitDetail.languages
-          );
         } else {
           alert("모집글을 불러오는데 실패했습니다.");
         }
@@ -106,9 +97,6 @@ function UpdateRecruitPage(props) {
       meetingLocation: MeetingLocation,
     };
 
-    console.log(submitRecruitDetail.recruitPositions);
-    console.log(submitRecruitDetail.languages);
-
     if (
       submitRecruitDetail.title === "" ||
       submitRecruitDetail.projectDetail === "" ||
@@ -132,14 +120,12 @@ function UpdateRecruitPage(props) {
 
   const onRecruitPositionsHandler = (e) => {
     setRecruitPositions(e);
-    console.log("R", RecruitPositions);
   };
-  console.log("R1", RecruitPositions);
+
   const onLanguagesHandler = (e) => {
     setLanguages(e);
-    console.log("L", Languages);
   };
-  console.log("L1", Languages);
+
   const onQualificationsHandler = (e) => {
     setQualifications(e.currentTarget.value);
   };

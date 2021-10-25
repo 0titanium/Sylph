@@ -20,7 +20,6 @@ function ApplyTo() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("data", data);
           setUserApplyTo([...data.recruitTitle.reverse()]);
           setRecruitId([...data.recruitId.reverse()]);
         } else {
@@ -39,7 +38,6 @@ function ApplyTo() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("data1", data);
           setisRefused([...data.check]);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
@@ -63,22 +61,13 @@ function ApplyTo() {
               {isRefused === undefined ? (
                 <LoadingOutlined className={styles.loading} />
               ) : isRefused[index] === 1 ? (
-                <p className={styles.pst}>
-                  수락되었습니다.
-                </p>
+                <p className={styles.pst}>수락되었습니다.</p>
               ) : isRefused[index] === 2 ? (
-                <p className={styles.pst}>
-                  대기중입니다.
-                </p>
+                <p className={styles.pst}>대기중입니다.</p>
               ) : (
-                <p className={styles.pst}>
-                  거절되었습니다.
-                </p>
+                <p className={styles.pst}>거절되었습니다.</p>
               )}
-              <a
-                href={`/recruit/${RecruitId[index]}`}
-                className={styles.ast}
-              >
+              <a href={`/recruit/${RecruitId[index]}`} className={styles.ast}>
                 바로가기
               </a>
             </List.Item>

@@ -20,7 +20,6 @@ function LandingPage() {
       .then((data) => {
         if (data.success) {
           setRecruits(data.recruits);
-          console.log(data.recruits);
         } else {
           alert("모집글을 불러오는데 실패했습니다.");
         }

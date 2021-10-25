@@ -27,7 +27,6 @@ function MyInfo(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.user);
           setUserImage(data.userImage);
           setUserId(data.user[0].id);
           setUserNickame(data.user[0].nickname);

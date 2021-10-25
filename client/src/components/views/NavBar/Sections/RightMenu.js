@@ -28,8 +28,6 @@ function RightMenu(props) {
           setUserImage(data.user[0].image);
           setUserNickame(data.user[0].nickname);
           setCheckRecruit(data.user[0].recruitWriting);
-          console.log("CheckRecruit", CheckRecruit);
-          console.log(data);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -44,7 +42,6 @@ function RightMenu(props) {
 
   const signoutHandler = () => {
     dispatch(signoutUser()).then((response) => {
-      console.log(response.payload.err);
       if (response.payload.signoutSuccess) {
         setUserImage("");
         setUserNickame("");
@@ -56,7 +53,6 @@ function RightMenu(props) {
   };
 
   const onCheckHandler = () => {
-    console.log(CheckRecruit);
     fetchUser();
     setCheckRecruit(CheckRecruit);
     // if (CheckRecruit !== (null || undefined)) {

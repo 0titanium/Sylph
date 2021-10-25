@@ -75,10 +75,7 @@ function MyRecruit() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.user);
           setRecruit(data.recruitDetail);
-          console.log("r", Recruit);
-          console.log("rd", data.recruitDetail);
           if (data.recruitDetail) {
             setTitle(data.recruitDetail.title);
             setWriter(data.user.nickname);

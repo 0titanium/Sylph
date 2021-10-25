@@ -9,7 +9,7 @@ export function signinUser(dataToSubmit) {
     credentials: "include",
     body: JSON.stringify({ dataToSubmit }),
   }).then((response) => response.json());
-  console.log(request);
+
   return {
     type: SIGNIN_USER,
     payload: request,

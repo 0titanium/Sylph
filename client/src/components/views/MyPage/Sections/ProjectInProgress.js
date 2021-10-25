@@ -25,10 +25,6 @@ function ProjectInProgress() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log("r", Recruit);
-          console.log("d", data);
-          console.log("rd", data.recruitDetail);
-
           if (data.recruitDetail !== "") {
             setRecruit(data.recruitDetail);
             setTitle(data.recruitDetail.title);

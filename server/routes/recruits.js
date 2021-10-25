@@ -80,7 +80,6 @@ router.patch("/recruit", (req, res) => {
   } = req.body.submitRecruitDetail;
 
   // recruitId = mongoose.Types.ObjectId(recruitId);
-  console.log(req.body.submitRecruitDetail);
   Recruit.findByIdAndUpdate(
     recruitId,
     req.body.submitRecruitDetail,
@@ -300,7 +299,6 @@ router.get("/applicationInfo", (req, res) => {
 
       if (recruit[i]) {
         applyFor = recruit[i].applyfor;
-        console.log(applyFor);
         // waiting - recruitId in user.applyto 1 && userId in recruit.applyfor 1 && userId in recruit.member 0 - push 2
         if (applyFor.includes(userId) && !recruit[i].member.includes(userId)) {
           check.push(2);

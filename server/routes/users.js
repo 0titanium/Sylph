@@ -163,7 +163,6 @@ router.patch("/applyment", (req, res) => {
 // cancel application route
 router.patch("/cancelApplyment", (req, res) => {
   let userId = mongoose.Types.ObjectId(req.body.userId);
-  console.log("a");
   User.findByIdAndUpdate(
     userId,
     { $pull: { applyto: req.body.recruitId } },
@@ -198,8 +197,6 @@ router.patch("/recruit", (req, res) => {
 router.patch("/completion", (req, res) => {
   Recruit.findById(req.body.recruitId, (err, recruit) => {
     let team = recruit.member;
-
-    console.log("t", team);
 
     team.forEach((member) => {
       User.findByIdAndUpdate(

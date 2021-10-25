@@ -52,7 +52,6 @@ function RecruitPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.recruitPost);
           fetch(`${USER_SERVER}/recruit`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -86,7 +85,6 @@ function RecruitPage(props) {
   };
 
   const onRecruitPositionsHandler = (e) => {
-    console.log(e);
     setRecruitPositions(e);
   };
 

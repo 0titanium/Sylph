@@ -11,8 +11,6 @@ function PagesFilteredByPositions() {
   const [Recruits, setRecruits] = useState(null);
   const pname = useParams().pname;
 
-  console.log(pname);
-
   const fetchRecruits = () => {
     fetch(`${RECRUIT_SERVER}/positions/${pname}`, {
       method: "GET",
@@ -24,7 +22,6 @@ function PagesFilteredByPositions() {
       .then((data) => {
         if (data.success) {
           setRecruits(data.recruits);
-          console.log(data.recruits);
         } else {
           alert("모집글을 불러오는데 실패했습니다.");
         }

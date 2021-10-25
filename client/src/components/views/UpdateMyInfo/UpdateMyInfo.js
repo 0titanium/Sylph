@@ -49,7 +49,6 @@ function UpdateMyInfo(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.user);
           // setUserImage(data.userImage);
           setUserObjId(data.user[0]._id);
           setUserId(data.user[0].id);
