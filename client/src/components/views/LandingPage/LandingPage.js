@@ -54,7 +54,7 @@ function LandingPage() {
           : recruitPositions;
 
       return (
-        <Col key={index} lg={6} md={8} xs={24}>
+        <Col key={index} className={styles.colSt}>
           <Card
             title={title}
             extra={<a href={`/recruit/${recruit._id}`}>More</a>}
@@ -76,7 +76,7 @@ function LandingPage() {
     <div className={styles.landing}>
       <Title level={2}>Latest</Title>
       <hr />
-      <Row gutter={(32, 16)} className={styles.row}>
+      <Row gutter={(18, 6)} className={styles.row}>
         {Recruits === undefined ? (
           <LoadingOutlined className={styles.loading} />
         ) : Recruits.length !== 0 ? (

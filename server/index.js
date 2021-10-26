@@ -1,19 +1,17 @@
 const express = require("express");
 const app = express();
 const port = 5000;
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 const userRouter = require("./routes/users");
 const recruitRouter = require("./routes/recruits");
-// const commentRouter = require("./routes/comments");
 
 // CORS
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept",
+    "Origin, X-Requested-With, Content-Type, Accept"
   );
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
   res.setHeader("Access-Control-Allow-Credentials", true);
@@ -21,9 +19,9 @@ app.use((req, res, next) => {
 });
 
 // application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 // application/json 형태의 데이터를 분석해서 가져올 수 있게 해준다.
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(cookieParser());
 

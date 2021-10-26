@@ -77,6 +77,7 @@ router.get("/auth", auth, (req, res) => {
     career: req.user.career,
     githubaddress: req.user.githubaddress,
     image: !req.user.image ? "" : req.user.image,
+    recruitWriting: !req.user.recruitWriting ? "" : req.user.recruitWriting,
   });
 });
 

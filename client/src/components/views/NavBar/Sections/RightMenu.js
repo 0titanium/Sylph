@@ -28,6 +28,8 @@ function RightMenu(props) {
           setUserImage(data.user[0].image);
           setUserNickame(data.user[0].nickname);
           setCheckRecruit(data.user[0].recruitWriting);
+          console.log(data.user[0].recruitWriting);
+          console.log(CheckRecruit);
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -55,11 +57,12 @@ function RightMenu(props) {
   const onCheckHandler = () => {
     fetchUser();
     setCheckRecruit(CheckRecruit);
-    // if (CheckRecruit !== (null || undefined)) {
-    //   alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
-    // } else {
-    window.location.href = "/recruit/post";
-    // }
+
+    if (CheckRecruit === null || CheckRecruit === undefined) {
+      window.location.href = "/recruit/post";
+    } else {
+      alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
+    }
   };
 
   const menu = (
