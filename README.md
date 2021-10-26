@@ -154,6 +154,7 @@ Recruits project team members. Participate in the project.
 - 1유저 1프로젝트
   - 작성한 모집글이 있다면 모집글 제한. (v)
   - 여러 모집에 지원했을 경우, 한 프로젝트에 멤버가 되었다면 다른 프로젝트 멤버가 되는 것을 제한. ()
+    - apply for에서 지원자 데이터에서 projectInProgress 검사 -> 있으면 수락 버튼 클릭 시 수락 불가 메세지 전달.
 
 
 - 배포
