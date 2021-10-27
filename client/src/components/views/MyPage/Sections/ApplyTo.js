@@ -38,7 +38,8 @@ function ApplyTo() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setisRefused([...data.check]);
+          setisRefused([...data.check.reverse()]);
+          console.log(data)
         } else {
           alert("유저 정보를 불러오는데 실패했습니다.");
         }
@@ -55,7 +56,7 @@ function ApplyTo() {
           renderItem={(item, index) => (
             <List.Item>
               <Typography.Text mark className={styles.typoText}>
-                [지원중]
+                [지원완료]
               </Typography.Text>
               {item.length > 20 ? item.slice(0, 20) + "..." : item}
               {isRefused === undefined ? (

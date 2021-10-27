@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
+import { USER_SERVER } from "../../../Config";
 
 import { Input, Button, Checkbox } from "antd";
 import styles from "./SignUpPage.module.css";
@@ -108,6 +109,58 @@ function SignUpPage(props) {
     }
   };
 
+  const checkOverlapId = () => {
+    fetch(`${USER_SERVER}/isOverlappedId`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        id: Id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+          // alert를 modal로 바꿀 것.
+          if(data.isOverlappedId){
+            alert("사용 가능한 아이디 입니다.");
+          }else{
+            alert("중복된 아이디 입니다.")
+          }
+        } else {
+          alert("확인 작업에 실패했습니다.");
+        }
+      });
+  };
+
+  const checkOverlapNickname = () => {
+    fetch(`${USER_SERVER}/isOverlappedNick`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify({
+        nickname: Nickname,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+          // alert를 modal로 바꿀 것.
+          if(data.isOverlappedNick){
+            alert("사용 가능한 닉네임입니다.");
+          }else{
+            alert("중복된 닉네임입니다.")
+          }
+        } else {
+          alert("확인 작업에 실패했습니다.");
+        }
+      });
+  };
+
   return (
     <div className={styles.container}>
       <form className={styles.formSt} onSubmit={onSubmitHandler}>
@@ -127,6 +180,9 @@ function SignUpPage(props) {
           onChange={onIdHandler}
           className={styles.inputSt}
         />
+        <Button onClick={checkOverlapId} className={styles.checkOverlapBtn}>
+          중복 확인
+        </Button>
 
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Nickname
@@ -137,6 +193,12 @@ function SignUpPage(props) {
           onChange={onNicknameHandler}
           className={styles.inputSt}
         />
+        <Button
+          onClick={checkOverlapNickname}
+          className={styles.checkOverlapBtn}
+        >
+          중복 확인
+        </Button>
 
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Password

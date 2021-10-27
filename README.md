@@ -147,30 +147,52 @@ Recruits project team members. Participate in the project.
 
 ---
 
+2021-10-27
+
+- applyto - 지원한 프로젝트 - 메세지 버그
+
+  - map() 써서 해결. 데이터를 잘못 이해한 것이 원인이었다.
+
+- 여러 모집에 지원했을 경우, 한 프로젝트에 멤버가 되었다면 다른 프로젝트 멤버가 되는 것을 제한. (v)
+
+  - apply for에서 지원자 데이터에서 projectInProgress 검사 -> 있으면 수락 버튼 클릭 시 수락 불가 메세지 전달. (v)
+  - "거절했습니다" 메세지는 볼 일이 없다. 거절 버튼 클릭 시 apply for에서 삭제해버리기 때문. 삼항연산자 때문에 써놓긴 해야할 것 같다.
+
+- 배포
+  - 1. (FE: aws s3 && BE: aws ec2)
+    - firebase, heroku보단 처음 로딩 속도가 빠를 것으로 예상되는 것, 코드 수정이 쉬운 것이 장점.
+    - 까딱하다간 요금 폭탄을 맞을 지도 모르는 것이 단점.
+  - 2. (FE: firebase && BE: heroku) || (FE: heroku && BE: firebase)
+    - 무료로 할 수 있는 것이 장점.
+    - 코드 수정하려면 재배포해야하는 것과 첫 로딩이 느린 것이 단점.
+
+- sign up - id, nickname 중복여부 확인 기능. (v)
+  - sign up id, nickname 중복확인 버튼
+  - 클릭 - fetch(user_server) - user.find - return value
+  - 0 - "사용 가능한 아이디, 닉네임입니다.", 1 - "중복된 아이디, 닉네임입니다."
+
+---
 
 2021-10-26
 
-
 - 1유저 1프로젝트
+
   - 작성한 모집글이 있다면 모집글 제한. (v)
   - 여러 모집에 지원했을 경우, 한 프로젝트에 멤버가 되었다면 다른 프로젝트 멤버가 되는 것을 제한. ()
     - apply for에서 지원자 데이터에서 projectInProgress 검사 -> 있으면 수락 버튼 클릭 시 수락 불가 메세지 전달.
 
-
 - 배포
-
 
 ---
 
-
 2021-10-25
 
-
 - 왜 갑자기 로그인이 안될까.
- - css 밖에 안건드렸을 텐데.
- - onsubmit을 삭제했었다. 확인을 잘하자.
+- css 밖에 안건드렸을 텐데.
+- onsubmit을 삭제했었다. 확인을 잘하자.
 
 - inline styles 중에서 import css 하면 이상해지는 부분말고는 다 옮겼다.
+
   - mobile에서 이상한 부분을 찾아서 고쳐보자.
   - @media 처리만 하면 되는 것이 아닐까.
   - 디자인이 진짜 별로다.
@@ -181,27 +203,22 @@ Recruits project team members. Participate in the project.
 
 - 배포는 어떻게 할 것인가?
 
-
 ---
-
 
 2021-10-22
 
+- change css using css module
 
-- change css using css module 
   - responsive design is required
-
 
 - maybe need to make api folder
 
-
 ---
-
 
 2021-10-21
 
-
 - 기능
+
   - 회원 가입 //
   - 회원 탈퇴 //
   - 로그인 //
@@ -227,141 +244,114 @@ Recruits project team members. Participate in the project.
   - 프로젝트 지원자 참가 수락 //
   - 프로젝트 지원자 참가 거절 //
 
-
 - css
+
   - inline style // 코드가 지저분해보인다. 없어도 깔끔한 것 같지는 않음.
   - styled component // 이 방법은 가장 인기있다고 하는데 좋은 점이 무엇인지는 잘 모르겠다.
   - import css file // 피곤하다.
-
 
 - 배포
   - firebase & heroku - update가 힘든 것 같다.
   - aws s3 & ec2 - 프리티어에서 요금이 청구된 경험때문에 꺼려짐.
 
-
 ---
-
 
 2021-10-20
 
-
 - applyfor 버튼, 수락, 거절 작성.
-
 
 - 모집글 개수 제한?
 
-
 - 리팩터링
-
 
 ---
 
-
 2021-10-19
 
-
 - projectInProgress
+
   - 멤버필드에는 들어가는 것이었고, 각 멤버 프로젝트 필드에 들어가지않는다.
   - 쿼리 블록 중 가장 안쪽에 있는 블록에서 리턴을 해줘야한다.
 
-
 - 이번엔 applyfor, applyto에 fetch error -> cannot read property
-
 
 - 예외처리.
 
-
 - recruit.js - "/applicaitonInfo" 다시.
-  - 데이터 타입을 잘 숙지할 것.
 
+  - 데이터 타입을 잘 숙지할 것.
 
 - applyfor - 수락한 메세지의 버튼 처리.
   - 미처리
   - 수락 - recruit.member에 있음 - recruit.member를 확인해서
     - applyUser in recruit.member ? 수락(버튼 가리기) : 수락 && 거절 버튼
-  - 거절 - applyfor에서 삭제됨. 
-
+  - 거절 - applyfor에서 삭제됨.
 
 ---
 
-
 2021-10-18
-
 
 - projectInProgress.js
   - fetchMyProject - 400 error - why? - 없는 필드를 불러서? - 클라이언트 잘못?
   - 수정 전엔 완료버튼 클릭시 멤버 필드에 들어갔는데 error를 고치니까 안들어간다.
 
-
 ---
-
 
 2021-10-15
 
-
 - mongoose query 비동기 문제?
+
   - recruit는 로그에 찍힌다.
   - recruit.applyfor는 undefined.
   - 왜?
   - 배열에 담겨있었기 때문.
 
-
 - 거절 메세지 기능 작성. v
-
 
 - projectInProgress.js 작성중
   - 모집 완료 기능 추가사항 - member.map(eachMember=> eachMember.projectInProgress = eachMember.applyto).은 있었음.
 
-
 ---
-
 
 2021-10-14
 
-
 - 거절 메세지 기능 작성중.
+
   - 미지원 - 처리 없음
-  - 지원 
+  - 지원
     - 대기 recruit applyfor, user applyto 둘 다 존재
     - 수락 recruit applyfor, user applyto 둘 다 존재하면서 recruit member에 존재
-    - 거절 recruit applyfor 없음, user applyto 있음. 
-
+    - 거절 recruit applyfor 없음, user applyto 있음.
 
 - 모집 완료 후 유저들 기능 제한은 어떻게?
 
-
 - projectInProgress.js 작성중.
-
 
 ---
 
-
 2021-10-13
 
-
 - 수락 기능 작성. v
+
   - 수락 후 수락/거절 버튼 처리 필요.
 
-
 - 거절 기능 작성. v
+
   - 거절 후 recruit applyfor에서 지원자 제거. v
   - 지원자 applyTo - 거절 메세지. 작성중
 
 - 모집 완료 기능 작성. v
   - 모집 완료 - 프로젝트 시작 - 프로젝트 멤버 모집, 모집 완료 기능 제한?
 
-
 ---
-
 
 2021-10-12
 
 - 수락 기능 v
 
-- 거절 기능 - 어떤 처리? (alarm에서 제거 && 지원자에게 거절 메세지)?  
+- 거절 기능 - 어떤 처리? (alarm에서 제거 && 지원자에게 거절 메세지)?
 
 - 모집 완료 기능 - add recruit id in projectInProgress of User
-
 
 ---
 
@@ -532,7 +522,7 @@ Recruits project team members. Participate in the project.
 - apply to, apply for 작성. 디자인은 나중에?
 
 - 남은 것
-  - 지원 시 apply button disabled 처리 문제 
+  - 지원 시 apply button disabled 처리 문제
   - 모집글은 아이디당 한개씩만 쓸 수 있게 처리하는 문제.
   - positions dropdown (o)
   - tech stacks dropdown (o)

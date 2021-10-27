@@ -23,6 +23,54 @@ router.post("/signup", (req, res) => {
   });
 });
 
+// check id route
+router.post("/isOverlappedId", (req, res) => {
+  const checkId = req.body.id;
+
+  User.find({ id: checkId }, (err, user) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+
+    let isOverlappedId;
+
+    if (user[0]) {
+      isOverlappedId = 0;
+    } else {
+      isOverlappedId = 1;
+    }
+
+    return res.status(200).json({
+      success: true,
+      isOverlappedId,
+    });
+  });
+});
+
+// check nickname route
+router.post("/isOverlappedNick", (req, res) => {
+  const checkNickname = req.body.nickname;
+
+  User.find({ nickname: checkNickname }, (err, user) => {
+    if (err) {
+      return res.json({ success: false, err });
+    }
+
+    let isOverlappedNick;
+
+    if (user[0]) {
+      isOverlappedNick = 0;
+    } else {
+      isOverlappedNick = 1;
+    }
+
+    return res.status(200).json({
+      success: true,
+      isOverlappedNick,
+    });
+  });
+});
+
 // signin route
 router.post("/signin", (req, res) => {
   // 1 요청된 아이디가 db에 있는지 찾기

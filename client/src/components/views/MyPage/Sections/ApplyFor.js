@@ -38,17 +38,26 @@ function ApplyFor() {
       });
   };
 
-  const onAcceptHandler = (RecruitId, applyUserId) => {
-    fetch(`${RECRUIT_SERVER}/acceptance`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      mode: "cors",
-      credentials: "include",
-      body: JSON.stringify({
-        recruitId: RecruitId.toString(),
-        addUserId: applyUserId,
-      }),
-    }).then((response) => response.json());
+  const onAcceptHandler = (RecruitId, applyUser) => {
+    let applyUserId = applyUser._id;
+
+    if (
+      applyUser.projectInProgress &&
+      applyUser.projectInProgress !== RecruitId
+    ) {
+      alert("다른 프로젝트를 진행중인 유저입니다.");
+    } else {
+      fetch(`${RECRUIT_SERVER}/acceptance`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify({
+          recruitId: RecruitId.toString(),
+          addUserId: applyUserId,
+        }),
+      }).then((response) => response.json());
+    }
   };
 
   const onRefuseHandler = (RecruitId, applyUserId) => {
@@ -100,9 +109,7 @@ function ApplyFor() {
               ) : Recruit.applyfor.includes(UserData[index]._id) ? (
                 <>
                   <Button
-                    onClick={() =>
-                      onAcceptHandler(RecruitId, UserData[index]._id)
-                    }
+                    onClick={() => onAcceptHandler(RecruitId, UserData[index])}
                     className={styles.btn}
                   >
                     수락

@@ -287,35 +287,28 @@ router.get("/applicationInfo", (req, res) => {
   User.findById(userId, (err, user) => {
     let userApplyTo = user.applyto; // [...recruitId]
     let check = [];
-    let i = 0;
 
-    Recruit.find({ _id: { $in: userApplyTo } }, (err, recruit) => {
+    Recruit.find({ _id: { $in: userApplyTo } }, (err, recruits) => {
       // [...], [...], ... ,[...]
       if (err) {
         return res.status(400).json({ success: false, err });
       }
 
-      let applyFor; // [...userId]
+      check = recruits.map((recruit) => {
+        let applyFor = recruit.applyfor; // [...userId];
 
-      if (recruit[i]) {
-        applyFor = recruit[i].applyfor;
-        // waiting - recruitId in user.applyto 1 && userId in recruit.applyfor 1 && userId in recruit.member 0 - push 2
-        if (applyFor.includes(userId) && !recruit[i].member.includes(userId)) {
-          check.push(2);
+        if (applyFor.includes(userId) && !recruit.member.includes(userId)) {
+          return 2;
         } else if (
           // accenptace - recruitId in user.applyto 1 && userId in recruit.applyfor 1 && userId in recruit.member 1 - push 1
           applyFor.includes(userId) &&
-          recruit[i].member.includes(userId)
+          recruit.member.includes(userId)
         ) {
-          check.push(1);
+          return 1;
         } else if (!applyFor.includes(userId)) {
-          check.push(0);
+          return 0;
         }
-      } else {
-        return res.status(200).json({ success: true, check: [] });
-      }
-
-      i++;
+      });
 
       return res.status(200).json({ success: true, check });
     });

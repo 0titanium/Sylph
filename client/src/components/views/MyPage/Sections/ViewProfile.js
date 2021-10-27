@@ -51,7 +51,7 @@ function ViewProfile(props) {
               {UserData.careers}
             </Descriptions.Item>
             <Descriptions.Item label="GitHub Address">
-              {UserData.githubaddress}
+              <a href={UserData.githubaddress} target="_blank" rel="noreferrer">{UserData.githubaddress}</a>
             </Descriptions.Item>
           </Descriptions>
         )}
