@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { signinUser } from "../../../_actions/user_action";
 import { withRouter } from "react-router-dom";
 
-import { Input, Button } from "antd";
+import { Input, Button, Modal } from "antd";
 import styles from "./SignInPage.module.css";
 
 function SignInPage(props) {
@@ -11,6 +11,7 @@ function SignInPage(props) {
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const onIdHandler = (event) => {
     setId(event.currentTarget.value);
@@ -18,6 +19,36 @@ function SignInPage(props) {
 
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
+  };
+
+  const failModal = (Id, Password) => {
+    let message = "";
+
+    if (Id === "") {
+      message = "아이디를 입력하십시오.";
+    } else if (Password === "") {
+      message = "비밀번호를 입력하십시오.";
+    } else {
+      message = "아이디 혹은 비밀번호가 다릅니다.";
+    }
+
+    return (
+      <Modal
+        title={"로그인 실패"}
+        centered
+        visible={visible}
+        onOk={() => setVisible(false)}
+        okButtonProps={{
+          style: {
+            display: "flex",
+            margin: "auto",
+          },
+        }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
+        <p>{message}</p>
+      </Modal>
+    );
   };
 
   const onSubmitHandler = (event) => {
@@ -32,7 +63,7 @@ function SignInPage(props) {
       if (response.payload.signinSuccess) {
         props.history.push("/"); // withRouter 필요
       } else {
-        alert("로그인에 실패했습니다.");
+        setVisible(true);
       }
     });
   };
@@ -53,6 +84,7 @@ function SignInPage(props) {
         <Button className={styles.btn} htmlType="submit">
           Sign In
         </Button>
+        {failModal(Id, Password)}
       </form>
     </div>
   );

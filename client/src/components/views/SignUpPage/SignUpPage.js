@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
 import { USER_SERVER } from "../../../Config";
 
-import { Input, Button, Checkbox } from "antd";
+import { Input, Button, Checkbox, Modal } from "antd";
 import styles from "./SignUpPage.module.css";
 
 function SignUpPage(props) {
@@ -18,6 +18,10 @@ function SignUpPage(props) {
   const [Skills, setSkills] = useState([]);
   const [Careers, setCareers] = useState("");
   const [GitHubAddress, setGitHubAddress] = useState("https://github.com/");
+  const [Idvisible, setIdVisible] = useState(false);
+  const [Nickvisible, setNickVisible] = useState(false);
+  const [isOverlappedId, setisOverlappedId] = useState(undefined);
+  const [isOverlappedNick, setisOverlappedNick] = useState(undefined);
 
   const positionOptions = [
     { label: "Frontend", value: "Frontend" },
@@ -74,6 +78,64 @@ function SignUpPage(props) {
     setGitHubAddress(event.currentTarget.value);
   };
 
+  const overLapIdModal = (Id, isOverlappedId) => {
+    let message = "";
+
+    if (Id === "") {
+      message = "아이디를 입력하십시오.";
+    } else if (isOverlappedId) {
+      message = "이미 사용중인 아이디입니다.";
+    } else {
+      message = "사용 가능한 아이디입니다.";
+    }
+
+    return (
+      <Modal
+        centered
+        visible={Idvisible}
+        onOk={() => setIdVisible(false)}
+        okButtonProps={{
+          style: {
+            display: "flex",
+            margin: "auto",
+          },
+        }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
+        <p>{message}</p>
+      </Modal>
+    );
+  };
+
+  const overLapNickModal = (NickName, isOverlappedNick) => {
+    let message = "";
+
+    if (NickName === "") {
+      message = "닉네임을 입력하십시오.";
+    } else if (isOverlappedNick) {
+      message = "이미 사용중인 닉네임입니다.";
+    } else {
+      message = "사용 가능한 닉네임입니다.";
+    }
+
+    return (
+      <Modal
+        centered
+        visible={Nickvisible}
+        onOk={() => setNickVisible(false)}
+        okButtonProps={{
+          style: {
+            display: "flex",
+            margin: "auto",
+          },
+        }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
+        <p>{message}</p>
+      </Modal>
+    );
+  };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -123,11 +185,12 @@ function SignUpPage(props) {
       .then((data) => {
         if (data.success) {
           console.log(data);
-          // alert를 modal로 바꿀 것.
-          if(data.isOverlappedId){
-            alert("사용 가능한 아이디 입니다.");
-          }else{
-            alert("중복된 아이디 입니다.")
+          if (data.isOverlappedId) {
+            setIdVisible(true);
+            setisOverlappedId(false);
+          } else {
+            setIdVisible(true);
+            setisOverlappedId(true);
           }
         } else {
           alert("확인 작업에 실패했습니다.");
@@ -150,10 +213,14 @@ function SignUpPage(props) {
         if (data.success) {
           console.log(data);
           // alert를 modal로 바꿀 것.
-          if(data.isOverlappedNick){
-            alert("사용 가능한 닉네임입니다.");
-          }else{
-            alert("중복된 닉네임입니다.")
+          if (data.isOverlappedNick) {
+            // alert("사용 가능한 닉네임입니다.");
+            setNickVisible(true);
+            setisOverlappedNick(false);
+          } else {
+            // alert("중복된 닉네임입니다.");
+            setNickVisible(true);
+            setisOverlappedNick(true);
           }
         } else {
           alert("확인 작업에 실패했습니다.");
@@ -184,6 +251,8 @@ function SignUpPage(props) {
           중복 확인
         </Button>
 
+        {overLapIdModal(Id, isOverlappedId)}
+
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Nickname
         </label>
@@ -200,14 +269,22 @@ function SignUpPage(props) {
           중복 확인
         </Button>
 
+        {overLapNickModal(Nickname, isOverlappedNick)}
+
         <label className={styles.labelSt}>
-          <p className={styles.pst}>*</p> Password
+          <p className={styles.pst}>*</p> Password {` - (6자리 이상)`}
         </label>
         <Input.Password
           value={Password}
           onChange={onPasswordHandler}
           className={styles.inputSt}
+          placeholder="6자리 이상 입력하십시오."
         />
+        {Password.length === 0 ? null : Password.length < 6 ? (
+          <p className={styles.checkPwSt}>
+            비밀번호는 6자리 이상이어야 합니다.
+          </p>
+        ) : null}
 
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Confirm Password
@@ -216,7 +293,11 @@ function SignUpPage(props) {
           value={ConfirmPassword}
           onChange={onConfirmPasswordHandler}
           className={styles.inputSt}
+          placeholder="6자리 이상 입력하십시오."
         />
+        {ConfirmPassword.length === 0 ? null : ConfirmPassword !== Password ? (
+          <p className={styles.checkPwSt}>비밀번호가 일치하지 않습니다.</p>
+        ) : null}
 
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Position

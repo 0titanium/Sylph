@@ -41,6 +41,12 @@
   height: 2.5rem;
 }
 
+.checkPwSt {
+  margin: 0;
+  padding-top: 10px;
+  color: red;
+}
+
 .checkOverlapBtn {
   margin-top: 10px;
 }

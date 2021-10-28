@@ -14,11 +14,14 @@ Recruits project team members. Participate in the project.
 
 <br/>
 
-- frontend: react, antd
+# `frontend`
+ react, antd
 
-- backend: nodejs, express
+# `backend`
+nodejs, express
 
-- database: mongodb atlas
+# `database` 
+mongodb atlas
 
 <br/>
 
@@ -33,13 +36,13 @@ Recruits project team members. Participate in the project.
     - not login
       - logo ("a href="/" Sylph /a")
       - dropdown ("li a href="/category/positions" postions /a /li")
-        - dropdown ("li a href="/category/languages" languages /a /li")
+      - dropdown ("li a href="/category/languages" languages /a /li")
       - sign in ("a href="/signin" /a")
       - sign up ("a href="/signup" /a")
     - login
       - logo ("a href="/" Sylph /a ")
       - dropdown ("li a href="/category/positions" postions /a /li")
-        - dropdown ("li a href="/category/languages" languages /a /li")
+      - dropdown ("li a href="/category/languages" languages /a /li")
       - dropdown ("a href="/myPage" myPage /a") && ("a logout /a")
 
   - RegisterPage ("/register")
@@ -144,6 +147,28 @@ Recruits project team members. Participate in the project.
     - member (Array)
 
 <br />
+
+---
+
+
+- image upload 할까 말까.
+  - antd upload component가 있다.
+  - 이미지는 따로 저장해야하겠지.
+  - 용량 제한이 필요.
+
+
+- sign in - 아이디 혹은 비밀번호가 다릅니다. modal (v)
+
+
+- sign up - 중복 modal, 비밀번호 자리수, 확인과 일치 여부 (v)
+
+
+- alert to modal
+  - 무수히 많은 alert의 알림이
+
+
+- 하면 할수록 할 일이 많아지는 느낌이다.
+
 
 ---
 

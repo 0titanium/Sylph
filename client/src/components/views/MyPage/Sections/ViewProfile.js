@@ -27,7 +27,13 @@ function ViewProfile(props) {
         centered
         visible={visible}
         onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
+        okButtonProps={{
+          style: {
+            display: "flex",
+            margin: "auto",
+          },
+        }}
+        cancelButtonProps={{ style: { display: "none" } }}
         width={800}
       >
         {UserData === undefined ? (
@@ -51,7 +57,9 @@ function ViewProfile(props) {
               {UserData.careers}
             </Descriptions.Item>
             <Descriptions.Item label="GitHub Address">
-              <a href={UserData.githubaddress} target="_blank" rel="noreferrer">{UserData.githubaddress}</a>
+              <a href={UserData.githubaddress} target="_blank" rel="noreferrer">
+                {UserData.githubaddress}
+              </a>
             </Descriptions.Item>
           </Descriptions>
         )}
