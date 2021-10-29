@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../Config";
+import Alarm from "../Alarm/Alarm";
 
 import { Typography, Row, Col, Card } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -8,6 +9,8 @@ import styles from "./LandingPage.module.css";
 function LandingPage() {
   const { Title } = Typography;
   const [Recruits, setRecruits] = useState(undefined);
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const fetchRecruits = () => {
     fetch(`${RECRUIT_SERVER}/latestRecruits`, {
@@ -21,7 +24,8 @@ function LandingPage() {
         if (data.success) {
           setRecruits(data.recruits);
         } else {
-          alert("모집글을 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("모집글을 불러오는데 실패했습니다.");
         }
       });
   };
@@ -85,6 +89,7 @@ function LandingPage() {
           <p>모집글이 없습니다.</p>
         )}
       </Row>
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

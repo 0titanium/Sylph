@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
+import Alarm from "../Alarm/Alarm";
 
 import { Input, Button, Checkbox } from "antd";
-// import { ControlOutlined } from "@ant-design/icons";
 import styles from "./RecruitPage.module.css";
 
 function RecruitPage(props) {
@@ -17,6 +17,8 @@ function RecruitPage(props) {
   const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const options = [
     { label: "Frontend", value: "Frontend" },
@@ -65,13 +67,17 @@ function RecruitPage(props) {
             .then((response) => response.json())
             .then((data) => {
               if (!data.success) {
-                alert("모집글 작성에 실패했습니다.");
+                // alert("모집글 작성에 실패했습니다.");
+                setVisible(true);
+                setMessage("모집글 작성에 실패했습니다.");
               }
             });
           props.history.push("/");
           window.location.reload();
         } else {
-          alert("모집글 작성에 실패했습니다.");
+          // alert("모집글 작성에 실패했습니다.");
+          setVisible(true);
+          setMessage("모집글 작성에 실패했습니다.");
         }
       });
   };
@@ -121,7 +127,9 @@ function RecruitPage(props) {
       submitRecruitDetail.languages === [] ||
       submitRecruitDetail.meetingLocation === ""
     ) {
-      alert("입력하지 않은 내용이 있습니다.");
+      // alert("입력하지 않은 내용이 있습니다.");
+      setVisible(true);
+      setMessage("입력하지 않은 내용이 있습니다.");
     } else {
       fetchRecruit(submitRecruitDetail);
     }

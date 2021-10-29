@@ -150,6 +150,19 @@ mongodb atlas
 
 ---
 
+2021-10-29
+
+
+- alert to modal
+
+- modify sign up 
+
+- sign up -> auto sign in
+
+
+---
+
+2021-10-28
 
 - image upload 할까 말까.
   - antd upload component가 있다.

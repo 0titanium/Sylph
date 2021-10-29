@@ -7,6 +7,7 @@ import { Menu, Dropdown, Avatar } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { getCookie } from "../../../../utils/getCookie";
 import { USER_SERVER } from "../../../../Config";
+import Alarm from "../../Alarm/Alarm";
 
 function RightMenu(props) {
   const userId = getCookie("user_id", document.cookie);
@@ -14,6 +15,8 @@ function RightMenu(props) {
   const [UserNickame, setUserNickame] = useState("");
   const [UserImage, setUserImage] = useState("");
   const [CheckRecruit, setCheckRecruit] = useState(undefined);
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const fetchUser = () => {
     fetch(`${USER_SERVER}/userInfo`, {
@@ -31,7 +34,9 @@ function RightMenu(props) {
           console.log(data.user[0].recruitWriting);
           console.log(CheckRecruit);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("유저 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -49,7 +54,9 @@ function RightMenu(props) {
         setUserNickame("");
         props.history.push("/signin"); // withRouter 필요
       } else {
-        alert("sign out에 실패했습니다.");
+        // alert("sign out에 실패했습니다.");
+        setVisible(true);
+        setMessage("sign out에 실패했습니다.");
       }
     });
   };
@@ -61,7 +68,9 @@ function RightMenu(props) {
     if (CheckRecruit === null || CheckRecruit === undefined) {
       window.location.href = "/recruit/post";
     } else {
-      alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
+      // alert("하나의 프로젝트 팀원만 모집할 수 있습니다.");
+      setVisible(true);
+      setMessage("하나의 프로젝트 팀원만 모집할 수 있습니다.");
     }
   };
 
@@ -90,28 +99,31 @@ function RightMenu(props) {
     );
   } else {
     return (
-      <Menu mode={props.mode}>
-        <Menu.Item key="recruit" onClick={onCheckHandler}>
-          <a>Recruit</a>
-        </Menu.Item>
-        {/* avatar + name - click - dropdown - mypage, logout */}
-        <Menu.Item key="dropdwon">
-          <Dropdown overlay={menu} trigger={["click"]}>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              <Avatar
-                className="nav-avatar"
-                src={UserImage}
-                style={{ marginRight: "7px" }}
-              />
-              <p style={{ display: "inline" }}>{UserNickame}</p>
-              <DownOutlined style={{ marginLeft: "5px" }} />
-            </a>
-          </Dropdown>
-        </Menu.Item>
-      </Menu>
+      <>
+        <Menu mode={props.mode}>
+          <Menu.Item key="recruit" onClick={onCheckHandler}>
+            <a>Recruit</a>
+          </Menu.Item>
+          {/* avatar + name - click - dropdown - mypage, logout */}
+          <Menu.Item key="dropdwon">
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+              >
+                <Avatar
+                  className="nav-avatar"
+                  src={UserImage}
+                  style={{ marginRight: "7px" }}
+                />
+                <p style={{ display: "inline" }}>{UserNickame}</p>
+                <DownOutlined style={{ marginLeft: "5px" }} />
+              </a>
+            </Dropdown>
+          </Menu.Item>
+        </Menu>
+        <Alarm message={Message} visible={visible} setVisible={setVisible} />
+      </>
     );
   }
 }

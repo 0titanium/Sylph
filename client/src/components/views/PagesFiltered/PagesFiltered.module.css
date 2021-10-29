@@ -1,16 +1,42 @@
-.card {
-    width: 300px;
-}
-
-.container {
+.landing {
     width: 85%;
     margin: 3rem auto;
-}
-
-.row {
-    margin-top: 2rem;
-}
-
-.loading {
+  }
+  
+  .oneCard {
+    width: 300px;
+  }
+  
+  .row {
+    margin: 1rem;
+  }
+  
+  .colSt {
+    margin: 10px 0px;
+  }
+  
+  .loading {
     font-size: 3rem;
-}
+  }
+  
+  @media (max-width: 768px) {
+    .landing {
+      width: 90%;
+      margin: auto;
+    }
+  
+    .oneCard {
+      margin: 10px 0px;
+    }
+  
+    .colSt {
+      margin: 10px 0px;
+    }
+  }
+  
+  @media (max-width: 1024px) and (min-width: 768px) {
+    .oneCard {
+      width: 200px;
+    }
+  }
+  

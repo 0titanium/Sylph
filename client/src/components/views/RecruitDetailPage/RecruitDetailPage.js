@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
+import Alarm from "../Alarm/Alarm";
 
 import { Button, Divider, Modal } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -19,6 +20,8 @@ function RecruitDetailPage(props) {
   const [MeetingLocation, setMeetingLocation] = useState("");
   const [CheckApply, setCheckApply] = useState(false);
   const [IsCompleted, setIsCompleted] = useState(undefined);
+  const [alarm, setAlarm] = useState(false);
+  const [Message, setMessage] = useState(undefined);
   const rid = useParams().recruitId;
 
   // fetch user info
@@ -36,7 +39,9 @@ function RecruitDetailPage(props) {
             setCheckApply(true);
           }
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setAlarm(true);
+          setMessage("유저 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -62,7 +67,9 @@ function RecruitDetailPage(props) {
           setMeetingLocation(data.recruitDetail.meetingLocation);
           setIsCompleted(data.recruitDetail.recruitCompleted);
         } else {
-          alert("모집글을 불러오는데 실패했습니다.");
+          // alert("모집글을 불러오는데 실패했습니다.");
+          setAlarm(true);
+          setMessage("모집글을 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -82,7 +89,9 @@ function RecruitDetailPage(props) {
           props.history.push("/");
           window.location.reload();
         } else {
-          alert("모집글 삭제에 실패했습니다.");
+          // alert("모집글 삭제에 실패했습니다.");
+          setAlarm(true);
+          setMessage("모집글 삭제에 실패했습니다.");
         }
       });
   };
@@ -102,7 +111,9 @@ function RecruitDetailPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (!data.success) {
-          alert("모집글 삭제에 실패했습니다.");
+          // alert("모집글 삭제에 실패했습니다.");
+          setAlarm(true);
+          setMessage("모집글 삭제에 실패했습니다.");
         }
       });
   };
@@ -115,7 +126,14 @@ function RecruitDetailPage(props) {
       mode: "cors",
       credentials: "include",
       body: JSON.stringify({ userId: userId, recruitId: rid }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("지원에 실패했습니다.");
+        }
+      });
 
     fetch(`${USER_SERVER}/applyment`, {
       method: "PATCH",
@@ -123,7 +141,14 @@ function RecruitDetailPage(props) {
       mode: "cors",
       credentials: "include",
       body: JSON.stringify({ userId: userId, recruitId: rid }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("지원에 실패했습니다.");
+        }
+      });
     setCheckApply(true);
   };
 
@@ -134,7 +159,16 @@ function RecruitDetailPage(props) {
       mode: "cors",
       credentials: "include",
       body: JSON.stringify({ userId: userId, recruitId: rid }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("지원 취소에 실패했습니다.");
+        } else {
+          setCheckApply(false);
+        }
+      });
 
     fetch(`${USER_SERVER}/cancelApplyment`, {
       method: "PATCH",
@@ -142,8 +176,16 @@ function RecruitDetailPage(props) {
       mode: "cors",
       credentials: "include",
       body: JSON.stringify({ userId: userId, recruitId: rid }),
-    }).then((response) => response.json());
-    setCheckApply(false);
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("지원 취소에 실패했습니다.");
+        } else {
+          setCheckApply(false);
+        }
+      });
   };
 
   // recruit completion
@@ -157,7 +199,14 @@ function RecruitDetailPage(props) {
         recruitId: recruitId.toString(),
         title: Title.toString(),
       }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("모집 완료에 실패했습니다.");
+        }
+      });
 
     fetch(`${USER_SERVER}/completion`, {
       method: "PATCH",
@@ -168,7 +217,14 @@ function RecruitDetailPage(props) {
         userId: userId,
         recruitId: recruitId.toString(),
       }),
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.success) {
+          setAlarm(true);
+          setMessage("모집 완료에 실패했습니다.");
+        }
+      });
   };
 
   // if user click apply button
@@ -180,7 +236,9 @@ function RecruitDetailPage(props) {
         cancelRequest(userId, rid);
       }
     } else {
-      alert("로그인이 필요한 기능입니다.");
+      // alert("로그인이 필요한 기능입니다.");
+      setAlarm(true);
+      setMessage("로그인이 필요한 기능입니다.");
     }
   };
 
@@ -191,7 +249,9 @@ function RecruitDetailPage(props) {
       completeRequest(rid);
       window.location.reload();
     } else {
-      alert("로그인이 필요한 기능입니다.");
+      // alert("로그인이 필요한 기능입니다.");
+      setAlarm(true);
+      setMessage("로그인이 필요한 기능입니다.");
     }
   };
 
@@ -316,6 +376,7 @@ function RecruitDetailPage(props) {
           </form>
         </div>
       )}
+      <Alarm message={Message} visible={alarm} setVisible={setAlarm} />
     </div>
   );
 }

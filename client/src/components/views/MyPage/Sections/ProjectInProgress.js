@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { USER_SERVER } from "../../../../Config";
+import Alarm from "../../Alarm/Alarm";
 
 import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -14,6 +15,8 @@ function ProjectInProgress() {
   const [Qualifications, setQualifications] = useState(undefined);
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
   const [RecruitId, setRecruitId] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const fetchMyProject = () => {
     fetch(`${USER_SERVER}/myProject`, {
@@ -38,7 +41,9 @@ function ProjectInProgress() {
             setRecruit(null);
           }
         } else {
-          alert("프로젝트를 불러오는데 실패했습니다.");
+          // alert("프로젝트 정보를 불러오는 것에 실패했습니다.");
+          setVisible(true);
+          setMessage("프로젝트 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -142,6 +147,7 @@ function ProjectInProgress() {
           <h3 className={styles.alarm}>진행중인 프로젝트가 없습니다.</h3>
         </div>
       )}
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

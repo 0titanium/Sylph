@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
 import ViewProfile from "./ViewProfile";
+import Alarm from "../../Alarm/Alarm";
 
 import { List, Typography, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -13,6 +14,8 @@ function ApplyFor() {
   const [UserData, setUserData] = useState(undefined);
   const [Member, setMember] = useState(undefined);
   const [Recruit, setRecruit] = useState(undefined);
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const alarmToWriter = () => {
     fetch(`${RECRUIT_SERVER}/applyment`, {
@@ -33,7 +36,9 @@ function ApplyFor() {
           setApplyUsers([...data.usersNicknames.reverse()]);
           setUserData([...data.user.reverse()]);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("지원자 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -45,7 +50,9 @@ function ApplyFor() {
       applyUser.projectInProgress &&
       applyUser.projectInProgress !== RecruitId
     ) {
-      alert("다른 프로젝트를 진행중인 유저입니다.");
+      // alert("다른 프로젝트를 진행중인 유저입니다.");
+      setVisible(true);
+      setMessage("다른 프로젝트를 진행중인 유저입니다.");
     } else {
       fetch(`${RECRUIT_SERVER}/acceptance`, {
         method: "PATCH",
@@ -146,6 +153,7 @@ function ApplyFor() {
       ) : (
         <p>지원자가 없습니다.</p>
       )}
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

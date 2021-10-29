@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { USER_SERVER } from "../../../../Config";
 import { getCookie } from "../../../../utils/getCookie";
+import Alarm from "../../Alarm/Alarm";
 
 import { Descriptions, Button, Modal } from "antd";
 import styles from "./MyInfo.module.css";
@@ -16,6 +17,8 @@ function MyInfo(props) {
   const [UserSkills, setUserSkills] = useState([]);
   const [UserCareers, setUserCareers] = useState("");
   const [UserGitHubAddress, setUserGitHubAddress] = useState("");
+  const [alarm, setAlarm] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const fetchUserInfo = () => {
     fetch(`${USER_SERVER}/userInfo`, {
@@ -35,7 +38,9 @@ function MyInfo(props) {
           setUserCareers(data.user[0].careers);
           setUserGitHubAddress(data.user[0].githubaddress);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setAlarm(true);
+          setMessage("유저 정보를 불러오는데 실패했습니다.");
         }
       });
   };
@@ -59,7 +64,9 @@ function MyInfo(props) {
         if (data.success) {
           props.history.push("/");
         } else {
-          alert("회원 탈퇴에 실패했습니다.");
+          // alert("회원 탈퇴에 실패했습니다.");
+          setAlarm(true);
+          setMessage("회원 탈퇴에 실패했습니다.");
         }
       });
   };
@@ -138,6 +145,7 @@ function MyInfo(props) {
           {deleteComponent()}
         </Descriptions.Item>
       </Descriptions>
+      <Alarm message={Message} visible={alarm} setVisible={setAlarm} />
     </div>
   );
 }

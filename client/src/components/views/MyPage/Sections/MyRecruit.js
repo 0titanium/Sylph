@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
+import Alarm from "../../Alarm/Alarm";
 
 import { Descriptions, Button } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -15,6 +16,8 @@ function MyRecruit() {
   const [Qualifications, setQualifications] = useState(undefined);
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
   const [RecruitId, setRecruitId] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const title =
     Title === undefined ? (
@@ -87,7 +90,9 @@ function MyRecruit() {
             setRecruitId(data.recruitDetail._id);
           }
         } else {
-          alert("모집글을 불러오는데 실패했습니다.");
+          // alert("모집글을 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("모집글 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -154,6 +159,7 @@ function MyRecruit() {
           </h3>
         </div>
       )}
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

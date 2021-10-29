@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RECRUIT_SERVER } from "../../../../Config";
+import Alarm from "../../Alarm/Alarm";
 
 import { List, Typography } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -9,6 +10,8 @@ function ApplyTo() {
   const [UserApplyTo, setUserApplyTo] = useState(undefined);
   const [RecruitId, setRecruitId] = useState([]);
   const [isRefused, setisRefused] = useState(undefined);
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const fetchApplyTo = () => {
     fetch(`${RECRUIT_SERVER}/myApply`, {
@@ -19,11 +22,14 @@ function ApplyTo() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.success) {
           setUserApplyTo([...data.recruitTitle.reverse()]);
           setRecruitId([...data.recruitId.reverse()]);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("지원 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -37,11 +43,14 @@ function ApplyTo() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.success) {
           setisRefused([...data.check.reverse()]);
-          console.log(data)
+          console.log(data);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("지원 정보를 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -92,6 +101,7 @@ function ApplyTo() {
       ) : (
         <p>지원한 프로젝트가 없습니다.</p>
       )}
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

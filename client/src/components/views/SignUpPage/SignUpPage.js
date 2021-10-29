@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../../../_actions/user_action";
 import { USER_SERVER } from "../../../Config";
+import Alarm from "../Alarm/Alarm";
 
 import { Input, Button, Checkbox, Modal } from "antd";
 import styles from "./SignUpPage.module.css";
@@ -22,6 +23,10 @@ function SignUpPage(props) {
   const [Nickvisible, setNickVisible] = useState(false);
   const [isOverlappedId, setisOverlappedId] = useState(undefined);
   const [isOverlappedNick, setisOverlappedNick] = useState(undefined);
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
+  const [CheckedId, setCheckedId] = useState(false);
+  const [CheckedNick, setCheckedNick] = useState(false);
 
   const positionOptions = [
     { label: "Frontend", value: "Frontend" },
@@ -140,7 +145,9 @@ function SignUpPage(props) {
     event.preventDefault();
 
     if (Password !== ConfirmPassword) {
-      return alert("비밀번호가 다릅니다.");
+      // return alert("비밀번호가 다릅니다.");
+      setVisible(true);
+      setMessage("비밀번호가 다릅니다.");
     }
 
     let data = {
@@ -156,16 +163,33 @@ function SignUpPage(props) {
     if (
       data.id === "" ||
       data.nickname === "" ||
-      data.position === [] ||
-      data.skills === []
+      data.password === "" ||
+      data.position.length === 0 ||
+      data.skills.length === 0
     ) {
-      alert("입력하지 않은 필수 내용이 있습니다.");
+      // alert("입력하지 않은 필수 내용이 있습니다.");
+      setVisible(true);
+      setMessage("입력하지 않은 필수 내용이 있습니다.");
+    } else if (data.password.length < 6) {
+      setVisible(true);
+      setMessage("비밀번호는 6자리 이상이어야합니다.");
+    } else if (data.password !== ConfirmPassword) {
+      setVisible(true);
+      setMessage("비밀번호가 일치하지 않습니다.");
+    } else if (isOverlappedId) {
+      setVisible(true);
+      setMessage("중복된 아이디입니다.");
+    } else if (isOverlappedNick) {
+      setVisible(true);
+      setMessage("중복된 닉네임입니다.");
     } else {
       dispatch(signupUser(data)).then((response) => {
         if (response.payload.success) {
           props.history.push("/signin"); // withRouter 필요
         } else {
-          alert("계정을 만드는데 실패했습니다.");
+          // alert("계정을 만드는데 실패했습니다.");
+          setVisible(true);
+          setMessage("계정을 만드는데 실패했습니다.");
         }
       });
     }
@@ -193,7 +217,9 @@ function SignUpPage(props) {
             setisOverlappedId(true);
           }
         } else {
-          alert("확인 작업에 실패했습니다.");
+          // alert("확인 작업에 실패했습니다.");
+          setVisible(true);
+          setMessage("확인 작업에 실패했습니다.");
         }
       });
   };
@@ -223,7 +249,9 @@ function SignUpPage(props) {
             setisOverlappedNick(true);
           }
         } else {
-          alert("확인 작업에 실패했습니다.");
+          // alert("확인 작업에 실패했습니다.");
+          setVisible(true);
+          setMessage("확인 작업에 실패했습니다.");
         }
       });
   };
@@ -337,6 +365,7 @@ function SignUpPage(props) {
           Sign Up
         </Button>
       </form>
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }
