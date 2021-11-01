@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RECRUIT_SERVER } from "../../../Config";
+import Alarm from "../Alarm/Alarm";
 
 import { Button, Input, Checkbox } from "antd";
 import styles from "./UpdateRecruitPage.module.css";
@@ -15,6 +16,8 @@ function UpdateRecruitPage(props) {
   const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const rid = useParams().recruitId;
 
@@ -60,7 +63,9 @@ function UpdateRecruitPage(props) {
           setQualifications(data.recruitDetail.Qualifications);
           setMeetingLocation(data.recruitDetail.meetingLocation);
         } else {
-          alert("모집글을 불러오는데 실패했습니다.");
+          // alert("모집글을 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("모집글을 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -79,7 +84,9 @@ function UpdateRecruitPage(props) {
         if (data.success) {
           props.history.push("/");
         } else {
-          alert("모집글 작성에 실패했습니다.");
+          // alert("모집글 작성에 실패했습니다.");
+          setVisible(true);
+          setMessage("모집글 작성에 실패했습니다.");
         }
       });
   };
@@ -104,7 +111,9 @@ function UpdateRecruitPage(props) {
       submitRecruitDetail.languages === [] ||
       submitRecruitDetail.meetingLocation === ""
     ) {
-      alert("입력하지 않은 내용이 있습니다.");
+      // alert("입력하지 않은 내용이 있습니다.");
+      setVisible(true);
+      setMessage("입력하지 않은 내용이 있습니다.");
     } else {
       fetchRecruit(submitRecruitDetail);
     }
@@ -195,6 +204,7 @@ function UpdateRecruitPage(props) {
           Edit Recruit
         </Button>
       </form>
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }

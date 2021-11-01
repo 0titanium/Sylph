@@ -31,47 +31,79 @@ mongodb atlas
 
 - frontend
 
-  - NavBar
+  - _actions
+    - types
+    - user_action
 
-    - not login
-      - logo ("a href="/" Sylph /a")
-      - dropdown ("li a href="/category/positions" postions /a /li")
-      - dropdown ("li a href="/category/languages" languages /a /li")
-      - sign in ("a href="/signin" /a")
-      - sign up ("a href="/signup" /a")
-    - login
-      - logo ("a href="/" Sylph /a ")
-      - dropdown ("li a href="/category/positions" postions /a /li")
-      - dropdown ("li a href="/category/languages" languages /a /li")
-      - dropdown ("a href="/myPage" myPage /a") && ("a logout /a")
+  - _reducers
+    - index
+    - user_reducer
 
-  - RegisterPage ("/register")
-
-  - LoginPage ("/login")
-
-  - LandingPage ("/")
-
-    - positions || languages filter dropdown
-    - project recruitment cards ("a href="/recruitment/posts/:postId" detail /a")
-
-  - RecruitDetailPage ("/recruit/:recruitId")
-
-    - Apply ("button onClick={onApplyHandler} Apply /button")
-    - Comment
-
-  - RecruitPage ("/recruit/post")
-
-  - UpdateRecruitPage ("/recruit/update/:recruitId")
-
-  - MyPage ("/mypage")
-
-    - MyInfo
-      - UpdateMyInfo("/mypage/update)
-    - MyRecruit
-    - ApplyTo
-    - ApplyFor
+  - Alarm // modal
 
   - Footer
+
+  - LandingPage ("/")
+    - positions || languages filter dropdown
+    - project recruitment cards
+  
+  - MyPage ("/mypage")
+    - MyInfo
+      - UpdateMyInfo("/mypage/update)
+      - Withdrawal
+    - MyRecruit
+    - ProjectInProgress
+    - ApplyTo
+    - ApplyFor
+      - ViewProfile
+  
+  - NavBar
+    - not login
+      - logo
+      
+      - LeftMenu
+        - positions (dropdown) 
+        - languages (dropdown)
+
+      - RightMenu
+        - sign in 
+        - sign up 
+
+    - login
+      - logo 
+
+      - LeftMenu
+        - positions (dropdown) 
+        - languages (dropdown)
+
+      - RightMenu
+        - my page, sign out (dropdwon)
+
+  - PagesFiltedByPositions ("/positions/:pname)
+  
+  - PagesFiltedByLanguages ("/languages/:lname)
+  
+  - RecruitDetailPage ("/recruit/:recruitId")
+    - Apply / Cancel
+    - Edit - UpdateRecruitPage
+    - Complete
+    - Delete  
+
+  - RecruitPage ("/recruit/post")  
+  
+  - SignInPage ("/signin")
+  
+  - SignUpPage ("/signup")
+
+  - UpdateMyInfo("/mypage/update)
+  
+  - UpdateRecruitPage ("/recruit/update/:recruitId")
+
+  - hoc
+    - auth
+
+  - utils
+    - getCookie
 
 <br/>
 
@@ -80,6 +112,10 @@ mongodb atlas
   - "/users"
 
     - POST "/users/signup" // signup users
+
+    - POST "/users/isOverlappedId" // check duplicated id
+
+    - POST "/users/isOverlappedNick" // check duplicated nickname
 
     - POST "/users/signin" // signin users
 
@@ -95,13 +131,23 @@ mongodb atlas
 
     - PATCH "/users/applyment" // apply
 
-    - PATCH "/user/recruit" // save data writting recruit
+    - PATCH "/users/cancelApplyment" // cancel apply
+
+    - PATCH "/users/recruit" // save data writting recruit
+
+    - PATCH "/users/completion" // save data project member
+
+    - GET "/users/myProject" // get project in progress
 
   - "/recruits"
 
     - POST "/recruits/recruit" // users post recruitement recruit
 
     - GET "/recruits/latestRecruits" // get latest recruits
+
+    - GET "/recruits/positions/:pname" // get recruits filtered by positions
+
+    - GET "/recruits/languages/:lanme" // get recruits filtered by languages
 
     - GET "/recruits/recruitDetail:rid" // get a specific recruit
 
@@ -111,53 +157,78 @@ mongodb atlas
 
     - PATCH "/recruits/applyment" // apply to recruit
 
+    - PATCH "/recruits/cancelApplyment" // cancel apply
+
     - GET "/recruits/applyment" // get data applying to recruit
 
-    - GET "/recruits/myRecruit" // get data recruit written by user
+    - GET "/recruits/myRecruit" // get data recruit written by uts/myApply" // get data apply
 
-    - GET "/recruits/myApply" // get data apply
+    - GET "/recruits/myApply" // get recruit user apply
+
+    - PATCH "/recruits/completion" // complete recruit
+
+    - PATCH "/recruits/acceptance" // push user in project member
+
+    - PATCH "/recruits/refusal" // pop user in recruit apply
+
+    - GET "/recruits/applicationInfo" // alarm to user if user accepted or refused
 
 <br/>
 
 - database
 
   - user
-
-    - id (string)
-    - nickname (string)
-    - password (string)
+    - id (String)
+    - nickname (String)
+    - password (String)
     - position (Array)
     - skills (Array)
-    - career (string)
-    - github address (string)
+    - careers (String)
+    - githubaddress (String)
     - image (String?)
-    - recruitWriting (objectId)
-    - projectInProgress (objectId)
     - applyto (Array)
+    - recruitWriting (ObjectId)
+    - projectInProgress (ObjectId)
+    - token (String)
+    - tokenExp (Number)
+    
 
   - recruit
-    - writer (objectId)
-    - title (string)
-    - project detail (string)
-    - meeting location (string)
-    - recruit positions (Array)
-    - Qualifications (string)
-    - applyfor (Array)
+    - writer (ObjectId)
+    - title (String)
+    - projectDetail (String)
+    - recruitPositions (Array)
+    - languages (Array)
+    - Qualifications (String)
+    - meetingLocation (String)
     - personnel (Number)
+    - applyfor (Array)
     - member (Array)
+    - recruitCompleted (Boolean)
 
 <br />
 
 ---
+
+
+2021-11-01
+
+
+- alert to modal (v)
+
+
+- current number of members in recruitDetailPage
+
+
+---
+
 
 2021-10-29
 
 
 - alert to modal
 
-- modify sign up 
-
-- sign up -> auto sign in
+- modify sign up (v)
 
 
 ---

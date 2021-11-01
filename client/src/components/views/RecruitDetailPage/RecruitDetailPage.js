@@ -132,6 +132,8 @@ function RecruitDetailPage(props) {
         if (!data.success) {
           setAlarm(true);
           setMessage("지원에 실패했습니다.");
+        } else {
+          setCheckApply(true);
         }
       });
 
@@ -147,9 +149,10 @@ function RecruitDetailPage(props) {
         if (!data.success) {
           setAlarm(true);
           setMessage("지원에 실패했습니다.");
+        } else {
+          setCheckApply(true);
         }
       });
-    setCheckApply(true);
   };
 
   const cancelRequest = (userId, rid) => {
@@ -228,7 +231,7 @@ function RecruitDetailPage(props) {
   };
 
   // if user click apply button
-  const onApplyHandler = () => {
+  const onApplyHandler = (e) => {
     if (userId) {
       if (!CheckApply) {
         applyRequest(userId, rid);
@@ -237,13 +240,16 @@ function RecruitDetailPage(props) {
       }
     } else {
       // alert("로그인이 필요한 기능입니다.");
+      e.preventDefault();
       setAlarm(true);
       setMessage("로그인이 필요한 기능입니다.");
     }
   };
 
   // if writer click complete button
-  const onCompleteHandler = () => {
+  const onCompleteHandler = (e) => {
+    e.preventDefault();
+
     if (userId) {
       setIsCompleted(true);
       completeRequest(rid);

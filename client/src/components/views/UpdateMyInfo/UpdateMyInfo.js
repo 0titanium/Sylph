@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { USER_SERVER } from "../../../Config";
+import Alarm from "../Alarm/Alarm";
 
 import { Input, Button } from "antd";
 import styles from "./UpdateMyInfo.module.css";
 
 function UpdateMyInfo(props) {
-  // const [Password, setPassword] = useState("");
-  // const [ConfirmPassword, setConfirmPassword] = useState("");
   const [UserObjId, setUserObjId] = useState("");
   const [UserId, setUserId] = useState("");
   const [UserNickame, setUserNickame] = useState("");
@@ -14,14 +13,8 @@ function UpdateMyInfo(props) {
   const [UserSkills, setUserSkills] = useState("");
   const [UserCareers, setUserCareers] = useState("");
   const [UserGitHubAddress, setUserGitHubAddress] = useState("");
-
-  // const onPasswordHandler = (event) => {
-  //   setPassword(event.currentTarget.value);
-  // };
-
-  // const onConfirmPasswordHandler = (event) => {
-  //   setConfirmPassword(event.currentTarget.value);
-  // };
+  const [visible, setVisible] = useState(false);
+  const [Message, setMessage] = useState(undefined);
 
   const onPositionHandler = (event) => {
     setUserPosition(event.currentTarget.value);
@@ -58,7 +51,9 @@ function UpdateMyInfo(props) {
           setUserCareers(data.user[0].careers);
           setUserGitHubAddress(data.user[0].githubaddress);
         } else {
-          alert("유저 정보를 불러오는데 실패했습니다.");
+          // alert("유저 정보를 불러오는데 실패했습니다.");
+          setVisible(true);
+          setMessage("유저 정보를 불러오는데 실패했습니다.");
         }
       });
   };
@@ -81,7 +76,9 @@ function UpdateMyInfo(props) {
         if (data.success) {
           props.history.push("/mypage");
         } else {
-          alert("정보 수정에 실패했습니다.");
+          // alert("정보 수정에 실패했습니다.");
+          setVisible(true);
+          setMessage("정보 수정에 실패했습니다.");
         }
       });
   };
@@ -89,12 +86,7 @@ function UpdateMyInfo(props) {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
-    // if (Password !== ConfirmPassword) {
-    //   return alert("비밀번호가 다릅니다.");
-    // }
-
     let data = {
-      // password: Password,
       objId: UserObjId,
       position: UserPosition,
       skills: UserSkills,
@@ -103,7 +95,9 @@ function UpdateMyInfo(props) {
     };
 
     if (data.position === "" || data.skills === "") {
-      alert("입력하지 않은 필수 내용이 있습니다.");
+      // alert("입력하지 않은 필수 내용이 있습니다.");
+      setVisible(true);
+      setMessage("입력하지 않은 필수 내용이 있습니다.");
     } else {
       UpdateUserInfo(data);
     }
@@ -207,6 +201,7 @@ function UpdateMyInfo(props) {
           Edit
         </Button>
       </form>
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }
