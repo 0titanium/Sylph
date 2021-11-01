@@ -22,7 +22,6 @@ function ApplyTo() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           setUserApplyTo([...data.recruitTitle.reverse()]);
           setRecruitId([...data.recruitId.reverse()]);
@@ -43,10 +42,8 @@ function ApplyTo() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           setisRefused([...data.check.reverse()]);
-          console.log(data);
         } else {
           // alert("유저 정보를 불러오는데 실패했습니다.");
           setVisible(true);

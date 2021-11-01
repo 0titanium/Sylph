@@ -9,7 +9,7 @@ const recruitSchema = mongoose.Schema(
     },
     title: {
       type: String,
-      maxLength: 50,
+      maxLength: 100,
     },
     projectDetail: {
       type: String,
@@ -27,10 +27,7 @@ const recruitSchema = mongoose.Schema(
     },
     meetingLocation: {
       type: String,
-    },
-    personnel: {
-      type: Number,
-      default: 0,
+      maxLength: 100,
     },
     applyfor: {
       type: Array,

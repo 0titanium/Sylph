@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../_actions/user_action";
-import Alarm from "../components/views/Alarm/Alarm";
 
 export default function authFunc(SpecificComponent, option, adminRoute = null) {
   /*
@@ -13,17 +12,11 @@ export default function authFunc(SpecificComponent, option, adminRoute = null) {
   function AuthenticationCheck(props) {
     const dispatch = useDispatch();
 
-    const [visible, setVisible] = useState(false);
-    const [Message, setMessage] = useState(undefined);
-
     const pushFunc = () => {
       dispatch(auth()).then((response) => {
         // 로그인하지 않은 상태
         if (!response.payload.isAuth) {
           if (option) {
-            // alert("로그인이 필요한 기능입니다.");
-            setVisible(true);
-            setMessage("로그인이 필요한 기능입니다.");
             props.history.push("/signin");
           }
         } else {

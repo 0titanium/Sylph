@@ -15,6 +15,7 @@ function MyRecruit() {
   const [Languages, setLanguages] = useState(undefined);
   const [Qualifications, setQualifications] = useState(undefined);
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
+  const [NumberOfMembers, setNumberOfMembers] = useState(undefined);
   const [RecruitId, setRecruitId] = useState("");
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
@@ -87,6 +88,7 @@ function MyRecruit() {
             setLanguages(data.recruitDetail.languages);
             setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
+            setNumberOfMembers(data.recruitDetail.member.length);
             setRecruitId(data.recruitDetail._id);
           }
         } else {
@@ -136,8 +138,8 @@ function MyRecruit() {
           <Descriptions.Item label="Qualifications">
             {Qualifications === undefined ? (
               <LoadingOutlined className={styles.loading} />
-            ) : Qualifications.length > 100 ? (
-              Qualifications.slice(0, 100) + "..."
+            ) : Qualifications.length > 50 ? (
+              Qualifications.slice(0, 50) + "..."
             ) : (
               Qualifications
             )}
@@ -145,10 +147,17 @@ function MyRecruit() {
           <Descriptions.Item label="MeetingLocation">
             {MeetingLocation === undefined ? (
               <LoadingOutlined className={styles.loading} />
-            ) : MeetingLocation.length > 100 ? (
-              MeetingLocation.slice(0, 100) + "..."
+            ) : MeetingLocation.length > 50 ? (
+              MeetingLocation.slice(0, 50) + "..."
             ) : (
               MeetingLocation
+            )}
+          </Descriptions.Item>
+          <Descriptions.Item label="NumberOfMembers">
+            {NumberOfMembers === undefined ? (
+              <LoadingOutlined className={styles.loading} />
+            ) : (
+              NumberOfMembers
             )}
           </Descriptions.Item>
         </Descriptions>

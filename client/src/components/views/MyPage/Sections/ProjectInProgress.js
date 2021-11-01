@@ -14,6 +14,7 @@ function ProjectInProgress() {
   const [Languages, setLanguages] = useState(undefined);
   const [Qualifications, setQualifications] = useState(undefined);
   const [MeetingLocation, setMeetingLocation] = useState(undefined);
+  const [NumberOfMembers, setNumberOfMembers] = useState(undefined);
   const [RecruitId, setRecruitId] = useState("");
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
@@ -36,6 +37,7 @@ function ProjectInProgress() {
             setLanguages(data.recruitDetail.languages);
             setQualifications(data.recruitDetail.Qualifications);
             setMeetingLocation(data.recruitDetail.meetingLocation);
+            setNumberOfMembers(data.recruitDetail.member.length);
             setRecruitId(data.recruitDetail._id);
           } else {
             setRecruit(null);
@@ -139,6 +141,13 @@ function ProjectInProgress() {
               MeetingLocation.slice(0, 100) + "..."
             ) : (
               MeetingLocation
+            )}
+          </Descriptions.Item>
+          <Descriptions.Item label="NumberOfMembers">
+            {NumberOfMembers === undefined ? (
+              <LoadingOutlined className={styles.loading} />
+            ) : (
+              NumberOfMembers
             )}
           </Descriptions.Item>
         </Descriptions>

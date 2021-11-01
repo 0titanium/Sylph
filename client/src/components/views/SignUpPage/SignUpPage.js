@@ -208,7 +208,6 @@ function SignUpPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
           if (data.isOverlappedId) {
             setIdVisible(true);
             setisOverlappedId(false);
@@ -237,8 +236,6 @@ function SignUpPage(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data);
-          // alert를 modal로 바꿀 것.
           if (data.isOverlappedNick) {
             // alert("사용 가능한 닉네임입니다.");
             setNickVisible(true);

@@ -201,12 +201,12 @@ mongodb atlas
     - languages (Array)
     - Qualifications (String)
     - meetingLocation (String)
-    - personnel (Number)
     - applyfor (Array)
     - member (Array)
     - recruitCompleted (Boolean)
 
 <br />
+
 
 ---
 
@@ -216,8 +216,11 @@ mongodb atlas
 
 - alert to modal (v)
 
+- recruit content(title, meeting location) max length (v)
 
-- current number of members in recruitDetailPage
+- current number of members in recruitDetailPage (v)
+
+- 모집인원 필드 추가할 것.
 
 
 ---

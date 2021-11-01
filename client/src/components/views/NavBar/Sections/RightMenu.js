@@ -31,8 +31,6 @@ function RightMenu(props) {
           setUserImage(data.user[0].image);
           setUserNickame(data.user[0].nickname);
           setCheckRecruit(data.user[0].recruitWriting);
-          console.log(data.user[0].recruitWriting);
-          console.log(CheckRecruit);
         } else {
           // alert("유저 정보를 불러오는데 실패했습니다.");
           setVisible(true);

@@ -130,6 +130,12 @@ function RecruitPage(props) {
       // alert("입력하지 않은 내용이 있습니다.");
       setVisible(true);
       setMessage("입력하지 않은 내용이 있습니다.");
+    } else if (submitRecruitDetail.title.length > 100) {
+      setVisible(true);
+      setMessage("제목은 100자 이하로만 작성할 수 있습니다.");
+    } else if (submitRecruitDetail.meetingLocation.length > 100) {
+      setVisible(true);
+      setMessage("모임장소는 100자 이하로만 작성할 수 있습니다.");
     } else {
       fetchRecruit(submitRecruitDetail);
     }
@@ -190,6 +196,7 @@ function RecruitPage(props) {
           Recruit
         </Button>
       </form>
+      <Alarm message={Message} visible={visible} setVisible={setVisible} />
     </div>
   );
 }
