@@ -14,14 +14,14 @@ Recruits project team members. Participate in the project.
 
 <br/>
 
-# `frontend`
+# `Frontend`
  react, antd
 
-# `backend`
+# `Backend`
 nodejs, express
 
-# `database` 
-mongodb atlas
+# `Database` 
+mongodb atlas(mongoose)
 
 <br/>
 
@@ -29,7 +29,7 @@ mongodb atlas
 
 <br/>
 
-- frontend
+- Frontend
 
   - _actions
     - types
@@ -107,7 +107,7 @@ mongodb atlas
 
 <br/>
 
-- backend
+- Backend
 
   - "/users"
 
@@ -175,7 +175,7 @@ mongodb atlas
 
 <br/>
 
-- database
+- Database
 
   - user
     - id (String)
@@ -221,6 +221,10 @@ mongodb atlas
 - sign up - careers select로 변경(v)
   - post 필요.
 
+- 아무래도 aws 프리티어로 요금 부과안되게 잘 해봐야겠다. 계속 수정할 부분이 생긴다.
+  - Frontend: aws s3
+  - Backend: aws ec2 linux 2? ubuntu 18.04? ubuntu 20.04?
+  
 
 ---
 

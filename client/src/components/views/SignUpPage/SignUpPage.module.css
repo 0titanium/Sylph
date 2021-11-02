@@ -51,6 +51,10 @@
   margin-top: 10px;
 }
 
+.selectSt {
+  width: 150px;
+}
+
 .choicepst {
   display: inline;
 }
@@ -69,5 +73,52 @@
 
   .formSt {
     width: 90%;
+  }
+}
+
+@media (min-width: 1339px) {
+  .container {
+    padding-top: 50px;
+    height: 100%;
+  }
+
+  .formSt {
+    height: 100%;
+  }
+}
+
+@media (min-width: 2559px) {
+  .container {
+    padding-top: 150px;
+    height: 100%;
+  }
+
+  .formSt {
+    height: 100%;
+  }
+
+  .essential {
+    margin-top: 3rem;
+  }
+  .choice {
+    margin-top: 3rem;
+  }
+
+  .labelSt {
+    margin-bottom: 10px;
+    margin-top: 3rem;
+  }
+
+  .inputSt {
+    font-size: 1.5rem;
+    height: 3rem;
+  }
+
+  .checkOverlapBtn {
+    margin-top: 15px;
+  }
+
+  .btn {
+    height: 3rem;
   }
 }

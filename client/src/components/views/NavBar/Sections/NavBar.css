@@ -96,3 +96,15 @@
     padding: 10px 20px;
   }
 }
+
+@media (min-width: 1339px) {
+  /* .menu {
+    height: 5rem;
+  } */
+}
+
+@media (min-width: 2559px) {
+  /* .menu {
+    height: 150px;
+  } */
+}
