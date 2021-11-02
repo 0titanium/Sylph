@@ -29,6 +29,10 @@ const recruitSchema = mongoose.Schema(
       type: String,
       maxLength: 100,
     },
+    personnel: {
+      type: Number,
+      default: 1,
+    },
     applyfor: {
       type: Array,
       default: [],

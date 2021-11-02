@@ -32,6 +32,10 @@
   resize: none;
 }
 
+.selectSt {
+  width: 50px;
+}
+
 .btn {
   display: flex;
   justify-content: center;

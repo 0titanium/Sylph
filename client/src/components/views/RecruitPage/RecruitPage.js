@@ -3,13 +3,14 @@ import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { getCookie } from "../../../utils/getCookie";
 import Alarm from "../Alarm/Alarm";
 
-import { Input, Button, Checkbox } from "antd";
+import { Input, Button, Checkbox, Select } from "antd";
 import styles from "./RecruitPage.module.css";
 
 function RecruitPage(props) {
   const userId = getCookie("user_id", document.cookie);
 
   const { TextArea } = Input;
+  const { Option } = Select;
 
   const [Title, setTitle] = useState("");
   const [ProjectDetail, setProjectDetail] = useState("");
@@ -123,8 +124,8 @@ function RecruitPage(props) {
     if (
       submitRecruitDetail.title === "" ||
       submitRecruitDetail.projectDetail === "" ||
-      submitRecruitDetail.recruitPositions === [] ||
-      submitRecruitDetail.languages === [] ||
+      submitRecruitDetail.recruitPositions.length === 0 ||
+      submitRecruitDetail.languages.length === 0 ||
       submitRecruitDetail.meetingLocation === ""
     ) {
       // alert("입력하지 않은 내용이 있습니다.");
@@ -169,6 +170,19 @@ function RecruitPage(props) {
           options={options}
           onChange={onRecruitPositionsHandler}
         />
+
+        <label className={styles.labelSt}>모집 인원</label>
+        <Select defaultValue="1" className={styles.selectSt}>
+          <Option value="1">1</Option>
+          <Option value="2">2</Option>
+          <Option value="3">3</Option>
+          <Option value="4">4</Option>
+          <Option value="5">5</Option>
+          <Option value="6">6</Option>
+          <Option value="7">7</Option>
+          <Option value="8">8</Option>
+          <Option value="9">9</Option>
+        </Select>
 
         <label className={styles.labelSt}>언어</label>
         <Checkbox.Group

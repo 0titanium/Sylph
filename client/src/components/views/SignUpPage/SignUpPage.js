@@ -5,11 +5,13 @@ import { signupUser } from "../../../_actions/user_action";
 import { USER_SERVER } from "../../../Config";
 import Alarm from "../Alarm/Alarm";
 
-import { Input, Button, Checkbox, Modal } from "antd";
+import { Input, Button, Checkbox, Modal, Select } from "antd";
 import styles from "./SignUpPage.module.css";
 
 function SignUpPage(props) {
   const dispatch = useDispatch();
+
+  const { Option } = Select;
 
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
@@ -25,8 +27,8 @@ function SignUpPage(props) {
   const [isOverlappedNick, setisOverlappedNick] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
-  const [CheckedId, setCheckedId] = useState(false);
-  const [CheckedNick, setCheckedNick] = useState(false);
+  // const [CheckedId, setCheckedId] = useState(false);
+  // const [CheckedNick, setCheckedNick] = useState(false);
 
   const positionOptions = [
     { label: "Frontend", value: "Frontend" },
@@ -80,7 +82,11 @@ function SignUpPage(props) {
   };
 
   const onGitHubAddressHandler = (event) => {
-    setGitHubAddress(event.currentTarget.value);
+    if (event.currentTarget.value === "https://github.com/") {
+      setGitHubAddress("");
+    } else {
+      setGitHubAddress(event.currentTarget.value);
+    }
   };
 
   const overLapIdModal = (Id, isOverlappedId) => {
@@ -340,13 +346,26 @@ function SignUpPage(props) {
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> Careers
         </label>
-        <Input
+        {/* <Input
           type="text"
           value={Careers}
           onChange={onCareersHandler}
           className={styles.inputSt}
           placeholder="ex) 1 year, ...etc"
-        />
+        /> */}
+        <Select
+          onClick={onCareersHandler}
+          defaultValue="0"
+          className={styles.selectSt}
+        >
+          <Option value="0">선택 안함</Option>
+          <Option value="1">1년 미만</Option>
+          <Option value="2">1년 이상~2년 미만</Option>
+          <Option value="3">2년 이상~3년 미만</Option>
+          <Option value="4">3년 이상~4년 미만</Option>
+          <Option value="5">4년 이상~5년 미만</Option>
+          <Option value="6">5년 이상</Option>
+        </Select>
 
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> GitHub Address

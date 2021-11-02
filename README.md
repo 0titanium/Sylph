@@ -211,6 +211,20 @@ mongodb atlas
 ---
 
 
+2021-11-02
+
+- 모집인원 필드 추가(v)
+
+- recruit 모집 select 추가(v)
+  - change value string to number, post 필요.
+
+- sign up - careers select로 변경(v)
+  - post 필요.
+
+
+---
+
+
 2021-11-01
 
 
