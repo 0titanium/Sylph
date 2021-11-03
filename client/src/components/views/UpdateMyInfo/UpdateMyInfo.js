@@ -69,13 +69,18 @@ function UpdateMyInfo(props) {
       .then((data) => {
         if (data.success) {
           // setUserImage(data.userImage);
+          console.log(data.user[0]);
           setUserObjId(data.user[0]._id);
           setUserId(data.user[0].id);
           setUserNickame(data.user[0].nickname);
           setUserPosition([...data.user[0].position]);
           setUserSkills([...data.user[0].skills]);
           setUserCareers(data.user[0].careers);
-          setUserGitHubAddress(data.user[0].githubaddress);
+          if (data.user[0].githubaddress === "") {
+            setUserGitHubAddress("https://github.com/");
+          } else {
+            setUserGitHubAddress(data.user[0].githubaddress);
+          }
         } else {
           // alert("유저 정보를 불러오는데 실패했습니다.");
           setVisible(true);
@@ -112,6 +117,8 @@ function UpdateMyInfo(props) {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
+    let flag = 1;
+
     let data = {
       objId: UserObjId,
       position: UserPosition,
@@ -120,11 +127,23 @@ function UpdateMyInfo(props) {
       githubaddress: UserGitHubAddress,
     };
 
-    if (data.position === "" || data.skills === "") {
+    if (UserGitHubAddress === "https://github.com/") {
+      data.githubaddress = "";
+    }
+
+    if (UserGitHubAddress.substring(0, 19) !== "https://github.com/") {
+      setVisible(true);
+      setMessage("올바른 주소가 아닙니다.");
+      flag = 0;
+    }
+
+    if (data.position.length === 0 || data.skills.length === 0) {
       // alert("입력하지 않은 필수 내용이 있습니다.");
       setVisible(true);
       setMessage("입력하지 않은 필수 내용이 있습니다.");
-    } else {
+      flag = 0;
+    }
+    if (flag === 1) {
       UpdateUserInfo(data);
     }
   };
@@ -203,19 +222,23 @@ function UpdateMyInfo(props) {
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> Careers
         </label>
-        <Select
-          onChange={onCareersHandler}
-          defaultValue=""
-          className={styles.selectSt}
-        >
-          <Option value="">선택 안함</Option>
-          <Option value="1년 미만">1년 미만</Option>
-          <Option value="1년 이상~2년 미만">1년 이상~2년 미만</Option>
-          <Option value="2년 이상~3년 미만">2년 이상~3년 미만</Option>
-          <Option value="3년 이상~4년 미만">3년 이상~4년 미만</Option>
-          <Option value="4년 이상~5년 미만">4년 이상~5년 미만</Option>
-          <Option value="5년 이상">5년 이상</Option>
-        </Select>
+        {UserCareers === undefined ? (
+          <LoadingOutlined className={styles.loading} />
+        ) : (
+          <Select
+            onChange={onCareersHandler}
+            defaultValue={UserCareers}
+            className={styles.selectSt}
+          >
+            <Option value="">선택 안함</Option>
+            <Option value="1년 미만">1년 미만</Option>
+            <Option value="1년 이상~2년 미만">1년 이상~2년 미만</Option>
+            <Option value="2년 이상~3년 미만">2년 이상~3년 미만</Option>
+            <Option value="3년 이상~4년 미만">3년 이상~4년 미만</Option>
+            <Option value="4년 이상~5년 미만">4년 이상~5년 미만</Option>
+            <Option value="5년 이상">5년 이상</Option>
+          </Select>
+        )}
 
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> GitHub Address

@@ -18,7 +18,7 @@ function RecruitPage(props) {
   const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
-  const [NumberOfMember, setNumberOfMember] = useState(0);
+  const [NumberOfMember, setNumberOfMember] = useState(1);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
 
@@ -74,7 +74,7 @@ function RecruitPage(props) {
                 setVisible(true);
                 setMessage("모집글 작성에 실패했습니다.");
               } else {
-                props.history.push(`/recruit/${data.recruitPost._id}`);
+                props.history.push("/");
                 window.location.reload();
               }
             });

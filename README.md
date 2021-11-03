@@ -218,11 +218,14 @@ mongodb atlas(mongoose)
 - sign up 수정(v)
 
 - update my info 수정(v)
+  - career 선택했던 경우 디폴트 밸류 유지필요 (v)
+  - github address 작성하지 않았던 경우 기본 스트링 필요(v)
 
 - recruit, recruit detail 수정(v)
 
 - recruit 작성 완료 후 뒤로가기에서 글을 작성할 수 있는 버그.
-
+  - 예상방안1. 뒤로가기 방지
+  - 예상방안2. recruit에서 작성한 글이 있는지 확인.
 
 ---
 
