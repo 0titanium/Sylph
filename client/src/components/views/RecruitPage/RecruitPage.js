@@ -18,6 +18,7 @@ function RecruitPage(props) {
   const [Languages, setLanguages] = useState([]);
   const [Qualifications, setQualifications] = useState("");
   const [MeetingLocation, setMeetingLocation] = useState("");
+  const [NumberOfMember, setNumberOfMember] = useState(0);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
 
@@ -67,14 +68,16 @@ function RecruitPage(props) {
           })
             .then((response) => response.json())
             .then((data) => {
+              console.log(data);
               if (!data.success) {
                 // alert("모집글 작성에 실패했습니다.");
                 setVisible(true);
                 setMessage("모집글 작성에 실패했습니다.");
+              } else {
+                props.history.push(`/recruit/${data.recruitPost._id}`);
+                window.location.reload();
               }
             });
-          props.history.push("/");
-          window.location.reload();
         } else {
           // alert("모집글 작성에 실패했습니다.");
           setVisible(true);
@@ -107,6 +110,10 @@ function RecruitPage(props) {
     setMeetingLocation(e.currentTarget.value);
   };
 
+  const onNumberOfMemberHandler = (value) => {
+    setNumberOfMember(Number(value));
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -118,6 +125,7 @@ function RecruitPage(props) {
       languages: Languages,
       Qualifications: Qualifications,
       meetingLocation: MeetingLocation,
+      personnel: NumberOfMember + 1,
       member: userId,
     };
 
@@ -172,7 +180,11 @@ function RecruitPage(props) {
         />
 
         <label className={styles.labelSt}>모집 인원</label>
-        <Select defaultValue="1" className={styles.selectSt}>
+        <Select
+          onChange={onNumberOfMemberHandler}
+          defaultValue="1"
+          className={styles.selectSt}
+        >
           <Option value="1">1</Option>
           <Option value="2">2</Option>
           <Option value="3">3</Option>

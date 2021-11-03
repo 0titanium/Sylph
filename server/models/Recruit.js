@@ -31,7 +31,6 @@ const recruitSchema = mongoose.Schema(
     },
     personnel: {
       type: Number,
-      default: 1,
     },
     applyfor: {
       type: Array,

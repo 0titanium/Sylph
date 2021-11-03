@@ -2,30 +2,56 @@ import React, { useState, useEffect } from "react";
 import { USER_SERVER } from "../../../Config";
 import Alarm from "../Alarm/Alarm";
 
-import { Input, Button } from "antd";
+import { Input, Button, Checkbox, Select } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import styles from "./UpdateMyInfo.module.css";
 
 function UpdateMyInfo(props) {
+  const { Option } = Select;
+
+  const positionOptions = [
+    { label: "Frontend", value: "Frontend" },
+    { label: "Backend", value: "Backend" },
+    { label: "Full stack", value: "Full stack" },
+    { label: "iOS", value: "iOS" },
+    { label: "Android", value: "Android" },
+    { label: "Game Client", value: "Game Client" },
+    { label: "Game Server", value: "Game Server" },
+  ];
+
+  const options = [
+    { label: "JavaScript", value: "JavaScript" },
+    { label: "TypeScript", value: "TypeScript" },
+    { label: "Java", value: "Java" },
+    { label: "Python", value: "Python" },
+    { label: "Swift", value: "Swift" },
+    { label: "Kotlin", value: "Kotlin" },
+    { label: "php", value: "php" },
+    { label: "C", value: "C" },
+    { label: "C++", value: "C++" },
+    { label: "C#", value: "C#" },
+  ];
+
   const [UserObjId, setUserObjId] = useState("");
   const [UserId, setUserId] = useState("");
   const [UserNickame, setUserNickame] = useState("");
-  const [UserPosition, setUserPosition] = useState("");
-  const [UserSkills, setUserSkills] = useState("");
-  const [UserCareers, setUserCareers] = useState("");
-  const [UserGitHubAddress, setUserGitHubAddress] = useState("");
+  const [UserPosition, setUserPosition] = useState(undefined);
+  const [UserSkills, setUserSkills] = useState(undefined);
+  const [UserCareers, setUserCareers] = useState(undefined);
+  const [UserGitHubAddress, setUserGitHubAddress] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
 
   const onPositionHandler = (event) => {
-    setUserPosition(event.currentTarget.value);
+    setUserPosition(event);
   };
 
   const onSkillsHandler = (event) => {
-    setUserSkills(event.currentTarget.value);
+    setUserSkills(event);
   };
 
-  const onCareersHandler = (event) => {
-    setUserCareers(event.currentTarget.value);
+  const onCareersHandler = (value) => {
+    setUserCareers(value);
   };
 
   const onGitHubAddressHandler = (event) => {
@@ -46,8 +72,8 @@ function UpdateMyInfo(props) {
           setUserObjId(data.user[0]._id);
           setUserId(data.user[0].id);
           setUserNickame(data.user[0].nickname);
-          setUserPosition(data.user[0].position);
-          setUserSkills(data.user[0].skills);
+          setUserPosition([...data.user[0].position]);
+          setUserSkills([...data.user[0].skills]);
           setUserCareers(data.user[0].careers);
           setUserGitHubAddress(data.user[0].githubaddress);
         } else {
@@ -113,6 +139,7 @@ function UpdateMyInfo(props) {
         <p className={styles.essential}>* 필수입력</p>
         <p className={styles.choice}>* 선택입력</p>
 
+        {/* 아이디 변경불가 */}
         <label className={styles.labelId}>
           <p className={styles.pst}>*</p> ID
         </label>
@@ -123,6 +150,7 @@ function UpdateMyInfo(props) {
           className={styles.inputSt}
         />
 
+        {/* 닉네임 변경불가 */}
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Nickname
         </label>
@@ -133,58 +161,61 @@ function UpdateMyInfo(props) {
           className={styles.inputSt}
         />
 
+        {/* 비밀번호 변경불가 */}
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Password
         </label>
-        <Input.Password
-          // value={Password}
-          // onChange={onPasswordHandler}
-          disabled={true}
-          className={styles.inputSt}
-        />
+        <Input.Password disabled={true} className={styles.inputSt} />
 
+        {/* 비밀번호 확인 변경불가 */}
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Confirm Password
         </label>
-        <Input.Password
-          // value={ConfirmPassword}
-          // onChange={onConfirmPasswordHandler}
-          disabled={true}
-          className={styles.inpuSt}
-        />
+        <Input.Password disabled={true} className={styles.inpuSt} />
 
+        {/* 포지션 */}
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Position
         </label>
-        <Input
-          type="text"
-          value={UserPosition}
-          onChange={onPositionHandler}
-          className={styles.inpuSt}
-          placeholder="ex) Frontend, Backend, Full Stack, ...etc"
-        />
+        {UserPosition === undefined ? (
+          <LoadingOutlined className={styles.loading} />
+        ) : (
+          <Checkbox.Group
+            defaultValue={UserPosition}
+            options={positionOptions}
+            onChange={onPositionHandler}
+          />
+        )}
 
         <label className={styles.labelSt}>
           <p className={styles.pst}>*</p> Skills
         </label>
-        <Input
-          type="text"
-          value={UserSkills}
-          onChange={onSkillsHandler}
-          className={styles.inputSt}
-          placeholder="ex) Java, Javascript, Kotlin, ...etc"
-        />
+        {UserSkills === undefined ? (
+          <LoadingOutlined className={styles.loading} />
+        ) : (
+          <Checkbox.Group
+            defaultValue={UserSkills}
+            options={options}
+            onChange={onSkillsHandler}
+          />
+        )}
 
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> Careers
         </label>
-        <Input
-          type="text"
-          value={UserCareers}
+        <Select
           onChange={onCareersHandler}
-          className={styles.inputSt}
-          placeholder="ex) 1 year, ...etc"
-        />
+          defaultValue=""
+          className={styles.selectSt}
+        >
+          <Option value="">선택 안함</Option>
+          <Option value="1년 미만">1년 미만</Option>
+          <Option value="1년 이상~2년 미만">1년 이상~2년 미만</Option>
+          <Option value="2년 이상~3년 미만">2년 이상~3년 미만</Option>
+          <Option value="3년 이상~4년 미만">3년 이상~4년 미만</Option>
+          <Option value="4년 이상~5년 미만">4년 이상~5년 미만</Option>
+          <Option value="5년 이상">5년 이상</Option>
+        </Select>
 
         <label className={styles.labelSt}>
           <p className={styles.choicepst}>*</p> GitHub Address

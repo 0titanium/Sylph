@@ -201,6 +201,7 @@ mongodb atlas(mongoose)
     - languages (Array)
     - Qualifications (String)
     - meetingLocation (String)
+    - personnel (Number)
     - applyfor (Array)
     - member (Array)
     - recruitCompleted (Boolean)
@@ -211,15 +212,30 @@ mongodb atlas(mongoose)
 ---
 
 
+2021-11-03
+
+
+- sign up 수정(v)
+
+- update my info 수정(v)
+
+- recruit, recruit detail 수정(v)
+
+- recruit 작성 완료 후 뒤로가기에서 글을 작성할 수 있는 버그.
+
+
+---
+
+
 2021-11-02
 
 - 모집인원 필드 추가(v)
 
 - recruit 모집 select 추가(v)
-  - change value string to number, post 필요.
+  - change value string to number, post 필요.(v)
 
 - sign up - careers select로 변경(v)
-  - post 필요.
+  - post 필요.(v)
 
 - 아무래도 aws 프리티어로 요금 부과안되게 잘 해봐야겠다. 계속 수정할 부분이 생긴다.
   - Frontend: aws s3

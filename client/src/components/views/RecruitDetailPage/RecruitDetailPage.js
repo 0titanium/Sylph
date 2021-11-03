@@ -23,6 +23,7 @@ function RecruitDetailPage(props) {
   const [alarm, setAlarm] = useState(false);
   const [Message, setMessage] = useState(undefined);
   const [NumberofMembers, setNumberofMembers] = useState(undefined);
+  const [Personnel, setPersonnel] = useState(undefined);
   const rid = useParams().recruitId;
 
   // fetch user info
@@ -67,6 +68,7 @@ function RecruitDetailPage(props) {
           setQualifications(data.recruitDetail.Qualifications);
           setMeetingLocation(data.recruitDetail.meetingLocation);
           setNumberofMembers(data.recruitDetail.member.length);
+          setPersonnel(data.recruitDetail.personnel);
           setIsCompleted(data.recruitDetail.recruitCompleted);
         } else {
           // alert("모집글을 불러오는데 실패했습니다.");
@@ -340,7 +342,9 @@ function RecruitDetailPage(props) {
           <h2>Meeting Location</h2>
           <p>{MeetingLocation}</p>
           <Divider />
-          <p>현재 인원: {NumberofMembers}명</p>
+          <p>
+            현재 인원: {NumberofMembers}/{Personnel}명
+          </p>
           <Divider />
           <form onSubmit={onApplyHandler} className={styles.apply}>
             {userId !== WriterId ? (
