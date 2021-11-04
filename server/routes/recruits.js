@@ -55,15 +55,19 @@ router.get("/languages/:lname", (req, res) => {
 // get a specific recruit route
 router.get("/recruitDetail/:rid", (req, res) => {
   Recruit.findById(req.params.rid, null, (err, recruit) => {
-    User.findById(recruit.writer, null, (err, writer) => {
-      if (err) {
-        return res.status(400).json({ success: false, err });
-      }
+    if (!recruit) {
+      return res.status(400).json({ success: false, err });
+    } else {
+      User.findById(recruit.writer, null, (err, writer) => {
+        if (err) {
+          return res.status(400).json({ success: false, err });
+        }
 
-      return res
-        .status(200)
-        .json({ success: true, recruitDetail: recruit, writer });
-    });
+        return res
+          .status(200)
+          .json({ success: true, recruitDetail: recruit, writer });
+      });
+    }
   });
 });
 

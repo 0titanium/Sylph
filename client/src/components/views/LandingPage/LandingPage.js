@@ -6,7 +6,7 @@ import { Typography, Row, Col, Card } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import styles from "./LandingPage.module.css";
 
-function LandingPage() {
+function LandingPage(props) {
   const { Title } = Typography;
   const [Recruits, setRecruits] = useState(undefined);
   const [visible, setVisible] = useState(false);

@@ -10,6 +10,7 @@ import styles from "./RecruitDetailPage.module.css";
 
 function RecruitDetailPage(props) {
   const userId = getCookie("user_id", document.cookie);
+  
   const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
   const [WriterId, setWriterId] = useState("");
@@ -72,6 +73,7 @@ function RecruitDetailPage(props) {
           setIsCompleted(data.recruitDetail.recruitCompleted);
         } else {
           // alert("모집글을 불러오는데 실패했습니다.");
+          props.history.push("/");
           setAlarm(true);
           setMessage("모집글을 불러오는 것에 실패했습니다.");
         }

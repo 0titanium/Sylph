@@ -11,7 +11,7 @@ function LeftMenu(props) {
         <a href="/positions/Backend">Backend</a>
       </Menu.Item>
       <Menu.Item key="3">
-        <a href="/positions/Fullstack">Full stack</a>
+        <a href="/positions/Full stack">Full stack</a>
       </Menu.Item>
       <Menu.Item key="4">
         <a href="/positions/iOS">iOS</a>

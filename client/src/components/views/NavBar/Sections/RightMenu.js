@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signoutUser } from "../../../../_actions/user_action";
 import { Menu, Dropdown, Avatar } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -17,9 +17,6 @@ function RightMenu(props) {
   const [CheckRecruit, setCheckRecruit] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
-  // const recruitWriting = useSelector(
-  //   (user) => user.user.userData.recruitWriting
-  // );
 
   const fetchUser = () => {
     fetch(`${USER_SERVER}/userInfo`, {

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
+import { auth } from "../../../_actions/user_action";
 import { getCookie } from "../../../utils/getCookie";
 import Alarm from "../Alarm/Alarm";
 
@@ -8,6 +10,14 @@ import styles from "./RecruitPage.module.css";
 
 function RecruitPage(props) {
   const userId = getCookie("user_id", document.cookie);
+
+  const dispatch = useDispatch();
+
+  dispatch(auth()).then((response) => {
+    if (response.payload.recruitWriting !== "") {
+      props.history.push("/");
+    }
+  });
 
   const { TextArea } = Input;
   const { Option } = Select;
@@ -129,6 +139,10 @@ function RecruitPage(props) {
       member: userId,
     };
 
+    // if (user && user.recruitWriting !== "") {
+    //   setVisible(true);
+    //   setMessage("모집글은 하나만 작성할 수 있습니다.");
+    // } else
     if (
       submitRecruitDetail.title === "" ||
       submitRecruitDetail.projectDetail === "" ||

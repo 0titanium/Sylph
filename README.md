@@ -212,6 +212,30 @@ mongodb atlas(mongoose)
 ---
 
 
+2021-11-04
+
+
+- recruit 작성 후 뒤로가기하면 글을 작성할 수 있는 문제.
+  - recruit에서 reatc-redux - useSelector로 작성한 글이 있다면 또 작성할 수 없게 하긴 했다.
+  - 페이지 진입을 못하게 하는게 더 낫지 않을까?
+    - 뒤로가기로 모집글 작성 url에 진입하면 랜딩페이지로 이동하도록 하는 것에 성공했으나 에러메세지가 나온다. 
+    - error : Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.
+    - useSelector가 문제라는 것 같다.
+    - useDispatch를 사용하면 문제가 없어진다.
+    - 뒤로가기로 진입하면 잽싼데, url 입력으로 진입하면 모집 작성 페이지로 이동했다가 랜딩페이지로 이동하는 속도가 좀 느리다.
+
+- 삭제한 글을 뒤로가기하면 볼 수 있고 다시 버튼을 클릭할 수 있는 문제.
+- 가 아니고 failed to fetch로 나온다.
+  - history stack 때문이라는 것 같다.
+  - 서버에서 recruit가 없을 경우 {success: false}를 보내고 recruitDetail에서 {data.success: false}를 받으면
+   일단 랜딩페이지로 이동하게 했다. 왜 이동했는지 알려주는 방법을 찾아야 할 것 같다.
+
+- 존재하지 않는 url을 입력했을 때의 처리
+  - not found page로 어떻게 이동시킴.
+
+---
+
+
 2021-11-03
 
 
@@ -223,7 +247,7 @@ mongodb atlas(mongoose)
 
 - recruit, recruit detail 수정(v)
 
-- recruit 작성 완료 후 뒤로가기에서 글을 작성할 수 있는 버그.
+- recruit 작성 완료 후 뒤로가기에서 글을 작성할 수 있는 문제.
   - 예상방안1. 뒤로가기 방지
   - 예상방안2. recruit에서 작성한 글이 있는지 확인.
 
