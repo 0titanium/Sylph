@@ -19,7 +19,8 @@ import NotFoundPage from "./components/views/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    // <Suspense fallback={<div>Loading...</div>}>
+    <>
       <NavBar />
       <div className={styles.container}>
         <Switch>
@@ -61,7 +62,8 @@ function App() {
         </Switch>
       </div>
       <Footer />
-    </Suspense>
+    </>
+    // </Suspense>
   );
 }
 

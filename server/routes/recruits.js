@@ -113,6 +113,7 @@ router.delete("/recruit", (req, res) => {
 });
 
 // apply recruit route
+// "/applyment" + "/cancelApplyment" 합칠 수 있을 듯
 router.patch("/applyment", (req, res) => {
   let recruitId = mongoose.Types.ObjectId(req.body.recruitId);
 

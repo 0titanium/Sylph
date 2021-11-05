@@ -91,7 +91,7 @@ mongodb atlas(mongoose)
       - RightMenu
         - my page, sign out (dropdwon)
 
-  - NotFoundpage ("*")
+  - NotFoundpage ("\*")
 
   - PagesFiltedByPositions ("/positions/:pname)
 
@@ -231,10 +231,18 @@ mongodb atlas(mongoose)
 - recruit -> 뒤로가기 -> landing page (v)
 
 - recruit detail -> 삭제 -> 뒤로가기 -> landing page with get error, 400 bad request
+
   - 수정: recruit detail -> 삭제 -> 뒤로가기 -> not found page (v)
 
 - 존재하지 않는 페이지 만들기.
+
   - NotFoundPage component -> App.js Route path = "\*" -> url에 맞는 컴포턴트를 순서대로 찾다가 없으면 설정한 컴포넌트를 보여주게 만드는 것으로 이해했다.
+
+- chrome 개발자도구 - network - throttling -> 느린 인터넷 환경으로 테스트해본 결과 Suspense 컴포넌트는 나타나지 않는다.
+
+  - 잘못한 점이 있을 수도 있고 Suspense가 필요하지 않을 수도 있는데 정확히는 모르겠다.
+
+- 생각나는 것은 다 한 것 같고 진짜로 배포.
 
 ---
 
