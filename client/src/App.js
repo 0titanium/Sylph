@@ -15,6 +15,7 @@ import Footer from "./components/views/Footer/Footer";
 import Auth from "./hoc/auth";
 
 import styles from "./App.module.css";
+import NotFoundPage from "./components/views/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
             path="/recruit/update/:recruitId"
             component={Auth(UpdateRecruitPage, null)}
           />
+          <Route path={"*"} component={NotFoundPage} />
         </Switch>
       </div>
       <Footer />

@@ -7,10 +7,11 @@ import Alarm from "../Alarm/Alarm";
 import { Button, Divider, Modal } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import styles from "./RecruitDetailPage.module.css";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function RecruitDetailPage(props) {
   const userId = getCookie("user_id", document.cookie);
-  
+
   const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
   const [WriterId, setWriterId] = useState("");
@@ -25,6 +26,7 @@ function RecruitDetailPage(props) {
   const [Message, setMessage] = useState(undefined);
   const [NumberofMembers, setNumberofMembers] = useState(undefined);
   const [Personnel, setPersonnel] = useState(undefined);
+  const [NotFound, setNotFound] = useState(undefined);
   const rid = useParams().recruitId;
 
   // fetch user info
@@ -73,9 +75,10 @@ function RecruitDetailPage(props) {
           setIsCompleted(data.recruitDetail.recruitCompleted);
         } else {
           // alert("모집글을 불러오는데 실패했습니다.");
-          props.history.push("/");
-          setAlarm(true);
-          setMessage("모집글을 불러오는 것에 실패했습니다.");
+          // props.history.push("/");
+          setNotFound(true);
+          // setAlarm(true);
+          // setMessage("모집글을 불러오는 것에 실패했습니다.");
         }
       });
   };
@@ -320,81 +323,85 @@ function RecruitDetailPage(props) {
     return () => setConfirmLoading(false);
   }, []);
 
-  return (
-    <div className={styles.container}>
-      {Title === undefined ? (
-        <LoadingOutlined className={styles.loading} />
-      ) : (
-        <div className={styles.page}>
-          <h3>Title: {Title}</h3>
-          <h3>Writer: {Writer}</h3>
-          <Divider />
-          <h2>Project Detail</h2>
-          <p>{ProjectDetail}</p>
-          <Divider />
-          <h2>Recruit Positions</h2>
-          <p>{RecruitPositions.map((position, index) => position + " ")}</p>
-          <Divider />
-          <h2>Languages</h2>
-          <p>{Languages.map((language, index) => language + " ")}</p>
-          <Divider />
-          <h2>Qualifications</h2>
-          <p>{Qualifications}</p>
-          <Divider />
-          <h2>Meeting Location</h2>
-          <p>{MeetingLocation}</p>
-          <Divider />
-          <p>
-            현재 인원: {NumberofMembers}/{Personnel}명
-          </p>
-          <Divider />
-          <form onSubmit={onApplyHandler} className={styles.apply}>
-            {userId !== WriterId ? (
-              CheckApply === false ? (
-                <Button className={styles.apply_btn} htmlType="submit">
-                  Apply
-                </Button>
+  if (NotFound) {
+    return <NotFoundPage />;
+  } else {
+    return (
+      <div className={styles.container}>
+        {Title === undefined ? (
+          <LoadingOutlined className={styles.loading} />
+        ) : (
+          <div className={styles.page}>
+            <h3>Title: {Title}</h3>
+            <h3>Writer: {Writer}</h3>
+            <Divider />
+            <h2>Project Detail</h2>
+            <p>{ProjectDetail}</p>
+            <Divider />
+            <h2>Recruit Positions</h2>
+            <p>{RecruitPositions.map((position, index) => position + " ")}</p>
+            <Divider />
+            <h2>Languages</h2>
+            <p>{Languages.map((language, index) => language + " ")}</p>
+            <Divider />
+            <h2>Qualifications</h2>
+            <p>{Qualifications}</p>
+            <Divider />
+            <h2>Meeting Location</h2>
+            <p>{MeetingLocation}</p>
+            <Divider />
+            <p>
+              현재 인원: {NumberofMembers}/{Personnel}명
+            </p>
+            <Divider />
+            <form onSubmit={onApplyHandler} className={styles.apply}>
+              {userId !== WriterId ? (
+                CheckApply === false ? (
+                  <Button className={styles.apply_btn} htmlType="submit">
+                    Apply
+                  </Button>
+                ) : (
+                  <Button className={styles.cancel_btn} htmlType="submit">
+                    Cancel
+                  </Button>
+                )
+              ) : IsCompleted === undefined ? (
+                <LoadingOutlined className={styles.loading} />
+              ) : IsCompleted === false ? (
+                <>
+                  <Button className={styles.apply_btn}>
+                    <a href={`/recruit/update/${rid}`}>Edit</a>
+                  </Button>
+                  <Button
+                    className={styles.apply_btn}
+                    onClick={onCompleteHandler}
+                  >
+                    Complete
+                  </Button>
+                  {deleteComponent()}
+                </>
               ) : (
-                <Button className={styles.cancel_btn} htmlType="submit">
-                  Cancel
-                </Button>
-              )
-            ) : IsCompleted === undefined ? (
-              <LoadingOutlined className={styles.loading} />
-            ) : IsCompleted === false ? (
-              <>
-                <Button className={styles.apply_btn}>
-                  <a href={`/recruit/update/${rid}`}>Edit</a>
-                </Button>
-                <Button
-                  className={styles.apply_btn}
-                  onClick={onCompleteHandler}
-                >
-                  Complete
-                </Button>
-                {deleteComponent()}
-              </>
-            ) : (
-              <>
-                <Button disabled className={styles.gray_btn}>
-                  <a href={`/recruit/update/${rid}`}>Edit</a>
-                </Button>
-                <Button
-                  disabled
-                  className={styles.gray_btn}
-                  onClick={onCompleteHandler}
-                >
-                  Complete
-                </Button>
-                {deleteComponent()}
-              </>
-            )}
-          </form>
-        </div>
-      )}
-      <Alarm message={Message} visible={alarm} setVisible={setAlarm} />
-    </div>
-  );
+                <>
+                  <Button disabled className={styles.gray_btn}>
+                    <a href={`/recruit/update/${rid}`}>Edit</a>
+                  </Button>
+                  <Button
+                    disabled
+                    className={styles.gray_btn}
+                    onClick={onCompleteHandler}
+                  >
+                    Complete
+                  </Button>
+                  {deleteComponent()}
+                </>
+              )}
+            </form>
+          </div>
+        )}
+        <Alarm message={Message} visible={alarm} setVisible={setAlarm} />
+      </div>
+    );
+  }
 }
 
 export default RecruitDetailPage;

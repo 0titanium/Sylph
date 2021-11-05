@@ -15,12 +15,15 @@ Recruits project team members. Participate in the project.
 <br/>
 
 # `Frontend`
- react, antd
+
+react, antd
 
 # `Backend`
+
 nodejs, express
 
-# `Database` 
+# `Database`
+
 mongodb atlas(mongoose)
 
 <br/>
@@ -31,11 +34,13 @@ mongodb atlas(mongoose)
 
 - Frontend
 
-  - _actions
+  - \_actions
+
     - types
     - user_action
 
-  - _reducers
+  - \_reducers
+
     - index
     - user_reducer
 
@@ -44,10 +49,12 @@ mongodb atlas(mongoose)
   - Footer
 
   - LandingPage ("/")
+
     - positions || languages filter dropdown
     - project recruitment cards
-  
+
   - MyPage ("/mypage")
+
     - MyInfo
       - UpdateMyInfo("/mypage/update)
       - Withdrawal
@@ -56,50 +63,59 @@ mongodb atlas(mongoose)
     - ApplyTo
     - ApplyFor
       - ViewProfile
-  
+
   - NavBar
+
     - not login
+
       - logo
-      
+
       - LeftMenu
-        - positions (dropdown) 
+
+        - positions (dropdown)
         - languages (dropdown)
 
       - RightMenu
-        - sign in 
-        - sign up 
+        - sign in
+        - sign up
 
     - login
-      - logo 
+
+      - logo
 
       - LeftMenu
-        - positions (dropdown) 
+
+        - positions (dropdown)
         - languages (dropdown)
 
       - RightMenu
         - my page, sign out (dropdwon)
 
+  - NotFoundpage ("*")
+
   - PagesFiltedByPositions ("/positions/:pname)
-  
+
   - PagesFiltedByLanguages ("/languages/:lname)
-  
+
   - RecruitDetailPage ("/recruit/:recruitId")
+
     - Apply / Cancel
     - Edit - UpdateRecruitPage
     - Complete
-    - Delete  
+    - Delete
 
-  - RecruitPage ("/recruit/post")  
-  
+  - RecruitPage ("/recruit/post")
+
   - SignInPage ("/signin")
-  
+
   - SignUpPage ("/signup")
 
   - UpdateMyInfo("/mypage/update)
-  
+
   - UpdateRecruitPage ("/recruit/update/:recruitId")
 
   - hoc
+
     - auth
 
   - utils
@@ -178,6 +194,7 @@ mongodb atlas(mongoose)
 - Database
 
   - user
+
     - id (String)
     - nickname (String)
     - password (String)
@@ -191,7 +208,6 @@ mongodb atlas(mongoose)
     - projectInProgress (ObjectId)
     - token (String)
     - tokenExp (Number)
-    
 
   - recruit
     - writer (ObjectId)
@@ -208,17 +224,27 @@ mongodb atlas(mongoose)
 
 <br />
 
+---
+
+2021-11-05
+
+- recruit -> 뒤로가기 -> landing page (v)
+
+- recruit detail -> 삭제 -> 뒤로가기 -> landing page with get error, 400 bad request
+  - 수정: recruit detail -> 삭제 -> 뒤로가기 -> not found page (v)
+
+- 존재하지 않는 페이지 만들기.
+  - NotFoundPage component -> App.js Route path = "\*" -> url에 맞는 컴포턴트를 순서대로 찾다가 없으면 설정한 컴포넌트를 보여주게 만드는 것으로 이해했다.
 
 ---
 
-
 2021-11-04
 
-
 - recruit 작성 후 뒤로가기하면 글을 작성할 수 있는 문제.
+
   - recruit에서 reatc-redux - useSelector로 작성한 글이 있다면 또 작성할 수 없게 하긴 했다.
   - 페이지 진입을 못하게 하는게 더 낫지 않을까?
-    - 뒤로가기로 모집글 작성 url에 진입하면 랜딩페이지로 이동하도록 하는 것에 성공했으나 에러메세지가 나온다. 
+    - 뒤로가기로 모집글 작성 url에 진입하면 랜딩페이지로 이동하도록 하는 것에 성공했으나 에러메세지가 나온다.
     - error : Cannot update during an existing state transition (such as within `render`). Render methods should be a pure function of props and state.
     - useSelector가 문제라는 것 같다.
     - useDispatch를 사용하면 문제가 없어진다.
@@ -226,22 +252,22 @@ mongodb atlas(mongoose)
 
 - 삭제한 글을 뒤로가기하면 볼 수 있고 다시 버튼을 클릭할 수 있는 문제.
 - 가 아니고 failed to fetch로 나온다.
+
   - history stack 때문이라는 것 같다.
   - 서버에서 recruit가 없을 경우 {success: false}를 보내고 recruitDetail에서 {data.success: false}를 받으면
-   일단 랜딩페이지로 이동하게 했다. 왜 이동했는지 알려주는 방법을 찾아야 할 것 같다.
+    일단 랜딩페이지로 이동하게 했다. 왜 이동했는지 알려주는 방법을 찾아야 할 것 같다.
 
-- 존재하지 않는 url을 입력했을 때의 처리
+- 존재하지 않는 url을 입력했을 때의 처리(v)
   - not found page로 어떻게 이동시킴.
 
 ---
 
-
 2021-11-03
-
 
 - sign up 수정(v)
 
 - update my info 수정(v)
+
   - career 선택했던 경우 디폴트 밸류 유지필요 (v)
   - github address 작성하지 않았던 경우 기본 스트링 필요(v)
 
@@ -253,27 +279,25 @@ mongodb atlas(mongoose)
 
 ---
 
-
 2021-11-02
 
 - 모집인원 필드 추가(v)
 
 - recruit 모집 select 추가(v)
+
   - change value string to number, post 필요.(v)
 
 - sign up - careers select로 변경(v)
+
   - post 필요.(v)
 
 - 아무래도 aws 프리티어로 요금 부과안되게 잘 해봐야겠다. 계속 수정할 부분이 생긴다.
   - Frontend: aws s3
   - Backend: aws ec2 linux 2? ubuntu 18.04? ubuntu 20.04?
-  
 
 ---
 
-
 2021-11-01
-
 
 - alert to modal (v)
 
@@ -283,40 +307,33 @@ mongodb atlas(mongoose)
 
 - 모집인원 필드 추가할 것.
 
-
 ---
 
-
 2021-10-29
-
 
 - alert to modal
 
 - modify sign up (v)
-
 
 ---
 
 2021-10-28
 
 - image upload 할까 말까.
+
   - antd upload component가 있다.
   - 이미지는 따로 저장해야하겠지.
   - 용량 제한이 필요.
 
-
 - sign in - 아이디 혹은 비밀번호가 다릅니다. modal (v)
-
 
 - sign up - 중복 modal, 비밀번호 자리수, 확인과 일치 여부 (v)
 
-
 - alert to modal
+
   - 무수히 많은 alert의 알림이
 
-
 - 하면 할수록 할 일이 많아지는 느낌이다.
-
 
 ---
 
@@ -332,6 +349,7 @@ mongodb atlas(mongoose)
   - "거절했습니다" 메세지는 볼 일이 없다. 거절 버튼 클릭 시 apply for에서 삭제해버리기 때문. 삼항연산자 때문에 써놓긴 해야할 것 같다.
 
 - 배포
+
   - 1. (FE: aws s3 && BE: aws ec2)
     - firebase, heroku보단 처음 로딩 속도가 빠를 것으로 예상되는 것, 코드 수정이 쉬운 것이 장점.
     - 까딱하다간 요금 폭탄을 맞을 지도 모르는 것이 단점.
