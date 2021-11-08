@@ -251,7 +251,9 @@ mongodb atlas(mongoose)
 
 - AWS S3 build folder upload
 
-- 
+- 업로드 후 권한을 설정하고 정적 웹 호스팅했으나 엔드포인트로 접속하면 404 not found
+  - 문제점 파악.
+  - firebase, heroku가 편한 것이었다.
 
 
 ---
