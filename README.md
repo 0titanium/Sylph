@@ -226,6 +226,37 @@ mongodb atlas(mongoose)
 
 ---
 
+
+2021-11-08
+
+- 배포 예상
+  - aws s3 - git clone client folder
+    - npm build?
+
+  - aws ec2 - git clone server folder
+  - connect server to mongodb atlas
+  - change config url
+  - add ec2 url to .gitignore 
+
+- aws IAM
+  - MFA 등록
+  - 사용자 추가
+
+- AWS CLI 설치
+  - AWS CLI - 사용자 등록
+
+- AWS S3 버킷 생성
+
+- client - npm run build
+
+- AWS S3 build folder upload
+
+- 
+
+
+---
+
+
 2021-11-05
 
 - recruit -> 뒤로가기 -> landing page (v)
