@@ -226,23 +226,62 @@ mongodb atlas(mongoose)
 
 ---
 
+2021-11-09
+
+- index.html을 폴더 안에 넣지않고 업로드해야 버킷 웹사이트 엔드포인트에 접속할 수 있다.
+
+- cli는 깔았지만 git bash에서 작동하지 않고 명령프롬프트에서 사용해야하는 점이 맘에 안든다.
+
+  - 배포 명령어 $ aws s3 sync ./build s3://"bucketName" --profile="folderName"
+
+- github actions와 연결하여 git push때 마다 바뀔 수 있도록.
+
+- cloudFront 사용?
+
+- aws ec2에 서버.
+  - ubuntu 18.04를 많이 쓰는 것 같다. 20.04나 리눅스 같은 다른 것들을 쓰지 않는 이유는 잘 모르겠다.
+  - instance 생성
+  - 접속방법 - .pem 읽기전용 - git bash - ssh -i "pemKey" name@"ec2Name"
+  - sudo apt-get update, sudo apt install nodejs, sudo apt install npm, git clone
+  - npm install, npm run
+  - bcrypt를 찾을 수 없다는 에러메세지.
+  - sudo npm cache clean -f / sudo npm install -g n / sudo n stable / sudo npm install --unsafe-perm=true --allow-root
+    - 처리를 해줬더니 됐다. 아마도 nodejs를 삭제하고 안정버전으로 설치하여 bcrypt가 install되도록 한다는 뜻인것 같다.
+  - mongodb atlas에 연결하려면 ec2 instance의 ip를 white list에 등록해야한다.
+  - mongodb atlas에 연결 확인
+  - public ipv4:5000 연결 확인
+
+- aws ec2 to s3 connection
+  - change client's config
+  - 연결됨을 확인. laptop, mobile 연결확인.
+  - sign up 작동 확인.
+  - sign in 작동 안됨.
+
+
+- ec2 주소가 노출되어도 괜찮은가? 
+
+---
 
 2021-11-08
 
 - 배포 예상
+
   - aws s3 - git clone client folder
+
     - npm build?
 
   - aws ec2 - git clone server folder
   - connect server to mongodb atlas
   - change config url
-  - add ec2 url to .gitignore 
+  - add ec2 url to .gitignore
 
 - aws IAM
+
   - MFA 등록
   - 사용자 추가
 
 - AWS CLI 설치
+
   - AWS CLI - 사용자 등록
 
 - AWS S3 버킷 생성
@@ -255,9 +294,7 @@ mongodb atlas(mongoose)
   - 문제점 파악.
   - firebase, heroku가 편한 것이었다.
 
-
 ---
-
 
 2021-11-05
 
