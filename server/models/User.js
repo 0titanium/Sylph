@@ -33,7 +33,7 @@ const userSchema = mongoose.Schema({
   githubaddress: {
     type: String,
   },
-  image: String,
+  image: { type: String, default: "" },
   applyto: {
     type: Array,
     default: [],

@@ -8,13 +8,7 @@ export function signinUser(dataToSubmit) {
     mode: "cors",
     credentials: "include",
     body: JSON.stringify({ dataToSubmit }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.siginInSuccess) {
-        document.cookie = `x_auth=${data.x_auth}; user_id=${data.userId}`
-      }
-    });
+  }).then((response) => response.json());
 
   return {
     type: SIGNIN_USER,
@@ -37,12 +31,13 @@ export function signupUser(dataToSubmit) {
   };
 }
 
-export function auth() {
+export function auth(dataToSubmit) {
   const request = fetch(`${USER_SERVER}/auth`, {
-    method: "GET",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     mode: "cors",
     credentials: "include",
+    body: JSON.stringify({ dataToSubmit }),
   }).then((response) => response.json());
 
   return {

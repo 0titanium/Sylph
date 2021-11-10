@@ -61,6 +61,8 @@ function SignInPage(props) {
 
     dispatch(signinUser(data)).then((response) => {
       if (response.payload.signinSuccess) {
+        window.localStorage.setItem("user_id", response.payload.userId);
+        window.localStorage.setItem("x_auth", response.payload.x_auth);
         props.history.push("/"); // withRouter 필요
       } else {
         setVisible(true);

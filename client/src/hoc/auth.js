@@ -13,7 +13,9 @@ export default function authFunc(SpecificComponent, option, adminRoute = null) {
     const dispatch = useDispatch();
 
     const pushFunc = () => {
-      dispatch(auth()).then((response) => {
+      let data = { x_auth: window.localStorage.getItem("x_auth") };
+
+      dispatch(auth(data)).then((response) => {
         // 로그인하지 않은 상태
         if (!response.payload.isAuth) {
           if (option) {

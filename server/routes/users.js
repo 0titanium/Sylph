@@ -110,7 +110,7 @@ router.post("/signin", (req, res) => {
 });
 
 // auth route
-router.get("/auth", auth, (req, res) => {
+router.post("/auth", auth, (req, res) => {
   // auth에서 req에 token, user를 넣어줌으로써 이 함수에서 사용가능해짐
   // 미들웨어 통과 - auth === true
 

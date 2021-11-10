@@ -10,7 +10,8 @@ import { USER_SERVER } from "../../../../Config";
 import Alarm from "../../Alarm/Alarm";
 
 function RightMenu(props) {
-  const userId = getCookie("user_id", document.cookie);
+  // const userId = getCookie("user_id", document.cookie);
+  const userId = window.localStorage.getItem("user_id");
   const dispatch = useDispatch();
   const [UserNickame, setUserNickame] = useState("");
   const [UserImage, setUserImage] = useState("");

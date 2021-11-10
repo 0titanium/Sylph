@@ -228,15 +228,23 @@ mongodb atlas(mongoose)
 
 2021-11-10
 
-
 - aws 문서를 읽어보니 s3에서는 쿠키를 처리하지 않는다고 하는데 이것 때문이 아닌가 싶다.
+
   - jwt를 json으로 보냄 -> json data -> setCookie -> getCookie?
-  
+  - user_id, x_auth가 쿠키에 저장된 것은 확인했지만 오류가 난다.
+  - 로컬스토리지를 사용해야할 것 같다.
+
+- git pull origin main error
+
+  - git stash -> git pull origin main
 
 - aws ec2에서 역시 요금이 발생했다. 0.09불이긴 하지만. 근데 이거 프리티어 아닌가
   - 정상 작동이 확인되면 즉시 삭제하고 무료 호스팅으로 바꿔야겠다.
   - github actions를 써보려고 했는데 firebase, heroku에서 재배포와 연동시킬 수 있는지 모르겠다.
+  - 중지 후 재시작했더니 ip가 바뀌어서 mongodb와 연결하려면 white list ip를 바꿔줘야한다.
+  - 위의 말은 client Config.js도 바꿔줘야한다는 뜻이다.
 
+- cookie를 못쓰면 get method는 못쓸것 같은데 어떻게 해야할까.
 
 ---
 
@@ -253,6 +261,7 @@ mongodb atlas(mongoose)
 - cloudFront 사용?
 
 - aws ec2에 서버.
+
   - ubuntu 18.04를 많이 쓰는 것 같다. 20.04나 리눅스 같은 다른 것들을 쓰지 않는 이유는 잘 모르겠다.
   - instance 생성
   - 접속방법 - .pem 읽기전용 - git bash - ssh -i "pemKey" name@"ec2Name"
@@ -266,6 +275,7 @@ mongodb atlas(mongoose)
   - public ipv4:5000 연결 확인
 
 - aws ec2 to s3 connection
+
   - change client's config
   - 연결됨을 확인. laptop, mobile 연결확인.
   - sign up 작동 확인.
@@ -276,8 +286,8 @@ mongodb atlas(mongoose)
   - firefox에서 접속해서 로그인해보니 cookie를 잘못 사용하고 있다고 한다.
   - s3 cors 설정은 의미가 있는건지 잘모르겠다.
 
-- ec2 주소가 노출되어도 괜찮은가? 
- - gitignore가 적용이 안된다. 뭔가 찝찝하지만 괜찮을 수도 있고 아니면 인스턴스 삭제하자.
+- ec2 주소가 노출되어도 괜찮은가?
+  - gitignore가 적용이 안된다. 뭔가 찝찝하지만 괜찮을 수도 있고 아니면 인스턴스 삭제하자.
 
 ---
 

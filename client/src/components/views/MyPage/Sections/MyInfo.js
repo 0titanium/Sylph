@@ -8,7 +8,8 @@ import { Descriptions, Button, Modal } from "antd";
 import styles from "./MyInfo.module.css";
 
 function MyInfo(props) {
-  const userId = getCookie("user_id", document.cookie);
+  // const userId = getCookie("user_id", document.cookie);
+  const userId = window.localStorage.getItem("user_id");
 
   const [UserImage, setUserImage] = useState("");
   const [UserId, setUserId] = useState("");
