@@ -8,7 +8,13 @@ export function signinUser(dataToSubmit) {
     mode: "cors",
     credentials: "include",
     body: JSON.stringify({ dataToSubmit }),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.siginInSuccess) {
+        document.cookie = `x_auth=${data.x_auth}; user_id=${data.userId}`
+      }
+    });
 
   return {
     type: SIGNIN_USER,
