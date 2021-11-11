@@ -148,8 +148,8 @@ router.patch("/cancelApplyment", (req, res) => {
 });
 
 // alarm to writer route
-router.get("/applyment", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/applyment/:userId", (req, res) => {
+  let userId = req.params.userId;
 
   // find user writing recruit
   User.findById(userId, null, (err, user) => {
@@ -184,8 +184,8 @@ router.get("/applyment", (req, res) => {
 });
 
 // my recruit route
-router.get("/myRecruit", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/myRecruit/:userId", (req, res) => {
+  let userId = req.params.userId;
 
   User.findById(userId, null, (err, user) => {
     let recruitId = user.recruitWriting;
@@ -203,8 +203,8 @@ router.get("/myRecruit", (req, res) => {
 });
 
 // get my apply to route
-router.get("/myApply", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/myApply/:userId", (req, res) => {
+  let userId = req.params.userId;
 
   User.findById(userId, null, (err, user) => {
     let applyto;
@@ -286,8 +286,8 @@ router.patch("/refusal", (req, res) => {
 });
 
 // check apply route
-router.get("/applicationInfo", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/applicationInfo/:userId", (req, res) => {
+  let userId = req.params.userId;
 
   User.findById(userId, (err, user) => {
     let userApplyTo = user.applyto; // [...recruitId]

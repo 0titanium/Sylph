@@ -41,6 +41,7 @@ function UpdateMyInfo(props) {
   const [UserGitHubAddress, setUserGitHubAddress] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
+  const userId = window.localStorage.getItem("user_id");
 
   const onPositionHandler = (event) => {
     setUserPosition(event);
@@ -59,7 +60,7 @@ function UpdateMyInfo(props) {
   };
 
   const fetchUserInfo = () => {
-    fetch(`${USER_SERVER}/userInfo`, {
+    fetch(`${USER_SERVER}/userInfo/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
-import { getCookie } from "../../../utils/getCookie";
 import Alarm from "../Alarm/Alarm";
 
 import { Button, Divider, Modal } from "antd";
@@ -10,7 +9,7 @@ import styles from "./RecruitDetailPage.module.css";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function RecruitDetailPage(props) {
-  const userId = getCookie("user_id", document.cookie);
+  const userId = window.localStorage.getItem("user_id");
 
   const [Title, setTitle] = useState(undefined);
   const [Writer, setWriter] = useState("");
@@ -31,7 +30,7 @@ function RecruitDetailPage(props) {
 
   // fetch user info
   const fetchUserInfo = () => {
-    fetch(`${USER_SERVER}/userInfo`, {
+    fetch(`${USER_SERVER}/userInfo/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

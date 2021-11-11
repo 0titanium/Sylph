@@ -19,6 +19,7 @@ function MyRecruit() {
   const [RecruitId, setRecruitId] = useState("");
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
+  const userId = window.localStorage.getItem("user_id");
 
   const title =
     Title === undefined ? (
@@ -70,7 +71,7 @@ function MyRecruit() {
     );
 
   const fetchMyRecruit = () => {
-    fetch(`${RECRUIT_SERVER}/myRecruit`, {
+    fetch(`${RECRUIT_SERVER}/myRecruit/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

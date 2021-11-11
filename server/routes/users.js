@@ -99,18 +99,20 @@ router.post("/signin", (req, res) => {
 
         // 토큰을 저장 (쿠키, 세션, 로컬스토리지등 어디가 제일 안전한지는 논란)
         // 여기선 쿠키에 저장
-        return res
-          // .cookie("x_auth", user.token)
-          // .cookie("user_id", user._id.toString())
-          .status(200)
-          .json({ signinSuccess: true, x_auth: user.token, userId: user._id });
+        return (
+          res
+            // .cookie("x_auth", user.token)
+            // .cookie("user_id", user._id.toString())
+            .status(200)
+            .json({ signinSuccess: true, x_auth: user.token, userId: user._id })
+        );
       });
     });
   });
 });
 
 // auth route
-router.post("/auth", auth, (req, res) => {
+router.get("/auth", auth, (req, res) => {
   // auth에서 req에 token, user를 넣어줌으로써 이 함수에서 사용가능해짐
   // 미들웨어 통과 - auth === true
 
@@ -135,15 +137,15 @@ router.post("/signout", auth, (req, res) => {
     if (err) {
       return res.json({ signoutSuccess: false, err });
     }
-    res.clearCookie("x_auth");
-    res.clearCookie("user_id");
+    // res.clearCookie("x_auth");
+    // res.clearCookie("user_id");
     return res.status(200).send({ signoutSuccess: true });
   });
 });
 
 // 유저 데이터 보내기
-router.get("/userInfo", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/userInfo/:userId", (req, res) => {
+  let userId = req.params.userId;
   let userImage = "";
 
   User.find({ _id: userId }).exec((err, user) => {
@@ -159,7 +161,7 @@ router.get("/userInfo", (req, res) => {
 
     return res.status(200).json({
       success: true,
-      userImage: userImage,
+      // userImage: userImage,
       user,
     });
   });
@@ -178,15 +180,17 @@ router.patch("/userInfo", (req, res) => {
 
 // withdrawal user
 router.delete("/withdrawal", (req, res) => {
-  let user = req.cookies.user_id;
+  let user = req.body.user.userId;
+
+  console.log(user);
 
   User.findByIdAndDelete(user, null, (err, user) => {
     if (err) {
       return res.status(400).json({ success: false, err });
     }
 
-    res.clearCookie("x_auth");
-    res.clearCookie("user_id");
+    // res.clearCookie("x_auth");
+    // res.clearCookie("user_id");
 
     return res.status(200).json({ success: true });
   });
@@ -264,8 +268,9 @@ router.patch("/completion", (req, res) => {
 });
 
 // projectInProgress route
-router.get("/myProject", (req, res) => {
-  let userId = req.cookies.user_id;
+router.get("/myProject/:userId", (req, res) => {
+  // let userId = req.cookies.user_id;
+  let userId = req.params.userId;
 
   User.findById(userId, (err, user) => {
     let projectId;

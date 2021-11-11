@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { USER_SERVER } from "../../../../Config";
-import { getCookie } from "../../../../utils/getCookie";
 import Alarm from "../../Alarm/Alarm";
 
 import { Descriptions, Button, Modal } from "antd";
 import styles from "./MyInfo.module.css";
 
 function MyInfo(props) {
-  // const userId = getCookie("user_id", document.cookie);
   const userId = window.localStorage.getItem("user_id");
 
   const [UserImage, setUserImage] = useState("");
@@ -22,7 +20,7 @@ function MyInfo(props) {
   const [Message, setMessage] = useState(undefined);
 
   const fetchUserInfo = () => {
-    fetch(`${USER_SERVER}/userInfo`, {
+    fetch(`${USER_SERVER}/userInfo/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -63,6 +61,8 @@ function MyInfo(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
+          window.localStorage.removeItem("x_auth");
+          window.localStorage.removeItem("user_id");
           props.history.push("/");
         } else {
           // alert("회원 탈퇴에 실패했습니다.");

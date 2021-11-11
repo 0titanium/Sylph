@@ -12,9 +12,10 @@ function ApplyTo() {
   const [isRefused, setisRefused] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
+  const userId = window.localStorage.getItem("user_id");
 
   const fetchApplyTo = () => {
-    fetch(`${RECRUIT_SERVER}/myApply`, {
+    fetch(`${RECRUIT_SERVER}/myApply/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -34,7 +35,7 @@ function ApplyTo() {
   };
 
   const checkApplyFor = () => {
-    fetch(`${RECRUIT_SERVER}/applicationInfo`, {
+    fetch(`${RECRUIT_SERVER}/applicationInfo/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

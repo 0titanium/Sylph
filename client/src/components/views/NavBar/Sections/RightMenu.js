@@ -5,12 +5,10 @@ import { useDispatch } from "react-redux";
 import { signoutUser } from "../../../../_actions/user_action";
 import { Menu, Dropdown, Avatar } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { getCookie } from "../../../../utils/getCookie";
 import { USER_SERVER } from "../../../../Config";
 import Alarm from "../../Alarm/Alarm";
 
 function RightMenu(props) {
-  // const userId = getCookie("user_id", document.cookie);
   const userId = window.localStorage.getItem("user_id");
   const dispatch = useDispatch();
   const [UserNickame, setUserNickame] = useState("");
@@ -20,7 +18,7 @@ function RightMenu(props) {
   const [Message, setMessage] = useState(undefined);
 
   const fetchUser = () => {
-    fetch(`${USER_SERVER}/userInfo`, {
+    fetch(`${USER_SERVER}/userInfo/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",
@@ -47,10 +45,15 @@ function RightMenu(props) {
   }, [userId]);
 
   const signoutHandler = () => {
-    dispatch(signoutUser()).then((response) => {
+    let data = window.localStorage.getItem("x_auth");
+
+    dispatch(signoutUser(data)).then((response) => {
+      console.log(response.payload);
       if (response.payload.signoutSuccess) {
         setUserImage("");
         setUserNickame("");
+        window.localStorage.removeItem("x_auth");
+        window.localStorage.removeItem("user_id");
         props.history.push("/signin"); // withRouter 필요
       } else {
         // alert("sign out에 실패했습니다.");

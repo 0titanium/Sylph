@@ -18,9 +18,10 @@ function ProjectInProgress() {
   const [RecruitId, setRecruitId] = useState("");
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
+  const userId = window.localStorage.getItem("user_id");
 
   const fetchMyProject = () => {
-    fetch(`${USER_SERVER}/myProject`, {
+    fetch(`${USER_SERVER}/myProject/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

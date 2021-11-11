@@ -16,9 +16,10 @@ function ApplyFor() {
   const [Recruit, setRecruit] = useState(undefined);
   const [visible, setVisible] = useState(false);
   const [Message, setMessage] = useState(undefined);
+  const userId = window.localStorage.getItem("user_id");
 
   const alarmToWriter = () => {
-    fetch(`${RECRUIT_SERVER}/applyment`, {
+    fetch(`${RECRUIT_SERVER}/applyment/${userId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       mode: "cors",

@@ -2,19 +2,32 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { USER_SERVER, RECRUIT_SERVER } from "../../../Config";
 import { auth } from "../../../_actions/user_action";
-import { getCookie } from "../../../utils/getCookie";
 import Alarm from "../Alarm/Alarm";
 
 import { Input, Button, Checkbox, Select } from "antd";
 import styles from "./RecruitPage.module.css";
 
 function RecruitPage(props) {
-  const userId = getCookie("user_id", document.cookie);
+  const userId = window.localStorage.getItem("user_id");
+  const data = window.localStorage.getItem("x_auth");
 
   const dispatch = useDispatch();
 
-  dispatch(auth()).then((response) => {
-    if (response.payload.recruitWriting !== "") {
+  dispatch(auth(data)).then((response) => {
+    console.log(response.payload.recruitWriting === "");
+    // if (
+    //   response.payload.recruitWriting !== "" ||
+    //   response.payload.recruitWriting !== undefined
+    // ) {
+    //   props.history.push("/");
+    // }
+
+    // 위의 코드랑 무슨 차이가 있는지?
+    if (
+      response.payload.recruitWriting === "" ||
+      response.payload.recruitWriting === undefined
+    ) {
+    } else {
       props.history.push("/");
     }
   });
