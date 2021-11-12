@@ -40,3 +40,13 @@
   height: 2.5rem;
   margin-top: 2rem;
 }
+
+@media (max-width: 767px) {
+  .container {
+    height: 100%;
+  }
+
+  .formSt {
+    width: 70%;
+  }
+}

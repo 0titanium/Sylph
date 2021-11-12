@@ -2,6 +2,26 @@
 
 ---
 
+2021-11-12
+
+- aws 테스트
+
+  - pc, mobile에서 잘 돌아가는 것을 확인했다.
+    - 잘 돌아가는 것은 아니었고 몇가지 수정할 점이 있다.
+    - mobile에서 apply가 안된다. 새로고침 되는 것을 보니 뭔가 작동하고 있기는 한 것 같다.
+      - 왜 apply만 안되는? complete도 안된다.
+      - fetch 후 alert를 띄워주니까 작동했다. 왜 그런지는 잘 모르겠다.
+      - mobile은 onClick 이벤트가 작동하지 않는다고 한다. 아이폰만?
+      - 그렇다기에는 다른 버튼은 잘 작동한다.
+        - css에 cursor: point를 적용하면 된다고 한다. (안된다.)
+      - onClick 이벤트가 작동하지 않는다면 새로고침도 안되야 하는 것이 아닐까?
+      - alert 모양이 나쁘지 않아서 pc에서는 modal을 띄우고 mobile에서는 alert를 띄우기로 했다. alert는 확인을 눌러야한다.
+    - mobile recruit edit page css 수정. (v)
+
+  - admin page를 만들어보는 것도 좋을 것 같다.
+
+---
+
 2021-11-11
 
 - auth는 서버에 x_auth값을 보내야하는데 get method에서 headers에 그 값을 넣으면 되는 것 같다.

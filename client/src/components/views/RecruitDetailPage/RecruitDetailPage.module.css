@@ -6,6 +6,7 @@
   background-color: #4b7bec;
   width: 4rme;
   height: 2.5rem;
+  cursor: pointer;
 }
 
 .container {
@@ -43,6 +44,7 @@
   width: 4rem;
   height: 2.5rem;
   margin-right: 2rem;
+  cursor: pointer;
 }
 
 .cancel_btn {
@@ -54,6 +56,7 @@
   width: 4rem;
   height: 2.5rem;
   margin-right: 2rem;
+  cursor: pointer;
 }
 
 .gray_btn {
@@ -71,5 +74,12 @@
   .page {
     width: 90%;
     border: 5px solid black;
+  }
+
+  .btn,
+  .apply_btn,
+  .cancel_btn,
+  .gray_btn {
+    cursor: pointer;
   }
 }

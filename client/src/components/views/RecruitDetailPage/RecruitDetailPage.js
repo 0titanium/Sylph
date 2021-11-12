@@ -161,6 +161,10 @@ function RecruitDetailPage(props) {
           setCheckApply(true);
         }
       });
+
+    if (window.innerWidth <= 768) {
+      alert("지원 완료.");
+    }
   };
 
   const cancelRequest = (userId, rid) => {
@@ -197,6 +201,10 @@ function RecruitDetailPage(props) {
           setCheckApply(false);
         }
       });
+
+    if (window.innerWidth <= 768) {
+      alert("지원 취소.");
+    }
   };
 
   // recruit completion
@@ -236,6 +244,10 @@ function RecruitDetailPage(props) {
           setMessage("모집 완료에 실패했습니다.");
         }
       });
+
+    if (window.innerWidth <= 768) {
+      alert("모집 완료.");
+    }
   };
 
   // if user click apply button
@@ -243,8 +255,16 @@ function RecruitDetailPage(props) {
     if (userId) {
       if (!CheckApply) {
         applyRequest(userId, rid);
+        if (window.innerWidth > 768) {
+          setAlarm(true);
+          setMessage("지원 완료.");
+        }
       } else {
         cancelRequest(userId, rid);
+        if (window.innerWidth > 768) {
+          setAlarm(true);
+          setMessage("지원 취소.");
+        }
       }
     } else {
       // alert("로그인이 필요한 기능입니다.");
@@ -256,12 +276,13 @@ function RecruitDetailPage(props) {
 
   // if writer click complete button
   const onCompleteHandler = (e) => {
-    e.preventDefault();
-
     if (userId) {
       setIsCompleted(true);
       completeRequest(rid);
-      window.location.reload();
+      if (window.innerWidth > 768) {
+        setAlarm(true);
+        setMessage("모집 완료.");
+      }
     } else {
       // alert("로그인이 필요한 기능입니다.");
       setAlarm(true);
