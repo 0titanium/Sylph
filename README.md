@@ -14,6 +14,10 @@ Recruits project team members. Participate in the project.
 
 ---
 
+사이드 프로젝트 및 취업용 프로젝트 팀을 구하고 싶은 사람들을 위한 웹.
+
+---
+
 <br/>
 
 # `Frontend`
@@ -30,8 +34,10 @@ mongodb atlas(mongoose)
 
 # `Deploy`
 
-Frontend: AWS S3
-Backend:  EC2
+Frontend: AWS S3.
+
+
+Backend:  EC2.
 
 <br/>
 
@@ -122,11 +128,8 @@ Backend:  EC2
   - UpdateRecruitPage ("/recruit/update/:recruitId")
 
   - hoc
-
     - auth
 
-  - utils
-    - getCookie
 
 <br/>
 
@@ -146,7 +149,7 @@ Backend:  EC2
 
     - POST "/users/signout" // signout users
 
-    - GET "/users/userInfo" // user info
+    - GET "/users/userInfo/:userId" // user info
 
     - PATCH "/users/userInfo" // udpate user's profile
 
@@ -160,7 +163,7 @@ Backend:  EC2
 
     - PATCH "/users/completion" // save data project member
 
-    - GET "/users/myProject" // get project in progress
+    - GET "/users/myProject/:userId" // get project in progress
 
   - "/recruits"
 
@@ -182,11 +185,11 @@ Backend:  EC2
 
     - PATCH "/recruits/cancelApplyment" // cancel apply
 
-    - GET "/recruits/applyment" // get data applying to recruit
+    - GET "/recruits/applyment/:userId" // get data applying to recruit
 
-    - GET "/recruits/myRecruit" // get data recruit written by uts/myApply" // get data apply
+    - GET "/recruits/myRecruit/:userId" // get data recruit written by uts/myApply" // get data apply
 
-    - GET "/recruits/myApply" // get recruit user apply
+    - GET "/recruits/myApply/:userId" // get recruit user apply
 
     - PATCH "/recruits/completion" // complete recruit
 
@@ -194,7 +197,7 @@ Backend:  EC2
 
     - PATCH "/recruits/refusal" // pop user in recruit apply
 
-    - GET "/recruits/applicationInfo" // alarm to user if user accepted or refused
+    - GET "/recruits/applicationInfo/:userId" // alarm to user if user accepted or refused
 
 <br/>
 
@@ -214,7 +217,6 @@ Backend:  EC2
     - recruitWriting (ObjectId)
     - projectInProgress (ObjectId)
     - token (String)
-    - tokenExp (Number)
 
   - recruit
     - writer (ObjectId)

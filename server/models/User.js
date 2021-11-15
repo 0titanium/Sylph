@@ -49,9 +49,6 @@ const userSchema = mongoose.Schema({
   token: {
     type: String,
   },
-  tokenExp: {
-    type: Number,
-  },
 });
 
 // 유저 모델에 유저 정보를 저장하기 전에(user.save) 처리를 함.
