@@ -792,7 +792,7 @@
 2021-08-24
 
 <br/>
-간략한 화면설계. frontend, backend, db 설계.
+간략한 화면설계. frontend, backend 초안 작성. db 모델 초안 작성.
 
 <br/>
 
